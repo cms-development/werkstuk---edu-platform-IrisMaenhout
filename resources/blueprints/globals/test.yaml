@@ -1,0 +1,17 @@
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: all_categories
+        field:
+          mode: default
+          display: 'All Categories'
+          type: taxonomies
+          icon: taxonomy
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          validate:
+            - required

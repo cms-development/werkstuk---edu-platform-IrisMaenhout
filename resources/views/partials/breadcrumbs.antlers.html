@@ -1,0 +1,10 @@
+<ul class="breadcrumbs flex">
+    {{ nav:breadcrumbs }}
+    <li{{ if is_current }} class="font-semibold text-darker-green"{{ /if }}>
+        <a href="{{ url }}">{{ slug }}</a>
+        <p class="inline-block">{{ if !is_current }} / {{ /if }}</p>
+    </li>
+    {{ /nav:breadcrumbs }}
+</ul>
+
+

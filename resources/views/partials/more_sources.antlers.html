@@ -1,0 +1,38 @@
+
+<div class="w-full bg-light-yellow border-2 border-dark-yellow py-8 px-16 rounded-xl">
+    <h2 class="mb-8 text-xl">Andere bronnen over dit onderwerp</h2>
+
+    <div id="container" class="flex flex-nowrap gap-6 scroll-smooth overflow-x-hidden snap-proximity snap-x">
+        {{ categories }}
+
+            {{ collection:sources taxonomy:categories="{{ slug }}" :id:not="id"}}
+                <div class="min-w-[250px] snap-center">
+                    <a href="{{ url }}" class="block ">
+                        <img src="{{ main_image }}" alt="{{ title }}" class="block h-40 w-full object-cover rounded-xl">
+
+                        <div class="flex gap-2 -mt-10 ml-1">
+                        {{ content_type }}
+
+                            {{if (index < 2)}}
+                                <a href="{{ url }}"
+                                class="block bg-darker-green text-white rounded-lg px-2 py-1 border border-white">{{title}}</a>
+
+                            {{ /if }}
+
+                        {{ /content_type }}
+                        </div>
+                        <h4 class="mt-4">{{title}}</h4>
+                    </a>
+                </div>
+
+            {{ /collection:sources }}
+
+        {{ /categories }}
+
+    </div>
+
+    <div class="flex justify-between mt-8">
+        <button id="slideLeft" class="bg-dark-yellow px-4 py-1 rounded "><i class="fa-solid fa-left-long text-white text-lg"></i><button>
+        <button id="slideRight" class="bg-dark-yellow px-4 py-1 rounded"><i class="fa-solid fa-right-long text-white text-lg"></i></button>
+    </div>
+</div>

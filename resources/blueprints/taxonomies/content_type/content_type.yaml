@@ -1,0 +1,19 @@
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: title
+        field:
+          type: text
+          required: true
+          validate:
+            - required
+      -
+        handle: slug
+        field:
+          type: slug
+          required: true
+          validate:
+            - required
+title: 'Content type'

@@ -1,0 +1,12 @@
+<script>
+    const buttonRight = document.getElementById('slideRight');
+    const buttonLeft = document.getElementById('slideLeft');
+    const doc = document.getElementById('container');
+
+    buttonRight.onclick = function () {
+      doc.scrollLeft += 300;
+    };
+    buttonLeft.onclick = function () {
+      doc.scrollLeft -= 300;
+    };
+</script>

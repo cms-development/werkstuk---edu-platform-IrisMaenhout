@@ -1,0 +1,201 @@
+/* This is all you. */
+
+:root {
+    --green-100: #B4CA6B;
+    --green-200: #7EC070;
+    --green-300: #64A855;
+    --green-400: #598450;
+    --green-500: #2E4E28;
+}
+
+h1, h2, h3, h4, h5, h6{
+    color: rgb(69, 69, 69);
+    font-weight: bold;
+}
+
+p, li, input, i, b, span{
+    color: rgb(98, 98, 98);
+}
+.primary-btn {
+    background-color: var(--green-300);
+    color: white;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 0.5em 1em;
+    border-radius: 10px;
+}
+
+.primary-btn:hover{
+    background-color: var(--green-200);
+    transition: 500ms;
+}
+
+.toggle-categories{
+    background-color: var(--green-200);
+    /* padding-top: 0.5em;
+    padding-bottom: 0.5em; */
+    border-radius: 1em;
+    color: white;
+    transition: 0.7s ease all;
+}
+
+.categories-grid{
+    display: grid;
+    gap: 4em;
+    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+}
+
+.categories-grid .category{
+    z-index: 2;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.543);
+    backdrop-filter: blur(5px);
+    border: 1px solid gray;
+    padding: 0.2em 0.5em;
+    border-radius: 10px;
+    margin: 1rem;
+
+}
+
+.categories-grid img{
+    border-radius: 15px;
+    height: 15em;
+    width: 100%;
+    display: block;
+    margin-bottom: 1em;
+    object-fit: cover;
+}
+
+.categories-grid h3{
+    font-weight: 700;
+    font-size: large;
+    margin-left: 1rem;
+}
+
+.videowrapper{
+    position: relative;
+    padding-bottom: 56.25%;
+    /* padding-top: 5em;
+    height: 0; */
+    width: 85%;
+    margin: 0 auto;
+
+}
+
+.videowrapper iframe{
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+}
+
+/* __________________ Source content __________________ */
+
+.source-content-container h2{
+    font-size: 28px;
+}
+.source-content-container h3{
+    font-size: 26px;
+}
+.source-content-container h4{
+    font-size: 21px;
+}
+.source-content-container h5{
+    font-size: 18px;
+}
+
+.source-content-container h2, .source-content-container h3, .source-content-container h4, .source-content-container h5, .source-content-container p{
+    margin-bottom: 1em;
+}
+
+.source-content-container img{
+    border-radius: 1em;
+}
+
+.source-content-container hr{
+    border: none;
+    height: 2px;
+    color: rgb(213, 213, 213); /* old IE */
+    background-color: rgb(213, 213, 213); /* Modern Browsers */
+    margin-bottom: 1em;
+}
+
+/* ______________________ Source content table ________________ */
+
+.source-content-container table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.source-content-container .table-container{
+    overflow-x: scroll;
+    margin-bottom: 2em;
+    border-radius: 0.5em;
+}
+
+
+.source-content-container table td, .source-content-container table th {
+    border: 1px solid #ddd;
+    padding: 1em;
+    min-width: 150px;
+}
+
+.source-content-container table th p{
+    color: white;
+}
+
+.source-content-container table td p, .source-content-container table th p {
+    margin-bottom: 0;
+}
+
+.source-content-container table tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+
+.source-content-container table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--green-200);
+}
+
+/* (Un)orderd list */
+.source-content-container ul {
+    list-style: disc outside none;
+    margin-left: 1em;
+}
+
+.source-content-container ul li ul {
+    list-style: circle outside none;
+
+}
+
+.source-content-container ul li ul li ul li{
+    list-style: square outside none;
+}
+
+.source-content-container ol{
+    list-style: decimal outside none;
+    margin-left: 1em;
+}
+
+
+.source-content-container li p{
+    display: inline;
+}
+
+
+.source-content-container blockquote{
+    background-color: rgb(208, 240, 237);
+    width: 100%;
+    padding: 1em 2em;
+    border-radius: 1em;
+    border: 2px solid rgb(140, 219, 193);
+}
+
+
+

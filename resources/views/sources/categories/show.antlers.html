@@ -1,0 +1,113 @@
+<!-- Display overview of sources -->
+
+{{ entries as="posts"}}
+<div class="md:flex">
+    <aside class="hidden md:block bg-[#e4efe0] w-[20%] ">
+        <div class="md:mt-36 mx-8">
+            <div class="justify-between items-center">
+                <h3 class="font-semibold text-lg">Informatie type</h3>
+                <i class="fa-solid fa-chevron-down"></i>
+                <i class="fa-solid fa-chevron-up hidden"></i>
+            </div>
+
+
+            <form method="get">
+
+                {{ taxonomy:content_type }}
+
+
+                {{? $filter_value = $get ?}}
+
+                {{? print_r($filter_value) ?}}
+
+
+                <div>
+                    <input type="checkbox" name="{{ title }}" id="{{ title }}" class="content-type">
+                    <label for="{{ title }}">{{ title }}</label>
+                </div>
+
+                {{ /taxonomy:content_type }}
+
+                <button type="submit">Filter</button>
+
+            </form>
+
+        </div>
+
+    </aside>
+
+    <div class="md:mt-36 max-w-[1200px] md:w-[85%]">
+        <div class="mx-auto w-[80%]">
+            {{ partial:breadcrumbs }}
+
+
+            <h1 class="mt-12 font-bold text-2xl mb-12">{{ title }}</h1>
+
+            {{ posts }}
+
+            <div class="bg-white p-6 rounded-2xl border-2 mb-12">
+                <div class="md:flex justify-between">
+                    <div>
+                        <div class="flex gap-6">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                                alt="" class="w-10 h-10 rounded-full object-cover">
+                            <div>
+                                <h4 class="font-semibold">Naam voornaam</h4>
+                                <i class="text-slate-400 text-sm">{{ last_modified }}</i>
+                            </div>
+                        </div>
+
+                        <div class=" mt-6">
+                            <h2 class="font-bold text-xl mb-8"><a href="{{ url }}">{{ title }}</a></h2>
+                            <div class="mb-4 gap-4 md:flex">
+                                <p class="mb-4">Categorie:</p>
+
+                                <div class="flex flex-wrap gap-4">
+                                    {{ categories }}
+                                    <a href="{{ url }}"
+                                        class="bg-lighter-green px-3 py-1 block rounded text-white">{{ title }}</a>
+                                    {{ /categories }}
+
+                                </div>
+
+                            </div>
+                            <div class="mb-2 gap-4 md:flex">
+                                <p class="mb-4">Informatie type:</p>
+                                <div class="flex flex-wrap gap-4">
+                                    {{ content_type }}
+                                    <a href="{{ url }}"
+                                        class="bg-darker-green px-3 py-1 block rounded text-white">{{ title }}</a>
+                                    {{ /content_type }}
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <a class="block md:w-[30%] mt-10 md:mt-0" href="{{ url }}">
+                        <img src="{{ main_image }}" alt="" class=" w-full h-full rounded-xl object-cover">
+                    </a>
+                </div>
+
+            </div>
+            {{ /posts }}
+        </div>
+
+
+
+    </div>
+</div>
+{{ /entries }}
+
+
+<!-- <script>
+    const filterItems = document.querySelectorAll('.content-type');
+    const form = document.querySelector('form');
+
+    filterItems.forEach((filter)=>{
+        filter.addEventListener('change', ()=>{
+            form.submit();
+        });
+    });
+</script> -->

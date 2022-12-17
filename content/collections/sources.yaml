@@ -1,0 +1,17 @@
+title: Sources
+template: sources/show
+layout: layout
+mount: home
+taxonomies:
+  1: categories
+  2: content_type
+revisions: false
+route: '/{mount}/{slug}'
+sort_dir: desc
+date_behavior:
+  past: public
+  future: private
+preview_targets:
+  -
+    label: Entry
+    url: '{permalink}'
