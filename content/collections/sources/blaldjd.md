@@ -18,7 +18,7 @@ layout:
       ## Surfen aan zee
       ![](statamic://asset::assets::oostende.jpg)
 
-      Dit is een tekst, hihi!!
+      Dit is een tekst, hihi!
     type: markdown
     enabled: true
 ---
