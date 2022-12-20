@@ -1,0 +1,62 @@
+<div class="flex">
+    <div class="w-full h-full hidden md:block">
+        <div class="bg-green-800 h-full w-full"></div>
+    </div>
+
+    <div class="w-full md:mt-16">
+        <div class="w-[70%] max-w-[5000px] mx-auto">
+            {{ user:login_form }}
+
+            <h1 class=" text-3xl mb-8">Login</h1>
+
+            {{ if errors }}
+            <div class="bg-red-400 rounded text-white p-2 mb-4">
+                {{ errors }}
+                {{ value }}<br>
+                {{ /errors }}
+            </div>
+            {{ /if }}
+
+            {{ if success }}
+            <div class="bg-green-400 rounded text-white p-2 mb-4">
+                {{ success }}<br>
+            </div>
+            {{ /if }}
+
+            <div>
+                <label class="mb-2 block">Email</label>
+                <input class="border border-gray-300 rounded w-full block px-2 py-1" type="email" name="email" value="{{ old:email }}" />
+            </div>
+
+            <div class="mt-6">
+                <label class="mb-2 block">Wachtwoord</label>
+                <div class="flex items-center">
+                    <input id="password" class="border border-gray-300 rounded w-full block px-2 py-1 pr-10" type="password" name="password"
+                    value="{{ old:password }}" />
+                    <i id="toggle-password" class="fa-regular fa-eye-slash -ml-8 cursor-pointer"></i>
+                </div>
+
+
+
+                <div class="flex justify-between mt-4">
+                    <div>
+                        <input type="checkbox" name="remember-user" id="remember-user">
+                        <label for="remeber-user">Ondhoud mij</label>
+                    </div>
+                    <a class="block underline text-lighter-green hover:text-green-300" href="/forgot-password">Wachtwoord vergeten</a>
+                </div>
+
+            </div>
+
+
+            <button class="primary-btn w-full block mt-16" type="submit">Log in</button>
+
+            <p class="text-center mt-6 mb-4">Nog geen account? <a href="/" class=" text-darker-green ml-1 font-bold">Vraag je inloggegevens aan</a></p>
+
+            {{ /user:login_form }}
+        </div>
+
+    </div>
+</div>
+
+{{ partial:script_password_toggle }}

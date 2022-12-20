@@ -19,3 +19,9 @@ use Illuminate\Support\Facades\Route;
 // ]);
 
 // Route::get('/filter-content-type', [FilterContentType::class, "index"])->name('filter.index');
+
+
+// Route::statamic('/inloggen', 'view', ['layout' => 'custom']);
+Route::statamic('/sign-in', 'public/login');
+Route::statamic('/forgot-password', 'public/forgot_password');
+Route::statamic('/reset-password', 'public/reset_password');

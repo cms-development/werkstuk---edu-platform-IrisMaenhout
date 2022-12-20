@@ -15,10 +15,19 @@
 
     <!----------------------- START HEADER ---------------------------->
 
+    {{ if logged_in}}
+        {{ partial:header_logged_in }}
+    {{ else }}
+        {{ if is_homepage }}
+            {{ partial:header_public }}
+        {{ else }}
+            Logo
+        {{ /if }}
 
-    <!-- {{ partial:header_public }} -->
+    {{ /if}}
 
-    {{ partial:header_logged_in }}
+
+
 
 
     <!----------------------- END HEADER ---------------------------->

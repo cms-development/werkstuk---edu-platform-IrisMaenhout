@@ -1,3 +1,4 @@
+{{ if logged_in }}
 <div class="md:mt-36 mx-auto w-[80%] max-w-[1200px]">
     <div class="bg-white p-6 rounded-2xl border-2 md:flex md:gap-20 mb-12">
         <div class="w-full">
@@ -32,8 +33,6 @@
 
     <div id="all-categories" class="categories-grid mb-32"></div>
 </div>
-
-
 
 <script>
     const categoryToggle = document.querySelector('#category-toggle');
@@ -82,3 +81,7 @@
         });
 
 </script>
+
+{{ else}}
+    Je bent niet ingelogd
+{{ /if }}

@@ -769,6 +769,22 @@ p, li, input, i, b, span{
   margin-top: 2rem;
 }
 
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mt-16 {
+  margin-top: 4rem;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
+.-ml-8 {
+  margin-left: -2rem;
+}
+
 .mb-10 {
   margin-bottom: 2.5rem;
 }
@@ -783,14 +799,6 @@ p, li, input, i, b, span{
 
 .mb-20 {
   margin-bottom: 5rem;
-}
-
-.mt-6 {
-  margin-top: 1.5rem;
-}
-
-.mb-2 {
-  margin-bottom: 0.5rem;
 }
 
 .mt-10 {
@@ -865,6 +873,10 @@ p, li, input, i, b, span{
   width: 2rem;
 }
 
+.w-\[70\%\] {
+  width: 70%;
+}
+
 .w-\[85\%\] {
   width: 85%;
 }
@@ -883,6 +895,10 @@ p, li, input, i, b, span{
 
 .max-w-\[1200px\] {
   max-width: 1200px;
+}
+
+.max-w-\[5000px\] {
+  max-width: 5000px;
 }
 
 .cursor-pointer {
@@ -949,6 +965,10 @@ p, li, input, i, b, span{
   scroll-behavior: smooth;
 }
 
+.break-all {
+  word-break: break-all;
+}
+
 .rounded-2xl {
   border-radius: 1rem;
 }
@@ -1004,6 +1024,11 @@ p, li, input, i, b, span{
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 
+.border-gray-300 {
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
+}
+
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -1034,6 +1059,21 @@ p, li, input, i, b, span{
   background-color: rgb(230 209 114 / var(--tw-bg-opacity));
 }
 
+.bg-green-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(22 101 52 / var(--tw-bg-opacity));
+}
+
+.bg-red-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 113 113 / var(--tw-bg-opacity));
+}
+
+.bg-green-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(74 222 128 / var(--tw-bg-opacity));
+}
+
 .bg-\[\#e4efe0\] {
   --tw-bg-opacity: 1;
   background-color: rgb(228 239 224 / var(--tw-bg-opacity));
@@ -1042,6 +1082,42 @@ p, li, input, i, b, span{
 .bg-lighter-green {
   --tw-bg-opacity: 1;
   background-color: rgb(126 192 112 / var(--tw-bg-opacity));
+}
+
+.bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
+.from-cyan-500 {
+  --tw-gradient-from: #06b6d4;
+  --tw-gradient-to: rgb(6 182 212 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-lime-300 {
+  --tw-gradient-from: #bef264;
+  --tw-gradient-to: rgb(190 242 100 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-lime-500 {
+  --tw-gradient-from: #84cc16;
+  --tw-gradient-to: rgb(132 204 22 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-lime-400 {
+  --tw-gradient-from: #a3e635;
+  --tw-gradient-to: rgb(163 230 53 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.to-blue-500 {
+  --tw-gradient-to: #3b82f6;
+}
+
+.to-emerald-500 {
+  --tw-gradient-to: #10b981;
 }
 
 .object-cover {
@@ -1119,6 +1195,14 @@ p, li, input, i, b, span{
   padding-left: 0.5rem;
 }
 
+.pr-10 {
+  padding-right: 2.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
 .align-middle {
   vertical-align: middle;
 }
@@ -1135,6 +1219,11 @@ p, li, input, i, b, span{
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 
 .text-4xl {
@@ -1162,6 +1251,10 @@ p, li, input, i, b, span{
 
 .uppercase {
   text-transform: uppercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
 }
 
 .italic {
@@ -1192,6 +1285,11 @@ p, li, input, i, b, span{
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-lighter-green {
+  --tw-text-opacity: 1;
+  color: rgb(126 192 112 / var(--tw-text-opacity));
+}
+
 .text-red-500 {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
@@ -1220,6 +1318,11 @@ p, li, input, i, b, span{
   color: rgb(126 192 112 / var(--tw-text-opacity));
 }
 
+.hover\:text-green-300:hover {
+  --tw-text-opacity: 1;
+  color: rgb(134 239 172 / var(--tw-text-opacity));
+}
+
 @media (min-width: 768px) {
 
   .md\:mt-36 {
@@ -1230,8 +1333,20 @@ p, li, input, i, b, span{
     margin-bottom: 0px;
   }
 
+  .md\:mt-24 {
+    margin-top: 6rem;
+  }
+
   .md\:mt-0 {
     margin-top: 0px;
+  }
+
+  .md\:mt-20 {
+    margin-top: 5rem;
+  }
+
+  .md\:mt-16 {
+    margin-top: 4rem;
   }
 
   .md\:block {
