@@ -1,0 +1,60 @@
+<div class="bg-white p-6 rounded-2xl border-2 mb-12">
+    <div class="md:flex justify-between">
+        <div>
+            <div class="flex gap-6">
+                {{ user }}
+
+                    {{ if (avatar) }}
+                        <img src="{{ avatar }}" class="w-10 h-10 rounded-full object-cover" alt="profile picture">
+                    {{ else }}
+                        <div class="bg-gradient-to-r from-lime-400 to-emerald-500 rounded-full h-10 w-10 flex justify-center items-center text-white capitalize">
+                            {{$ substr($name, 0, 1); $}}
+                        </div>
+                    {{ /if }}
+
+                {{ /user}}
+
+                <div>
+                    <h4 class="font-semibold">
+                        {{ user }}
+                            {{ first_name }} {{ last_name }}
+                        {{ /user }}
+                    </h4>
+                    <i class="text-slate-400 text-sm">{{ last_modified }}</i>
+                </div>
+            </div>
+
+            <div class=" mt-6">
+                <h2 class="font-bold text-xl mb-8"><a href="{{ url }}">{{ title }}</a></h2>
+                <div class="mb-4 gap-4 md:flex">
+                    <p class="mb-4">Categorie:</p>
+
+                    <div class="flex flex-wrap gap-4">
+                        {{ categories }}
+                        <a href="{{ url }}"
+                            class="bg-lighter-green px-3 py-1 block rounded text-white">{{ title }}</a>
+                        {{ /categories }}
+
+                    </div>
+
+                </div>
+                <div class="mb-2 gap-4 md:flex">
+                    <p class="mb-4">Informatie type:</p>
+                    <div class="flex flex-wrap gap-4">
+                        {{ content_type }}
+                        <a href="{{ url }}"
+                            class="bg-darker-green px-3 py-1 block rounded text-white">{{ title }}</a>
+                        {{ /content_type }}
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <a class="block md:w-[30%] mt-10 md:mt-0" href="{{ url }}">
+            <img src="{{ main_image }}" alt="" class=" w-full h-full rounded-xl object-cover">
+        </a>
+    </div>
+
+</div>

@@ -16,13 +16,20 @@
     <!----------------------- START HEADER ---------------------------->
 
     {{ if logged_in}}
-        {{ partial:header_logged_in }}
-    {{ else }}
+        {{ user }}
+            {{ if accept_register_proposal }}
+                {{ if title !== "Public page"}}
+                    {{ partial:header_logged_in }}
+                {{ /if }}
+            {{ /if }}
+        {{ /user }}
+
+    {{# {{ else }}
         {{ if is_homepage }}
             {{ partial:header_public }}
         {{ else }}
             Logo
-        {{ /if }}
+        {{ /if }} #}}
 
     {{ /if}}
 
@@ -30,8 +37,10 @@
 
 
 
-    <!----------------------- END HEADER ---------------------------->
 
+
+
+    <!----------------------- END HEADER ---------------------------->
 
     {{ template_content }}
 

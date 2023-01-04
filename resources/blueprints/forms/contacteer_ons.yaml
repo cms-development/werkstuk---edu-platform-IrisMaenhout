@@ -1,0 +1,124 @@
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: purpose
+        field:
+          options:
+            register: 'Ik wil een registratie aanvraag indienen'
+            message: 'Ik wil een bericht sturen'
+          multiple: false
+          max_items: 1
+          clearable: false
+          searchable: false
+          taggable: false
+          push_tags: false
+          cast_booleans: false
+          display: 'Waar kunnen we je mee helpen?'
+          type: select
+          icon: select
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          validate:
+            - required
+      -
+        handle: email
+        field:
+          input_type: email
+          antlers: false
+          display: Email
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          validate:
+            - required
+      -
+        handle: first_name
+        field:
+          input_type: text
+          antlers: false
+          display: 'First name'
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          validate:
+            - required
+      -
+        handle: last_name
+        field:
+          input_type: text
+          antlers: false
+          display: 'Last name'
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          validate:
+            - required
+      -
+        handle: role
+        field:
+          options:
+            student: Student
+            teacher: Docenten
+            ex-student: Ex-student
+          multiple: false
+          max_items: 1
+          clearable: false
+          searchable: false
+          taggable: false
+          push_tags: false
+          cast_booleans: false
+          display: Role
+          type: select
+          icon: select
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          validate:
+            - required
+          if:
+            purpose: '=== register'
+      -
+        handle: password
+        field:
+          input_type: password
+          antlers: false
+          display: Password
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          validate:
+            - required
+          if:
+            purpose: '=== register'
+      -
+        handle: message
+        field:
+          antlers: false
+          display: Message
+          type: textarea
+          icon: textarea
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          validate:
+            - required
+          if:
+            purpose: 'equals message'

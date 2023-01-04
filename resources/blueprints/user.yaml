@@ -1,29 +1,111 @@
 title: User
-fields:
-  -
-    handle: name
-    field:
-      type: text
-      display: Name
-  -
-    handle: email
-    field:
-      type: text
-      input: email
-      display: Email Address
-  -
-    handle: roles
-    field:
-      type: user_roles
-      width: 50
-  -
-    handle: groups
-    field:
-      type: user_groups
-      width: 50
-  -
-    handle: avatar
-    field:
-      type: assets
-      max_files: 1
-      container: assets
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: accept_register_proposal
+        field:
+          default: false
+          display: 'Accept register proposal'
+          type: toggle
+          icon: toggle
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+      -
+        handle: first_name
+        field:
+          type: text
+          display: 'First name'
+          instructions_position: above
+          listable: hidden
+          visibility: visible
+          always_save: false
+          input_type: text
+          antlers: false
+          validate:
+            - required
+      -
+        handle: last_name
+        field:
+          input_type: text
+          antlers: false
+          display: 'Last name'
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          validate:
+            - required
+      -
+        handle: email
+        field:
+          type: text
+          input: email
+          display: 'Email Address'
+      -
+        handle: avatar
+        field:
+          type: assets
+          max_files: 1
+          container: assets
+          display: Avatar
+          instructions_position: above
+          listable: hidden
+          visibility: visible
+          always_save: false
+          mode: list
+          restrict: false
+          allow_uploads: true
+          show_filename: true
+      -
+        handle: groups
+        field:
+          type: user_groups
+          width: 50
+          instructions_position: above
+          listable: hidden
+          visibility: visible
+          always_save: false
+          mode: select
+          max_items: 1
+      -
+        handle: roles
+        field:
+          mode: select
+          type: user_roles
+          icon: user_roles
+          width: 50
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          max_items: 1
+      -
+        handle: user_role
+        field:
+          options:
+            student: Student
+            ex-student: Ex-student
+            teacher: Leerkracht
+          multiple: false
+          max_items: 1
+          clearable: false
+          searchable: true
+          taggable: false
+          push_tags: false
+          cast_booleans: false
+          display: 'User role'
+          type: select
+          icon: select
+          instructions: 'This shows what role and group belongs to this person'
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          validate:
+            - required

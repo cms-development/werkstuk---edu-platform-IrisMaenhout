@@ -1,4 +1,10 @@
-super: true
-avatar: 39a9f53feef67fef9732640333e28aac.jpg
-id: ab5506d7-a3dc-4994-8404-816bc32682e8
-password_hash: $2y$10$ZlyE4uOzeXU4WBpRxhm9s.GqMQTr1ue2GJpPI8aa1ehA8/mZZUrr6
+first_name: Honjoong
+last_name: Kim
+user_role: teacher
+accept_register_proposal: false
+roles:
+  - teacher
+groups:
+  - teachers
+id: a60a48cd-a4a0-4d99-8e72-613dfae77321
+password_hash: $2y$10$izYuyM9X/RQ5dlF.zc6sy.3l3RJkqgw33Q55am4dQIFHTgQ8iKk..

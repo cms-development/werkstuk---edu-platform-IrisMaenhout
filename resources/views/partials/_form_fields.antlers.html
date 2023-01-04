@@ -1,0 +1,32 @@
+{{ if success }}
+    <div class="bg-green-300 text-white p-2 rounded-md mt-8 mb-20 w-full px-[5%] py-6">
+        {{ success }}
+    </div>
+{{ else }}
+    {{ if errors }}
+        <div class="bg-[#e86363] text-white p-2 rounded-md mt-8 mb-20 w-full px-[5%] py-6">
+            {{ errors }}
+            {{ value }}<br>
+            {{ /errors }}
+        </div>
+    {{ /if }}
+
+    {{# // Loop through and render the form inputs #}}
+    <div class="form-contact-us rounded-md mt-8 mb-20 w-full px-[5%] py-12 md:grid ">
+        {{ fields }}
+            <div class="mb-6 md:mb-10"  id="{{handle}}">
+                <label>{{ display }}</label>
+                <div class="pt-2">{{ field }}</div>
+                {{ if error }}
+                    <p class="mt-2 text-[#f28d8d]">{{ error }}</p>
+                {{ /if }}
+            </div>
+
+        {{ /fields }}
+
+        {{# // Add the honeypot field #}}
+        <input type="text" class="hidden" name="{{ honeypot ?? 'honeypot' }}">
+
+        <button type="submit" class="primary-btn block ml-auto">Verzenden</button>
+    </div>
+{{ /if }}

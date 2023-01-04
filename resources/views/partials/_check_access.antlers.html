@@ -1,0 +1,9 @@
+{{ if logged_in}}
+    {{ user }}
+        {{ if !accept_register_proposal }}
+            {{ redirect to="/geen-toegang" }}
+        {{ /if }}
+    {{ /user }}
+{{ else }}
+    {{ redirect to="/geen-toegang" }}
+{{ /if }}

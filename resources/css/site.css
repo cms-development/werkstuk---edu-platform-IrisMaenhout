@@ -19,7 +19,7 @@ p, li, input, i, b, span{
 .primary-btn {
     background-color: var(--green-300);
     color: white;
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-weight: 600;
     padding: 0.5em 1em;
     border-radius: 10px;
@@ -27,6 +27,21 @@ p, li, input, i, b, span{
 
 .primary-btn:hover{
     background-color: var(--green-200);
+    transition: 500ms;
+}
+
+.secondary-btn{
+    color: white;
+    text-transform: capitalize;
+    font-weight: 600;
+    padding: 0.5em 1em;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+.secondary-btn:hover{
+    background-color: white;
+    color: var(--green-300);
     transition: 500ms;
 }
 
@@ -94,28 +109,30 @@ p, li, input, i, b, span{
 
 /* __________________ Source content __________________ */
 
-.source-content-container h2{
+.source-content-container h2, .about-us-container h2{
     font-size: 28px;
 }
-.source-content-container h3{
+.source-content-container h3, .about-us-container h3{
     font-size: 26px;
 }
-.source-content-container h4{
+.source-content-container h4, .about-us-container h4{
     font-size: 21px;
 }
-.source-content-container h5{
+.source-content-container h5, .about-us-container h5{
     font-size: 18px;
 }
 
-.source-content-container h2, .source-content-container h3, .source-content-container h4, .source-content-container h5, .source-content-container p{
+.source-content-container h2, .source-content-container h3, .source-content-container h4, .source-content-container h5, .source-content-container p,
+
+.about-us-container h2, .about-us-container h3, .about-us-container h4, .about-us-container h5, .about-us-container p{
     margin-bottom: 1em;
 }
 
-.source-content-container img{
+.source-content-container img, .about-us-container img{
     border-radius: 1em;
 }
 
-.source-content-container hr{
+.source-content-container hr, .about-us-container hr{
     border: none;
     height: 2px;
     color: rgb(213, 213, 213); /* old IE */
@@ -125,38 +142,38 @@ p, li, input, i, b, span{
 
 /* ______________________ Source content table ________________ */
 
-.source-content-container table{
+.source-content-container table, .about-us-container table{
     border-collapse: collapse;
     width: 100%;
 }
 
-.source-content-container .table-container{
+.source-content-container .table-container, .about-us-container .table-container{
     overflow-x: scroll;
     margin-bottom: 2em;
     border-radius: 0.5em;
 }
 
 
-.source-content-container table td, .source-content-container table th {
+.source-content-container table td, .source-content-container table th, .about-us-container table td, .about-us-container table th {
     border: 1px solid #ddd;
     padding: 1em;
     min-width: 150px;
 }
 
-.source-content-container table th p{
+.source-content-container table th p, .about-us-container table th p{
     color: white;
 }
 
-.source-content-container table td p, .source-content-container table th p {
+.source-content-container table td p, .source-content-container table th p, .about-us-container table td p, .about-us-container table th p {
     margin-bottom: 0;
 }
 
-.source-content-container table tr:nth-child(even){
+.source-content-container table tr:nth-child(even), .about-us-container table tr:nth-child(even){
     background-color: #f2f2f2;
 }
 
 
-.source-content-container table th {
+.source-content-container table th, .about-us-container table th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
@@ -164,37 +181,71 @@ p, li, input, i, b, span{
 }
 
 /* (Un)orderd list */
-.source-content-container ul {
+.source-content-container ul, .about-us-container ul {
     list-style: disc outside none;
     margin-left: 1em;
 }
 
-.source-content-container ul li ul {
+.source-content-container ul li ul, .about-us-container ul li ul {
     list-style: circle outside none;
 
 }
 
-.source-content-container ul li ul li ul li{
+.source-content-container ul li ul li ul li, .about-us-container ul li ul li ul li{
     list-style: square outside none;
 }
 
-.source-content-container ol{
+.source-content-container ol, .about-us-container ol{
     list-style: decimal outside none;
     margin-left: 1em;
 }
 
 
-.source-content-container li p{
+.source-content-container li p, .about-us-container li p{
     display: inline;
 }
 
 
-.source-content-container blockquote{
+.source-content-container blockquote, .about-us-container blockquote{
     background-color: rgb(208, 240, 237);
     width: 100%;
     padding: 1em 2em;
     border-radius: 1em;
     border: 2px solid rgb(140, 219, 193);
+}
+
+/* ___________________________ Form _________________________ */
+.form-contact-us{
+    background-color: #4c8c6c;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 4em;
+}
+
+.form-contact-us label{
+    color: white;
+    font-weight: bold;
+}
+
+.form-contact-us input, .form-contact-us select, .form-contact-us textarea{
+    width: 100%;
+    background-color: #55af86;
+    outline: none;
+    padding: 1em;
+    border-radius: 0.5rem;
+    color: white;
+}
+
+.form-contact-us select:hover{
+    background-color: #73c6a1;
+}
+
+.form-contact-us #contact_message{
+    grid-column: 1 / -1;
+}
+
+.form-contact-us .primary-btn{
+    grid-column: 2;
+    margin-top: 1em;
 }
 
 

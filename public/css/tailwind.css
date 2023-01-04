@@ -491,7 +491,7 @@ p, li, input, i, b, span{
 .primary-btn {
     background-color: var(--green-300);
     color: white;
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-weight: 600;
     padding: 0.5em 1em;
     border-radius: 10px;
@@ -499,6 +499,21 @@ p, li, input, i, b, span{
 
 .primary-btn:hover{
     background-color: var(--green-200);
+    transition: 500ms;
+}
+
+.secondary-btn{
+    color: white;
+    text-transform: capitalize;
+    font-weight: 600;
+    padding: 0.5em 1em;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+.secondary-btn:hover{
+    background-color: white;
+    color: var(--green-300);
     transition: 500ms;
 }
 
@@ -568,31 +583,33 @@ p, li, input, i, b, span{
 
 /* __________________ Source content __________________ */
 
-.source-content-container h2{
+.source-content-container h2, .about-us-container h2{
     font-size: 28px;
 }
 
-.source-content-container h3{
+.source-content-container h3, .about-us-container h3{
     font-size: 26px;
 }
 
-.source-content-container h4{
+.source-content-container h4, .about-us-container h4{
     font-size: 21px;
 }
 
-.source-content-container h5{
+.source-content-container h5, .about-us-container h5{
     font-size: 18px;
 }
 
-.source-content-container h2, .source-content-container h3, .source-content-container h4, .source-content-container h5, .source-content-container p{
+.source-content-container h2, .source-content-container h3, .source-content-container h4, .source-content-container h5, .source-content-container p,
+
+.about-us-container h2, .about-us-container h3, .about-us-container h4, .about-us-container h5, .about-us-container p{
     margin-bottom: 1em;
 }
 
-.source-content-container img{
+.source-content-container img, .about-us-container img{
     border-radius: 1em;
 }
 
-.source-content-container hr{
+.source-content-container hr, .about-us-container hr{
     border: none;
     height: 2px;
     color: rgb(213, 213, 213); /* old IE */
@@ -602,36 +619,36 @@ p, li, input, i, b, span{
 
 /* ______________________ Source content table ________________ */
 
-.source-content-container table{
+.source-content-container table, .about-us-container table{
     border-collapse: collapse;
     width: 100%;
 }
 
-.source-content-container .table-container{
+.source-content-container .table-container, .about-us-container .table-container{
     overflow-x: scroll;
     margin-bottom: 2em;
     border-radius: 0.5em;
 }
 
-.source-content-container table td, .source-content-container table th {
+.source-content-container table td, .source-content-container table th, .about-us-container table td, .about-us-container table th {
     border: 1px solid #ddd;
     padding: 1em;
     min-width: 150px;
 }
 
-.source-content-container table th p{
+.source-content-container table th p, .about-us-container table th p{
     color: white;
 }
 
-.source-content-container table td p, .source-content-container table th p {
+.source-content-container table td p, .source-content-container table th p, .about-us-container table td p, .about-us-container table th p {
     margin-bottom: 0;
 }
 
-.source-content-container table tr:nth-child(even){
+.source-content-container table tr:nth-child(even), .about-us-container table tr:nth-child(even){
     background-color: #f2f2f2;
 }
 
-.source-content-container table th {
+.source-content-container table th, .about-us-container table th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
@@ -640,35 +657,71 @@ p, li, input, i, b, span{
 
 /* (Un)orderd list */
 
-.source-content-container ul {
+.source-content-container ul, .about-us-container ul {
     list-style: disc outside none;
     margin-left: 1em;
 }
 
-.source-content-container ul li ul {
+.source-content-container ul li ul, .about-us-container ul li ul {
     list-style: circle outside none;
 
 }
 
-.source-content-container ul li ul li ul li{
+.source-content-container ul li ul li ul li, .about-us-container ul li ul li ul li{
     list-style: square outside none;
 }
 
-.source-content-container ol{
+.source-content-container ol, .about-us-container ol{
     list-style: decimal outside none;
     margin-left: 1em;
 }
 
-.source-content-container li p{
+.source-content-container li p, .about-us-container li p{
     display: inline;
 }
 
-.source-content-container blockquote{
+.source-content-container blockquote, .about-us-container blockquote{
     background-color: rgb(208, 240, 237);
     width: 100%;
     padding: 1em 2em;
     border-radius: 1em;
     border: 2px solid rgb(140, 219, 193);
+}
+
+/* ___________________________ Form _________________________ */
+
+.form-contact-us{
+    background-color: #4c8c6c;
+    grid-template-columns: repeat(2, 1fr);
+    -moz-column-gap: 4em;
+         column-gap: 4em;
+}
+
+.form-contact-us label{
+    color: white;
+    font-weight: bold;
+}
+
+.form-contact-us input, .form-contact-us select, .form-contact-us textarea{
+    width: 100%;
+    background-color: #55af86;
+    outline: none;
+    padding: 1em;
+    border-radius: 0.5rem;
+    color: white;
+}
+
+.form-contact-us select:hover{
+    background-color: #73c6a1;
+}
+
+.form-contact-us #contact_message{
+    grid-column: 1 / -1;
+}
+
+.form-contact-us .primary-btn{
+    grid-column: 2;
+    margin-top: 1em;
 }
 
 .container {
@@ -714,8 +767,16 @@ p, li, input, i, b, span{
   position: fixed;
 }
 
+.relative {
+  position: relative;
+}
+
 .top-0 {
   top: 0px;
+}
+
+.top-16 {
+  top: 4rem;
 }
 
 .z-10 {
@@ -753,6 +814,26 @@ p, li, input, i, b, span{
   margin-bottom: 8rem;
 }
 
+.mt-8 {
+  margin-top: 2rem;
+}
+
+.mb-20 {
+  margin-bottom: 5rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
 .-mt-10 {
   margin-top: -2.5rem;
 }
@@ -763,10 +844,6 @@ p, li, input, i, b, span{
 
 .mt-4 {
   margin-top: 1rem;
-}
-
-.mt-8 {
-  margin-top: 2rem;
 }
 
 .mb-2 {
@@ -797,12 +874,24 @@ p, li, input, i, b, span{
   margin-top: 7rem;
 }
 
-.mb-20 {
-  margin-bottom: 5rem;
-}
-
 .mt-10 {
   margin-top: 2.5rem;
+}
+
+.mt-36 {
+  margin-top: 9rem;
+}
+
+.mt-20 {
+  margin-top: 5rem;
+}
+
+.mt-24 {
+  margin-top: 6rem;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
 }
 
 .block {
@@ -841,6 +930,10 @@ p, li, input, i, b, span{
   height: 3rem;
 }
 
+.h-9 {
+  height: 2.25rem;
+}
+
 .h-40 {
   height: 10rem;
 }
@@ -851,6 +944,10 @@ p, li, input, i, b, span{
 
 .h-10 {
   height: 2.5rem;
+}
+
+.h-screen {
+  height: 100vh;
 }
 
 .max-h-\[200px\] {
@@ -873,6 +970,10 @@ p, li, input, i, b, span{
   width: 2rem;
 }
 
+.w-9 {
+  width: 2.25rem;
+}
+
 .w-\[70\%\] {
   width: 70%;
 }
@@ -881,12 +982,25 @@ p, li, input, i, b, span{
   width: 85%;
 }
 
-.w-\[20\%\] {
-  width: 20%;
-}
-
 .w-10 {
   width: 2.5rem;
+}
+
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.w-36 {
+  width: 9rem;
+}
+
+.w-screen {
+  width: 100vw;
+}
+
+.w-\[20\%\] {
+  width: 20%;
 }
 
 .min-w-\[250px\] {
@@ -955,6 +1069,14 @@ p, li, input, i, b, span{
 
 .gap-4 {
   gap: 1rem;
+}
+
+.gap-20 {
+  gap: 5rem;
+}
+
+.gap-14 {
+  gap: 3.5rem;
 }
 
 .overflow-x-hidden {
@@ -1039,9 +1161,24 @@ p, li, input, i, b, span{
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
+.bg-green-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(134 239 172 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#e86363\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(232 99 99 / var(--tw-bg-opacity));
+}
+
 .bg-middle-green {
   --tw-bg-opacity: 1;
   background-color: rgb(100 168 85 / var(--tw-bg-opacity));
+}
+
+.bg-dark-yellow {
+  --tw-bg-opacity: 1;
+  background-color: rgb(230 209 114 / var(--tw-bg-opacity));
 }
 
 .bg-light-yellow {
@@ -1052,11 +1189,6 @@ p, li, input, i, b, span{
 .bg-darker-green {
   --tw-bg-opacity: 1;
   background-color: rgb(89 132 80 / var(--tw-bg-opacity));
-}
-
-.bg-dark-yellow {
-  --tw-bg-opacity: 1;
-  background-color: rgb(230 209 114 / var(--tw-bg-opacity));
 }
 
 .bg-green-800 {
@@ -1074,36 +1206,37 @@ p, li, input, i, b, span{
   background-color: rgb(74 222 128 / var(--tw-bg-opacity));
 }
 
-.bg-\[\#e4efe0\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(228 239 224 / var(--tw-bg-opacity));
-}
-
 .bg-lighter-green {
   --tw-bg-opacity: 1;
   background-color: rgb(126 192 112 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#5fa46e\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(95 164 110 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#70c48a\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(112 196 138 / var(--tw-bg-opacity));
+}
+
+.bg-red-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(252 165 165 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#00000085\] {
+  background-color: #00000085;
+}
+
+.bg-\[\#e4efe0\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(228 239 224 / var(--tw-bg-opacity));
+}
+
 .bg-gradient-to-r {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
-
-.from-cyan-500 {
-  --tw-gradient-from: #06b6d4;
-  --tw-gradient-to: rgb(6 182 212 / 0);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.from-lime-300 {
-  --tw-gradient-from: #bef264;
-  --tw-gradient-to: rgb(190 242 100 / 0);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.from-lime-500 {
-  --tw-gradient-from: #84cc16;
-  --tw-gradient-to: rgb(132 204 22 / 0);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
 .from-lime-400 {
@@ -1112,12 +1245,16 @@ p, li, input, i, b, span{
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
-.to-blue-500 {
-  --tw-gradient-to: #3b82f6;
-}
-
 .to-emerald-500 {
   --tw-gradient-to: #10b981;
+}
+
+.bg-cover {
+  background-size: cover;
+}
+
+.bg-center {
+  background-position: center;
 }
 
 .object-cover {
@@ -1137,6 +1274,14 @@ p, li, input, i, b, span{
   padding: 0.25rem;
 }
 
+.p-\[1em\] {
+  padding: 1em;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
@@ -1150,6 +1295,21 @@ p, li, input, i, b, span{
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+
+.px-\[5\%\] {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
 .px-8 {
@@ -1187,6 +1347,15 @@ p, li, input, i, b, span{
   padding-right: 0.75rem;
 }
 
+.px-\[10\%\] {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.pt-2 {
+  padding-top: 0.5rem;
+}
+
 .pr-4 {
   padding-right: 1rem;
 }
@@ -1197,6 +1366,18 @@ p, li, input, i, b, span{
 
 .pr-10 {
   padding-right: 2.5rem;
+}
+
+.pt-32 {
+  padding-top: 8rem;
+}
+
+.pb-24 {
+  padding-bottom: 6rem;
+}
+
+.pt-14 {
+  padding-top: 3.5rem;
 }
 
 .text-center {
@@ -1231,14 +1412,14 @@ p, li, input, i, b, span{
   line-height: 2.5rem;
 }
 
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
-
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 .font-bold {
@@ -1275,14 +1456,19 @@ p, li, input, i, b, span{
   color: rgb(89 132 80 / var(--tw-text-opacity));
 }
 
-.text-\[\#5AB946\] {
-  --tw-text-opacity: 1;
-  color: rgb(90 185 70 / var(--tw-text-opacity));
-}
-
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-\[\#f28d8d\] {
+  --tw-text-opacity: 1;
+  color: rgb(242 141 141 / var(--tw-text-opacity));
+}
+
+.text-\[\#5AB946\] {
+  --tw-text-opacity: 1;
+  color: rgb(90 185 70 / var(--tw-text-opacity));
 }
 
 .text-lighter-green {
@@ -1309,8 +1495,15 @@ p, li, input, i, b, span{
   outline-offset: 2px;
 }
 
-.filter {
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+.backdrop-blur {
+  --tw-backdrop-blur: blur(8px);
+  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+          backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+}
+
+.hover\:bg-\[\#68b679\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(104 182 121 / var(--tw-bg-opacity));
 }
 
 .hover\:text-\[\#7EC070\]:hover {
@@ -1325,6 +1518,10 @@ p, li, input, i, b, span{
 
 @media (min-width: 768px) {
 
+  .md\:top-0 {
+    top: 0px;
+  }
+
   .md\:mt-36 {
     margin-top: 9rem;
   }
@@ -1333,20 +1530,16 @@ p, li, input, i, b, span{
     margin-bottom: 0px;
   }
 
-  .md\:mt-24 {
-    margin-top: 6rem;
-  }
-
-  .md\:mt-0 {
-    margin-top: 0px;
-  }
-
-  .md\:mt-20 {
-    margin-top: 5rem;
+  .md\:mb-10 {
+    margin-bottom: 2.5rem;
   }
 
   .md\:mt-16 {
     margin-top: 4rem;
+  }
+
+  .md\:mt-0 {
+    margin-top: 0px;
   }
 
   .md\:block {
@@ -1357,8 +1550,20 @@ p, li, input, i, b, span{
     display: flex;
   }
 
+  .md\:grid {
+    display: grid;
+  }
+
+  .md\:hidden {
+    display: none;
+  }
+
   .md\:h-12 {
     height: 3rem;
+  }
+
+  .md\:h-14 {
+    height: 3.5rem;
   }
 
   .md\:h-\[800px\] {
@@ -1373,12 +1578,20 @@ p, li, input, i, b, span{
     width: 3rem;
   }
 
-  .md\:w-\[85\%\] {
-    width: 85%;
+  .md\:w-14 {
+    width: 3.5rem;
   }
 
   .md\:w-\[30\%\] {
     width: 30%;
+  }
+
+  .md\:w-\[50\%\] {
+    width: 50%;
+  }
+
+  .md\:w-\[85\%\] {
+    width: 85%;
   }
 
   .md\:flex-row {
@@ -1404,6 +1617,10 @@ p, li, input, i, b, span{
   .md\:px-20 {
     padding-left: 5rem;
     padding-right: 5rem;
+  }
+
+  .md\:pt-0 {
+    padding-top: 0px;
   }
 }
 

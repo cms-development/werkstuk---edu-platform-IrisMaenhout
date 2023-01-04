@@ -1,0 +1,202 @@
+title: 'Public page'
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: title
+        field:
+          type: text
+          required: true
+          validate:
+            - required
+      -
+        handle: titel_hero
+        field:
+          input_type: text
+          antlers: false
+          display: 'Titel hero'
+          type: text
+          icon: text
+          instructions: 'Dit is de titel die helemaal bovenaan op de pagina terecht komt.'
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          validate:
+            - required
+      -
+        handle: hero_image
+        field:
+          mode: list
+          container: assets
+          restrict: false
+          allow_uploads: true
+          show_filename: true
+          max_files: 1
+          display: 'Hero image'
+          type: assets
+          icon: assets
+          instructions: 'Dit is de afbeelding die te zien is, bovenaan de pagina.'
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          validate:
+            - required
+      -
+        handle: hero_description
+        field:
+          antlers: false
+          display: 'Hero description'
+          type: textarea
+          icon: textarea
+          instructions: 'Dit is een korte beschrijving over het platform.'
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          validate:
+            - required
+      -
+        handle: about_us
+        field:
+          collapse: false
+          previews: true
+          sets:
+            about_us_content:
+              display: 'About us content'
+              fields:
+                -
+                  handle: column1
+                  field:
+                    collapse: false
+                    always_show_set_button: false
+                    previews: true
+                    buttons:
+                      - h2
+                      - h3
+                      - h4
+                      - h5
+                      - bold
+                      - italic
+                      - underline
+                      - strikethrough
+                      - small
+                      - superscript
+                      - subscript
+                      - unorderedlist
+                      - orderedlist
+                      - removeformat
+                      - quote
+                      - anchor
+                      - image
+                      - table
+                      - color
+                      - horizontalrule
+                    save_html: true
+                    toolbar_mode: fixed
+                    link_noopener: false
+                    link_noreferrer: false
+                    target_blank: false
+                    reading_time: false
+                    fullscreen: true
+                    allow_source: true
+                    enable_input_rules: true
+                    enable_paste_rules: true
+                    antlers: false
+                    remove_empty_nodes: false
+                    display: Column1
+                    type: bard
+                    icon: bard
+                    listable: hidden
+                    instructions_position: above
+                    visibility: visible
+                    always_save: false
+                -
+                  handle: column2
+                  field:
+                    collapse: false
+                    always_show_set_button: false
+                    previews: true
+                    buttons:
+                      - h2
+                      - h3
+                      - h4
+                      - h5
+                      - bold
+                      - italic
+                      - underline
+                      - strikethrough
+                      - small
+                      - superscript
+                      - subscript
+                      - unorderedlist
+                      - orderedlist
+                      - removeformat
+                      - quote
+                      - anchor
+                      - image
+                      - table
+                      - color
+                      - horizontalrule
+                    container: assets
+                    save_html: true
+                    toolbar_mode: fixed
+                    link_noopener: false
+                    link_noreferrer: false
+                    target_blank: false
+                    reading_time: false
+                    fullscreen: true
+                    allow_source: true
+                    enable_input_rules: true
+                    enable_paste_rules: true
+                    antlers: false
+                    remove_empty_nodes: false
+                    display: Column2
+                    type: bard
+                    icon: bard
+                    listable: hidden
+                    instructions_position: above
+                    visibility: visible
+                    always_save: false
+          display: 'About us'
+          type: replicator
+          icon: replicator
+          instructions: 'Dit is optioneel'
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          max_sets: 1
+  sidebar:
+    display: Sidebar
+    fields:
+      -
+        handle: slug
+        field:
+          type: slug
+          localizable: true
+      -
+        handle: parent
+        field:
+          type: entries
+          collections:
+            - pages
+          max_items: 1
+          listable: false
+          localizable: true
+      -
+        handle: template
+        field:
+          hide_partials: true
+          blueprint: false
+          folder: public/public_page
+          display: Template
+          type: template
+          icon: template
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          duplicate: false

@@ -1,87 +1,96 @@
 {{ if logged_in }}
-<div class="md:mt-36 mx-auto w-[80%] max-w-[1200px]">
-    <div class="bg-white p-6 rounded-2xl border-2 md:flex md:gap-20 mb-12">
-        <div class="w-full">
-            <img class="rounded-xl w-full h-full max-h-[200px] object-cover mb-8 md:mb-0"
-                src="https://images.unsplash.com/photo-1499914485622-a88fac536970?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
-                alt="">
-        </div>
+    {{ user }}
+        {{ if accept_register_proposal}}
+            <div class="md:mt-36 mx-auto w-[80%] max-w-[1200px]">
+                <div class="bg-white p-6 rounded-2xl border-2 md:flex md:gap-20 mb-12">
+                    <div class="w-full">
+                        <img class="rounded-xl w-full h-full max-h-[200px] object-cover mb-8 md:mb-0"
+                            src="https://images.unsplash.com/photo-1499914485622-a88fac536970?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+                            alt="">
+                    </div>
 
-        <div>
-            <h2 class="font-bold text-xl mb-4">Mijn verdiepingsdossiers</h2>
-            <p class="mb-8">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat modi ipsam ducimus alias
-                labore totam. Ipsam similique consectetur quisquam, sequi ullam quaerat architecto eligendi beatae
-                repellat natus consequuntur modi iste?</p>
+                    <div>
+                        <h2 class="font-bold text-xl mb-4">Mijn verdiepingsdossiers</h2>
+                        <p class="mb-8">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat modi ipsam ducimus alias
+                            labore totam. Ipsam similique consectetur quisquam, sequi ullam quaerat architecto eligendi beatae
+                            repellat natus consequuntur modi iste?</p>
 
-            <div class="flex justify-between items-end">
-                <a href="/" class="underline text-middle-green">Bekijk dossiers</a>
-                <button class="primary-btn">Nieuw</button>
+                        <div class="flex justify-between items-end">
+                            <a href="/" class="underline text-middle-green">Bekijk dossiers</a>
+                            <button class="primary-btn">Nieuw</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-------------------------- Toggle categories ------------------>
+
+                <div id="category-toggle"
+                    class="flex justify-between items-center md:w-[60%] mx-auto bg-white p-2 rounded-3xl border-2 mb-12">
+                    <p class="toggle toggle-categories px-5 py-[0.5em] cursor-pointer">Alles</p>
+                    <p class="toggle px-5 py-[0.5em] cursor-pointer">Algemeen</p>
+                    <p class="toggle px-5 py-[0.5em] cursor-pointer">Theologisch</p>
+                </div>
+
+                <!------------------------------- Categories --------------------------->
+
+                <div id="all-categories" class="categories-grid mb-32"></div>
             </div>
-        </div>
-    </div>
 
-    <!-------------------------- Toggle categories ------------------>
+            <script>
+                const categoryToggle = document.querySelector('#category-toggle');
+                const toggles = document.querySelectorAll('.toggle');
+                const container = document.querySelector('#all-categories');
 
-    <div id="category-toggle"
-        class="flex justify-between items-center md:w-[60%] mx-auto bg-white p-2 rounded-3xl border-2 mb-12">
-        <p class="toggle toggle-categories px-5 py-[0.5em] cursor-pointer">Alles</p>
-        <p class="toggle px-5 py-[0.5em] cursor-pointer">Algemeen</p>
-        <p class="toggle px-5 py-[0.5em] cursor-pointer">Theologisch</p>
-    </div>
+                fetch('http://localhost:8080/api/taxonomies/categories/terms')
+                    .then((response) => response.json())
+                    .then((data) => {
 
-    <!------------------------------- Categories --------------------------->
+                        function addCard(taxonomy) {
+                            container.innerHTML +=
+                                `
+                                    <a class="block" href="${taxonomy.url}">
+                                        <span class="category">${taxonomy.category_group.label}</span>
+                                        <img src="${taxonomy.image.url}"
+                                            alt="category image">
+                                        <h3>${taxonomy.title}</h3>
+                                    </a>
+                                `
+                        }
 
-    <div id="all-categories" class="categories-grid mb-32"></div>
-</div>
+                        data.data.forEach(taxonomy => {
+                            addCard(taxonomy);
+                        })
 
-<script>
-    const categoryToggle = document.querySelector('#category-toggle');
-    const toggles = document.querySelectorAll('.toggle');
-    const container = document.querySelector('#all-categories');
+                        categoryToggle.addEventListener('click', (e) => {
+                            container.innerHTML = '';
 
-    fetch('http://localhost:8080/api/taxonomies/categories/terms')
-        .then((response) => response.json())
-        .then((data) => {
-
-            function addCard(taxonomy) {
-                container.innerHTML +=
-                    `
-                        <a class="block" href="${taxonomy.url}">
-                            <span class="category">${taxonomy.category_group.label}</span>
-                            <img src="${taxonomy.image.url}"
-                                alt="category image">
-                            <h3>${taxonomy.title}</h3>
-                        </a>
-                    `
-            }
-
-            data.data.forEach(taxonomy => {
-                addCard(taxonomy);
-            })
-
-            categoryToggle.addEventListener('click', (e) => {
-                container.innerHTML = '';
-
-                toggles.forEach((toggle) => {
-                    toggle.classList.remove('toggle-categories');
-                    e.target.classList.add('toggle-categories');
-                });
+                            toggles.forEach((toggle) => {
+                                toggle.classList.remove('toggle-categories');
+                                e.target.classList.add('toggle-categories');
+                            });
 
 
-                data.data.forEach(taxonomy => {
+                            data.data.forEach(taxonomy => {
 
-                    if (e.target.textContent === 'Alles' || e.target.textContent === taxonomy
-                        .category_group.label) {
-                        addCard(taxonomy);
-                    }
+                                if (e.target.textContent === 'Alles' || e.target.textContent === taxonomy
+                                    .category_group.label) {
+                                    addCard(taxonomy);
+                                }
 
-                });
-            })
+                            });
+                        })
 
-        });
+                    });
 
-</script>
+            </script>
+
+
+
+        {{ else }}
+            {{ redirect to="/algemeen" }}
+        {{ /if}}
+    {{ /user }}
 
 {{ else}}
-    Je bent niet ingelogd
+    {{ redirect to="/algemeen" }}
 {{ /if }}

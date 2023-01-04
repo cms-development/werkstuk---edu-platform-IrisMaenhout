@@ -1,0 +1,45 @@
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: full_name
+        field:
+          input_type: text
+          antlers: false
+          display: 'Volledige naam'
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          validate:
+            - required
+      -
+        handle: email
+        field:
+          input_type: email
+          antlers: false
+          display: E-mail
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          validate:
+            - required
+      -
+        handle: contact_message
+        field:
+          antlers: false
+          display: Bericht
+          type: textarea
+          icon: textarea
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          validate:
+            - required

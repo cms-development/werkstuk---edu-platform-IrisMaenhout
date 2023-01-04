@@ -1,4 +1,16 @@
-# admin:
-#   title: Administrators
-#   roles:
-#     - admin
+students:
+  title: Students
+  roles:
+    - student
+ex-students:
+  title: Ex-students
+  roles:
+    - ex-student
+admins:
+  title: Admins
+  roles:
+    - admin
+teachers:
+  title: Teachers
+  roles:
+    - teacher

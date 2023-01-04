@@ -1,4 +1,6 @@
-<!-- Display source -->
+<!-- Display source content -->
+
+{{ partial:check_access }}
 
 <div class="md:mt-36 max-w-[1200px] w-[80%] mx-auto">
 
@@ -82,7 +84,7 @@
 
 {{# Scripts #}}
 
-{{ partial:script_slider }}
+{{ partial:scripts/script_slider }}
 
 <script>
     const tables = document.querySelectorAll('table');

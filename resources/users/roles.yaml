@@ -1,4 +1,38 @@
-# admin:
-#   title: Administrator
-#   permissions:
-#     - super
+student:
+  title: Student
+  permissions:
+    - 'view pages entries'
+    - 'view sources entries'
+    - 'edit sources entries'
+    - 'create sources entries'
+    - 'delete sources entries'
+    - 'publish sources entries'
+    - 'configure asset containers'
+    - 'view assets assets'
+    - 'upload assets assets'
+    - 'view users'
+ex-student:
+  title: Ex-student
+teacher:
+  title: Teacher
+  permissions:
+    - 'view sources entries'
+    - 'edit sources entries'
+    - 'create sources entries'
+    - 'delete sources entries'
+    - 'publish sources entries'
+    - 'configure taxonomies'
+    - 'view categories terms'
+    - 'edit categories terms'
+    - 'create categories terms'
+    - 'delete categories terms'
+    - 'view content_type terms'
+    - 'edit content_type terms'
+    - 'create content_type terms'
+    - 'delete content_type terms'
+    - 'view assets assets'
+    - 'upload assets assets'
+admin:
+  title: Admin
+  permissions:
+    - super

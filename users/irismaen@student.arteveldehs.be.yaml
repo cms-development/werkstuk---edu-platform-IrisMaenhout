@@ -1,5 +1,8 @@
 name: Iris
 super: true
+first_name: Iris
+last_name: Maenhout
+accept_register_proposal: true
 id: 9f2b5fa0-6098-4ba1-be09-706663f15f2b
 password_hash: $2y$10$7/S5FjPYOc4zJli7dvkVsecac.iYgU1idaC55DWV1D3o3eA3KDPRO
 preferences:
@@ -16,3 +19,24 @@ preferences:
         - title
         - categories
         - content_type
+  forms:
+    register_proposal:
+      columns:
+        - datestamp
+        - first_name
+        - last_name
+        - email
+        - role
+    contact:
+      columns:
+        - datestamp
+        - first_name
+        - last_name
+        - email
+        - contact_message
+  users:
+    columns:
+      - email
+      - first_name
+      - user_role
+      - accept_register_proposal

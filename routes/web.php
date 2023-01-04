@@ -22,6 +22,9 @@ use Illuminate\Support\Facades\Route;
 
 
 // Route::statamic('/inloggen', 'view', ['layout' => 'custom']);
-Route::statamic('/sign-in', 'public/login');
+Route::statamic('/inloggen', 'public/login');
 Route::statamic('/forgot-password', 'public/forgot_password');
 Route::statamic('/reset-password', 'public/reset_password');
+Route::statamic('/geen-toegang', 'public/no_access');
+// Route::get('/geen-toegang', 'public/no_access')
+// ->name('no-access-error.show');
