@@ -9,7 +9,7 @@ categories:
 source_type:
   - pdf
 updated_by: 9f2b5fa0-6098-4ba1-be09-706663f15f2b
-updated_at: 1671314504
+updated_at: 1672915699
 content_type:
   - boek
 bard_layout:
@@ -247,8 +247,8 @@ layout_content:
       id: lbs1z1wc
       values:
         type: 3_columns
-        column1: '<h3>Dit is een tekst</h3><ol start="1"><li><p><p></p><p></p><p></p><p>jkgggnjgfnjgjkngjngd</p><ol start="1"><li><p>jfjfdjkfjkfjkfjkfjkjj</p></li><li><p>sddjjfjkjkd</p></li></ol></p></li><li><p>jfjfgjkfjkqfjk</p></li><li><p>sdjjkjkjkgf</p></li></ol>'
-        column2: '<h3>Dit is een tekst</h3><p><strike>jffjkgfjkgfjgfjkgf</strike></p><p></p><ul><li><p><p></p><p></p><p></p><p>Helllo</p><ul><li><p><p></p><p></p><p></p><p>jfjfjkfjk</p><ul><li><p>jdjdjkdjkdjk</p></li></ul></p></li></ul></p></li><li><p>HI</p></li><li><p>jsdjksfjk</p></li></ul>'
+        column1: '<h3>Dit is een tekst</h3><ol start="1"><li><p><p></p><p></p><p></p><p></p><p>jkgggnjgfnjgjkngjngd</p><ol start="1"><li><p>jfjfdjkfjkfjkfjkfjkjj</p></li><li><p>sddjjfjkjkd</p></li></ol></p></li><li><p>jfjfgjkfjkqfjk</p></li><li><p>sdjjkjkjkgf</p></li></ol>'
+        column2: '<h3>Dit is een tekst</h3><p><strike>jffjkgfjkgfjgfjkgf</strike></p><p></p><ul><li><p><p></p><p></p><p></p><p></p><p>Helllo</p><ul><li><p><p></p><p></p><p></p><p></p><p>jfjfjkfjk</p><ul><li><p>jdjdjkdjkdjk</p></li></ul></p></li></ul></p></li><li><p>HI</p></li><li><p>jsdjksfjk</p></li></ul>'
         column3: '<h3>Dit is een tekst</h3><p><em><u>jffjkgfjkgfjgfjkgf</u></em></p>'
   -
     type: set
@@ -256,8 +256,8 @@ layout_content:
       id: lbs2mfei
       values:
         type: 2_columns
-        colomn1: '<h4>Hi</h4><p>sdhjhjbfj</p><p><u>jxcjxcjkxc</u></p><p><strike>dhdsjsdjd</strike></p><p>jfjfjfjfcxjcxjkcxjk</p><p>cjkcjkds<sup>sdjdsjsdjksd</sup></p><p>jkjkcjkc<sub>cjkcxjcxjkcxkcx</sub></p><p><em>jcxjcxjkxc</em></p><p><strong>jfjfjfjf</strong></p><ul><li><p><p></p><p></p><p></p><p>kdkdkd</p><ul><li><p><p></p><p></p><p></p><p>jjfjfjffd</p><ul><li><p>jfjfjkfdjkfd</p></li></ul></p></li></ul></p></li><li><p>sdksdkdk</p></li><li><p>djdjdskjq</p></li></ul><p></p>'
-        colomn2: '<h4>dshdhd</h4><p>Bool</p><ol start="1"><li><p><p></p><p></p><p></p><p>ddjdj</p><ol start="1"><li><p>jfdjkfdjkf</p></li><li><p>jfdjkfdjfd</p></li></ol></p></li><li><p>djdsjdj</p></li><li><p>sjd</p></li></ol><p></p><p></p>'
+        colomn1: '<h4>Hi</h4><p>sdhjhjbfj</p><p><u>jxcjxcjkxc</u></p><p><strike>dhdsjsdjd</strike></p><p>jfjfjfjfcxjcxjkcxjk</p><p>cjkcjkds<sup>sdjdsjsdjksd</sup></p><p>jkjkcjkc<sub>cjkcxjcxjkcxkcx</sub></p><p><em>jcxjcxjkxc</em></p><p><strong>jfjfjfjf</strong></p><ul><li><p><p></p><p></p><p></p><p></p><p>kdkdkd</p><ul><li><p><p></p><p></p><p></p><p></p><p>jjfjfjffd</p><ul><li><p>jfjfjkfdjkfd</p></li></ul></p></li></ul></p></li><li><p>sdksdkdk</p></li><li><p>djdjdskjq</p></li></ul><p></p>'
+        colomn2: '<h4>dshdhd</h4><p>Bool</p><ol start="1"><li><p><p></p><p></p><p></p><p></p><p>ddjdj</p><ol start="1"><li><p>jfdjkfdjkf</p></li><li><p>jfdjkfdjfd</p></li></ol></p></li><li><p>djdsjdj</p></li><li><p>sjd</p></li></ol><p></p><p></p>'
   -
     type: paragraph
   -

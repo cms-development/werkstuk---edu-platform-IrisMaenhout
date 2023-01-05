@@ -894,6 +894,10 @@ p, li, input, i, b, span{
   margin-right: 0.5rem;
 }
 
+.ml-4 {
+  margin-left: 1rem;
+}
+
 .block {
   display: block;
 }
@@ -1226,8 +1230,8 @@ p, li, input, i, b, span{
   background-color: rgb(252 165 165 / var(--tw-bg-opacity));
 }
 
-.bg-\[\#00000085\] {
-  background-color: #00000085;
+.bg-\[\#000000a5\] {
+  background-color: #000000a5;
 }
 
 .bg-\[\#e4efe0\] {
@@ -1446,6 +1450,10 @@ p, li, input, i, b, span{
   line-height: 1.5;
 }
 
+.leading-none {
+  line-height: 1;
+}
+
 .text-middle-green {
   --tw-text-opacity: 1;
   color: rgb(100 168 85 / var(--tw-text-opacity));
@@ -1484,6 +1492,16 @@ p, li, input, i, b, span{
 .text-slate-400 {
   --tw-text-opacity: 1;
   color: rgb(148 163 184 / var(--tw-text-opacity));
+}
+
+.text-gray-900 {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
 .underline {

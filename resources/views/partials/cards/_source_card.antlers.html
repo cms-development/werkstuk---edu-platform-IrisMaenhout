@@ -2,23 +2,25 @@
     <div class="md:flex justify-between">
         <div>
             <div class="flex gap-6">
-                {{ user }}
+                {{# {{ dump author }} #}}
+
+                {{ author  }}
 
                     {{ if (avatar) }}
                         <img src="{{ avatar }}" class="w-10 h-10 rounded-full object-cover" alt="profile picture">
                     {{ else }}
                         <div class="bg-gradient-to-r from-lime-400 to-emerald-500 rounded-full h-10 w-10 flex justify-center items-center text-white capitalize">
-                            {{$ substr($name, 0, 1); $}}
+                            {{$ substr($first_name, 0, 1); $}}
                         </div>
                     {{ /if }}
 
-                {{ /user}}
+                {{ /author }}
 
                 <div>
                     <h4 class="font-semibold">
-                        {{ user }}
+                        {{ author }}
                             {{ first_name }} {{ last_name }}
-                        {{ /user }}
+                        {{ /author }}
                     </h4>
                     <i class="text-slate-400 text-sm">{{ last_modified }}</i>
                 </div>

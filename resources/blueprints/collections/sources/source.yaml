@@ -376,6 +376,11 @@ sections:
           default: current
           localizable: true
           max_items: 1
+          instructions_position: above
+          listable: hidden
+          visibility: visible
+          always_save: false
+          mode: select
       -
         handle: main_image
         field:

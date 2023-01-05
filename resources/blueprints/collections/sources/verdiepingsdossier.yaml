@@ -1,0 +1,692 @@
+title: Verdiepingsdossier
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: title
+        field:
+          type: text
+          required: true
+          validate:
+            - required
+      -
+        handle: document_content
+        field:
+          collapse: false
+          previews: true
+          sets:
+            new_folder:
+              display: 'New folder'
+              fields:
+                -
+                  handle: title_folder
+                  field:
+                    input_type: text
+                    antlers: false
+                    display: 'Title folder'
+                    type: text
+                    icon: text
+                    listable: hidden
+                    instructions_position: above
+                    visibility: visible
+                    always_save: false
+                    validate:
+                      - required
+                -
+                  handle: new_page
+                  field:
+                    collapse: false
+                    previews: true
+                    sets:
+                      new_page:
+                        display: 'New page'
+                        fields:
+                          -
+                            handle: title
+                            field:
+                              input_type: text
+                              antlers: false
+                              display: Title
+                              type: text
+                              icon: text
+                              listable: hidden
+                              instructions_position: above
+                              visibility: visible
+                              always_save: false
+                          -
+                            handle: page_layout
+                            field:
+                              collapse: false
+                              always_show_set_button: false
+                              previews: true
+                              sets:
+                                2_columns:
+                                  display: '2 columns'
+                                  fields:
+                                    -
+                                      handle: column1
+                                      field:
+                                        collapse: false
+                                        always_show_set_button: false
+                                        previews: true
+                                        buttons:
+                                          - h1
+                                          - h2
+                                          - h3
+                                          - h4
+                                          - h5
+                                          - bold
+                                          - italic
+                                          - underline
+                                          - strikethrough
+                                          - small
+                                          - superscript
+                                          - subscript
+                                          - unorderedlist
+                                          - orderedlist
+                                          - color
+                                          - removeformat
+                                          - quote
+                                          - anchor
+                                          - image
+                                          - table
+                                          - horizontalrule
+                                        container: assets
+                                        save_html: true
+                                        toolbar_mode: fixed
+                                        link_noopener: false
+                                        link_noreferrer: false
+                                        target_blank: false
+                                        link_collections:
+                                          - sources
+                                        reading_time: false
+                                        fullscreen: true
+                                        allow_source: true
+                                        enable_input_rules: true
+                                        enable_paste_rules: true
+                                        antlers: false
+                                        remove_empty_nodes: false
+                                        display: Column1
+                                        type: bard
+                                        icon: bard
+                                        listable: hidden
+                                        instructions_position: above
+                                        visibility: visible
+                                        always_save: false
+                                    -
+                                      handle: colomn2
+                                      field:
+                                        collapse: false
+                                        always_show_set_button: false
+                                        previews: true
+                                        buttons:
+                                          - h1
+                                          - h2
+                                          - h3
+                                          - h4
+                                          - h5
+                                          - bold
+                                          - italic
+                                          - underline
+                                          - strikethrough
+                                          - small
+                                          - superscript
+                                          - subscript
+                                          - unorderedlist
+                                          - orderedlist
+                                          - removeformat
+                                          - color
+                                          - quote
+                                          - anchor
+                                          - image
+                                          - table
+                                          - horizontalrule
+                                        container: assets
+                                        save_html: true
+                                        toolbar_mode: fixed
+                                        link_noopener: false
+                                        link_noreferrer: false
+                                        target_blank: false
+                                        link_collections:
+                                          - sources
+                                        reading_time: false
+                                        fullscreen: true
+                                        allow_source: true
+                                        enable_input_rules: true
+                                        enable_paste_rules: true
+                                        antlers: false
+                                        remove_empty_nodes: false
+                                        display: Colomn2
+                                        type: bard
+                                        icon: bard
+                                        listable: hidden
+                                        instructions_position: above
+                                        visibility: visible
+                                        always_save: false
+                              buttons:
+                                - h1
+                                - h2
+                                - h3
+                                - h4
+                                - h5
+                                - bold
+                                - italic
+                                - underline
+                                - strikethrough
+                                - unorderedlist
+                                - orderedlist
+                                - removeformat
+                                - quote
+                                - anchor
+                                - image
+                                - table
+                                - color
+                                - small
+                                - superscript
+                                - subscript
+                                - horizontalrule
+                              container: assets
+                              save_html: true
+                              toolbar_mode: fixed
+                              link_noopener: false
+                              link_noreferrer: false
+                              target_blank: false
+                              link_collections:
+                                - sources
+                              reading_time: false
+                              fullscreen: true
+                              allow_source: true
+                              enable_input_rules: true
+                              enable_paste_rules: true
+                              antlers: false
+                              remove_empty_nodes: false
+                              display: 'Page layout'
+                              type: bard
+                              icon: bard
+                              listable: hidden
+                              instructions_position: above
+                              visibility: visible
+                              always_save: false
+                          -
+                            handle: videos
+                            field:
+                              fields:
+                                -
+                                  handle: video
+                                  field:
+                                    display: Video
+                                    type: video
+                                    icon: video
+                                    listable: hidden
+                                    instructions_position: above
+                                    visibility: visible
+                                    always_save: false
+                              mode: table
+                              reorderable: true
+                              display: 'Video''s'
+                              type: grid
+                              icon: grid
+                              listable: hidden
+                              instructions_position: above
+                              visibility: visible
+                              always_save: false
+                          -
+                            handle: pdf
+                            field:
+                              mode: list
+                              container: assets
+                              restrict: false
+                              allow_uploads: true
+                              show_filename: true
+                              display: Pdf
+                              type: assets
+                              icon: assets
+                              listable: hidden
+                              instructions_position: above
+                              visibility: visible
+                              always_save: false
+                    display: 'New page'
+                    type: replicator
+                    icon: replicator
+                    listable: hidden
+                    instructions_position: above
+                    visibility: visible
+                    always_save: false
+            new_page:
+              display: 'New page'
+              fields:
+                -
+                  handle: title_page
+                  field:
+                    input_type: text
+                    antlers: false
+                    display: 'Title page'
+                    type: text
+                    icon: text
+                    listable: hidden
+                    instructions_position: above
+                    visibility: visible
+                    always_save: false
+                    validate:
+                      - required
+                -
+                  handle: page_layout
+                  field:
+                    collapse: false
+                    always_show_set_button: false
+                    previews: true
+                    sets:
+                      2_columns:
+                        display: '2 columns'
+                        fields:
+                          -
+                            handle: column_1
+                            field:
+                              collapse: false
+                              always_show_set_button: false
+                              previews: true
+                              buttons:
+                                - h1
+                                - h2
+                                - h3
+                                - h4
+                                - h5
+                                - bold
+                                - italic
+                                - underline
+                                - strikethrough
+                                - small
+                                - superscript
+                                - subscript
+                                - unorderedlist
+                                - orderedlist
+                                - removeformat
+                                - color
+                                - quote
+                                - anchor
+                                - image
+                                - table
+                                - horizontalrule
+                              container: assets
+                              save_html: true
+                              toolbar_mode: fixed
+                              link_noopener: false
+                              link_noreferrer: false
+                              target_blank: false
+                              link_collections:
+                                - sources
+                              reading_time: false
+                              fullscreen: true
+                              allow_source: true
+                              enable_input_rules: true
+                              enable_paste_rules: true
+                              antlers: false
+                              remove_empty_nodes: false
+                              display: 'Column 1'
+                              type: bard
+                              icon: bard
+                              listable: hidden
+                              instructions_position: above
+                              visibility: visible
+                              always_save: false
+                          -
+                            handle: column_2
+                            field:
+                              collapse: false
+                              always_show_set_button: false
+                              previews: true
+                              buttons:
+                                - h1
+                                - h2
+                                - h3
+                                - h4
+                                - h5
+                                - bold
+                                - italic
+                                - underline
+                                - strikethrough
+                                - small
+                                - superscript
+                                - subscript
+                                - unorderedlist
+                                - orderedlist
+                                - removeformat
+                                - color
+                                - quote
+                                - anchor
+                                - image
+                                - table
+                                - horizontalrule
+                              container: assets
+                              save_html: true
+                              toolbar_mode: fixed
+                              link_noopener: false
+                              link_noreferrer: false
+                              target_blank: false
+                              link_collections:
+                                - sources
+                              reading_time: false
+                              fullscreen: true
+                              allow_source: true
+                              enable_input_rules: true
+                              enable_paste_rules: true
+                              antlers: false
+                              remove_empty_nodes: false
+                              display: 'Column 2'
+                              type: bard
+                              icon: bard
+                              listable: hidden
+                              instructions_position: above
+                              visibility: visible
+                              always_save: false
+                      3_columns:
+                        display: '3 columns'
+                        fields:
+                          -
+                            handle: column_1
+                            field:
+                              collapse: false
+                              always_show_set_button: false
+                              previews: true
+                              buttons:
+                                - h1
+                                - h2
+                                - h3
+                                - h4
+                                - h5
+                                - h6
+                                - bold
+                                - italic
+                                - underline
+                                - strikethrough
+                                - small
+                                - superscript
+                                - subscript
+                                - unorderedlist
+                                - orderedlist
+                                - removeformat
+                                - quote
+                                - anchor
+                                - image
+                                - table
+                                - color
+                                - horizontalrule
+                              container: assets
+                              save_html: true
+                              toolbar_mode: fixed
+                              link_noopener: false
+                              link_noreferrer: false
+                              target_blank: false
+                              link_collections:
+                                - sources
+                              reading_time: false
+                              fullscreen: true
+                              allow_source: true
+                              enable_input_rules: true
+                              enable_paste_rules: true
+                              antlers: false
+                              remove_empty_nodes: false
+                              display: 'Column 1'
+                              type: bard
+                              icon: bard
+                              listable: hidden
+                              instructions_position: above
+                              visibility: visible
+                              always_save: false
+                          -
+                            handle: column_2
+                            field:
+                              collapse: false
+                              always_show_set_button: false
+                              previews: true
+                              buttons:
+                                - h1
+                                - h2
+                                - h3
+                                - h4
+                                - h5
+                                - bold
+                                - italic
+                                - underline
+                                - strikethrough
+                                - small
+                                - subscript
+                                - superscript
+                                - unorderedlist
+                                - orderedlist
+                                - color
+                                - removeformat
+                                - quote
+                                - anchor
+                                - image
+                                - table
+                                - horizontalrule
+                              container: assets
+                              save_html: true
+                              toolbar_mode: fixed
+                              link_noopener: false
+                              link_noreferrer: false
+                              target_blank: false
+                              link_collections:
+                                - sources
+                              reading_time: false
+                              fullscreen: true
+                              allow_source: true
+                              enable_input_rules: true
+                              enable_paste_rules: true
+                              antlers: false
+                              remove_empty_nodes: false
+                              display: 'Column 2'
+                              type: bard
+                              icon: bard
+                              listable: hidden
+                              instructions_position: above
+                              visibility: visible
+                              always_save: false
+                          -
+                            handle: column_3
+                            field:
+                              collapse: false
+                              always_show_set_button: false
+                              previews: true
+                              buttons:
+                                - h1
+                                - h2
+                                - h3
+                                - h4
+                                - h5
+                                - bold
+                                - italic
+                                - underline
+                                - strikethrough
+                                - small
+                                - superscript
+                                - subscript
+                                - unorderedlist
+                                - orderedlist
+                                - color
+                                - removeformat
+                                - quote
+                                - anchor
+                                - image
+                                - table
+                                - horizontalrule
+                              container: assets
+                              save_html: true
+                              toolbar_mode: fixed
+                              link_noopener: false
+                              link_noreferrer: false
+                              target_blank: false
+                              reading_time: false
+                              fullscreen: true
+                              allow_source: true
+                              enable_input_rules: true
+                              enable_paste_rules: true
+                              antlers: false
+                              remove_empty_nodes: false
+                              display: 'Column 3'
+                              type: bard
+                              icon: bard
+                              listable: hidden
+                              instructions_position: above
+                              visibility: visible
+                              always_save: false
+                    buttons:
+                      - h1
+                      - h2
+                      - h3
+                      - h4
+                      - h5
+                      - bold
+                      - italic
+                      - underline
+                      - strikethrough
+                      - small
+                      - superscript
+                      - subscript
+                      - unorderedlist
+                      - orderedlist
+                      - removeformat
+                      - color
+                      - quote
+                      - anchor
+                      - image
+                      - table
+                      - horizontalrule
+                    container: assets
+                    save_html: true
+                    toolbar_mode: fixed
+                    link_noopener: false
+                    link_noreferrer: false
+                    target_blank: false
+                    link_collections:
+                      - sources
+                    reading_time: false
+                    fullscreen: true
+                    allow_source: true
+                    enable_input_rules: true
+                    enable_paste_rules: true
+                    antlers: false
+                    remove_empty_nodes: false
+                    display: 'Page layout'
+                    type: bard
+                    icon: bard
+                    listable: hidden
+                    instructions_position: above
+                    visibility: visible
+                    always_save: false
+                    validate:
+                      - required
+                -
+                  handle: videos
+                  field:
+                    fields:
+                      -
+                        handle: video
+                        field:
+                          display: Video
+                          type: video
+                          icon: video
+                          listable: hidden
+                          instructions_position: above
+                          visibility: visible
+                          always_save: false
+                    mode: table
+                    reorderable: true
+                    display: 'Video''s'
+                    type: grid
+                    icon: grid
+                    listable: hidden
+                    instructions_position: above
+                    visibility: visible
+                    always_save: false
+                -
+                  handle: pdf
+                  field:
+                    mode: list
+                    container: assets
+                    restrict: false
+                    allow_uploads: true
+                    show_filename: true
+                    display: Pdf
+                    type: assets
+                    icon: assets
+                    listable: hidden
+                    instructions_position: above
+                    visibility: visible
+                    always_save: false
+          display: 'Document content'
+          type: replicator
+          icon: replicator
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+      -
+        handle: is_verdiepingsdossier
+        field:
+          default: 'true'
+          display: 'Is verdiepingsdossier'
+          type: hidden
+          icon: hidden
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+  sidebar:
+    display: Sidebar
+    fields:
+      -
+        handle: slug
+        field:
+          type: slug
+          localizable: true
+      -
+        handle: main_image
+        field:
+          mode: list
+          container: assets
+          restrict: false
+          allow_uploads: true
+          show_filename: true
+          display: 'Main image'
+          type: assets
+          icon: assets
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          validate:
+            - required
+      -
+        handle: author
+        field:
+          mode: select
+          display: Author
+          type: users
+          icon: users
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          default: current
+          validate:
+            - required
+      -
+        handle: categories
+        field:
+          type: terms
+          taxonomies:
+            - categories
+          display: Categories
+          mode: select
+      -
+        handle: content_type
+        field:
+          type: terms
+          taxonomies:
+            - content_type
+          display: 'Source types'
+          mode: select
+          default: verdiepingsdossier
