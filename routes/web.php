@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CreateEntryController;
 use App\Http\Controllers\FilterContentType;
 use Illuminate\Support\Facades\Route;
 use Statamic\Facades\Entry;
@@ -68,5 +69,7 @@ Route::statamic('/create-entry', 'sources/student_mini_site/create_mini_site');
     if($entry !== null && $entry->blueprint == 'verdiepingsdossier'){
         Route::statamic('{collection_url}/{child_page}', 'sources/student_mini_site/mini_site_child_page');
     }
+
+    Route::post('/create', [CreateEntryController::class, 'store'] )->name('store');
 
 

@@ -1,19 +1,55 @@
-HID
-
 <div class=" mt-48">
-    <form action="{{ route_store }}" method="POST" title="like form">
+    <form action="/create" method="POST" title="like form" enctype="multipart/form-data">
         {{ csrf_field }}
 
         {{# <input type="hidden" name="entry_id" value="{{ id }}"> #}}
         {{# <input type="hidden" data-id="{{ id }}" class="like_status" name="like_status" value="0"> #}}
 
-        <!-- Btn -->
-        <button class="like-btn border-2 border-rose-400 border-solid px-4 py-2 text-lg rounded-lg text-rose-400 hover:text-white hover:bg-rose-400 transition duration-700 ease-in-out">
-            <!-- <span class="heart-icon-outline text-3xl align-middle">&#9825;</span> -->
-            &#9825;
+        {{# ->slug('product-slug')
+            ->data([
+                'title' => 'product name',
+                'hero_description' => 'Dit is een test uit de controller',
+                'slug' => 'dit-is-een-url',
+                'categories' => '',
+                'content_type' => 'verdiepingsdossier'
+            ]); #}}
 
-            <!-- <span class="number-likes align-middle ml-2">{{ likes }}</span> -->
-        </button>
+        <label for="title">Titel</label><br>
+        <input type="text" name="title"><br>
+
+        <label for="slug">Slug</label><br>
+        <input type="text" name="slug"><br>
+
+        <label for="hero_description">Hero description</label><br>
+        <textarea name="hero_description" id="" cols="30" rows="10"></textarea>
+        <br>
+
+
+        <label for="categories">Categories</label><br>
+        <select name="categories" id="categories">
+            {{ taxonomy:categories }}
+                <option value="{{ slug }}">{{ title }}</option>
+            {{ /taxonomy:categories }}
+        </select><br>
+
+        {{# <label for="img">Select image:</label>
+        <input type="file" id="img" name="img" accept="image/*"> #}}
+
+        <div class="bg-grey-lighter py-10">
+            <label class="w-44 flex flex-col items-center px-2 py-3 bg-white-rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer">
+                    <span class="mt-2 text-base leading-normal">
+                        Select a file
+                    </span>
+                <input
+                    type="file"
+                    name="main_image"
+                    accept="image/*"
+                    class="hidden">
+            </label>
+        </div>
+
+
+       <button type="submit">Creër verdiepingsdossier</button>
 
     </form>
 

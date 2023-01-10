@@ -29,7 +29,7 @@ class CreateEntry extends Tags
 
         $data = [
             'csrf_field' => csrf_field(),
-            'route_store' => route('statamic.create_entry.store')
+            // 'route_store' => route('statamic.create_entry.store')
         ];
 
         return view('partials/create_entry_btn', $data);
