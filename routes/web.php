@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FilterContentType;
 use Illuminate\Support\Facades\Route;
+use Statamic\Facades\Entry;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +27,46 @@ Route::statamic('/inloggen', 'public/login');
 Route::statamic('/forgot-password', 'public/forgot_password');
 Route::statamic('/reset-password', 'public/reset_password');
 Route::statamic('/geen-toegang', 'public/no_access');
-// Route::get('/geen-toegang', 'public/no_access')
+// Route::statamic('/{collection}', 'sources/student_mini_site/mini_site_homepage');
+Route::statamic('/create-entry', 'sources/student_mini_site/create_mini_site');
 // ->name('no-access-error.show');
+// Route::name('create_entry.')->group( function()
+//     {
+//         Route::post('/create', [CreateEntry::class, 'store'] )->name('store');
+//     }
+// );
+
+// Route::get('/{mini_site_slug}/{page_slug}', function ($mini_site_slug, $page_slug) {
+//     // $entry = Entry::query()
+//     // // ->where('collection', 'source')
+//     // ->where('content_type', 'verdiepingsdosier')
+//     // ->first();
+
+//     $entry = Entry::findByUri('/' . $mini_site_slug);
+
+//     function search_child_page($var)
+//     {
+//         return str_contains(json_encode($var), "dit-is-een-pagina");
+//     }
+
+//     dd($entry);
+//     if($entry["document_content"]) {
+//         $availibility_child_page = array_filter($entry["document_content"], "search_child_page");
+
+//         dd($availibility_child_page);
+//     }
+
+
+//     // return $mini_site_page_slug;
+// });
+
+
+
+    $link = explode("/", $_SERVER['REQUEST_URI']);
+    $entry = Entry::findByUri('/' . $link[1]);
+
+    if($entry !== null && $entry->blueprint == 'verdiepingsdossier'){
+        Route::statamic('{collection_url}/{child_page}', 'sources/student_mini_site/mini_site_child_page');
+    }
+
+

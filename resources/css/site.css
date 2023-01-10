@@ -92,7 +92,7 @@ p, li, input, i, b, span{
     padding-bottom: 56.25%;
     /* padding-top: 5em;
     height: 0; */
-    width: 85%;
+    /* width: 85%; */
     margin: 0 auto;
 
 }
@@ -148,7 +148,7 @@ p, li, input, i, b, span{
 }
 
 .source-content-container .table-container, .about-us-container .table-container{
-    overflow-x: scroll;
+    overflow-x: auto;
     margin-bottom: 2em;
     border-radius: 0.5em;
 }
@@ -248,5 +248,10 @@ p, li, input, i, b, span{
     margin-top: 1em;
 }
 
+.grid-container{
+    display: grid;
+    gap: 4em;
+    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+}
 
 

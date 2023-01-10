@@ -2,7 +2,7 @@
 <div class="w-full bg-light-yellow border-2 border-dark-yellow py-8 px-16 rounded-xl">
     <h2 class="mb-8 text-xl">Andere bronnen over dit onderwerp</h2>
 
-    <div id="container" class="flex flex-nowrap gap-6 scroll-smooth overflow-x-hidden snap-proximity snap-x">
+    <div id="container" class="flex flex-nowrap gap-6 scroll-smooth overflow-x-hidden w-full snap-proximity snap-x">
         {{ categories }}
 
             {{ collection:sources taxonomy:categories="{{ slug }}" :id:not="id"}}
@@ -36,3 +36,7 @@
         <button id="slideRight" class="bg-dark-yellow px-4 py-1 rounded"><i class="fa-solid fa-right-long text-white text-lg"></i></button>
     </div>
 </div>
+
+
+{{# Script slider #}}
+{{ partial:scripts/script_slider }}

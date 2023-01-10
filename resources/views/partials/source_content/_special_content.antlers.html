@@ -1,0 +1,53 @@
+{{# Show pdf #}}
+{{ if (pdf) }}
+    <div class="mt-12">
+        {{ pdf }}
+            <object class="w-full mb-12 h-[400px] md:h-[800px] rounded-xl" type="application/pdf"
+                data="{{ url }}?#zoom=100&scrollbar=0&toolbar=1&navpanes=0">
+                <p class=" text-red-500">The pdf can not be displayed.</p>
+            </object>
+        {{ /pdf }}
+    </div>
+{{ /if }}
+
+
+{{# Show videos #}}
+{{ if (videos) }}
+    {{ videos }}
+
+        {{ if video | is_embeddable }}
+            <!-- Youtube and Vimeo -->
+            <div class="w-full md:w-[85%] videowrapper my-12">
+                <iframe class="w-full rounded-xl" src="{{ video | embed_url }}" frameborder="0" allowfullscreen></iframe>
+            </div>
+        {{ else }}
+            <!-- Other HTML5 video types -->
+            <video src="{{ video | embed_url }}" ></video>
+        {{ /if }}
+
+    {{ /videos }}
+
+{{ /if }}
+
+{{# Show embeded escaperoom #}}
+{{ if (edu_escaperoom) }}
+    <iframe class="w-full mt-12 rounded-xl" src="{{ edu_escaperoom }}" frameborder="0" height="600"
+    allowfullscreen></iframe>
+
+{{ /if }}
+
+
+<script>
+    const tables = document.querySelectorAll('table');
+
+    tables.forEach((table)=>{
+        // create wrapper container
+        const wrapper = document.createElement('div');
+        wrapper.className = 'table-container';
+        // insert wrapper before el in the DOM tree
+        table.parentNode.insertBefore(wrapper, table);
+        // move el into wrapper
+        wrapper.appendChild(table);
+    });
+
+</script>

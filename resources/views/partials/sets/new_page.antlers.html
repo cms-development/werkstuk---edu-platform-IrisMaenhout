@@ -1,0 +1,21 @@
+{{# Layout #}}
+<div class="source-content-container">
+    {{ page_layout }}
+        {{ if type == "text" }}
+            <div class="text">
+                {{ text }}
+            </div>
+        {{ else }}
+            {{ partial src="sets/{type}" }}
+        {{ /if }}
+
+    {{ /page_layout }}
+</div>
+
+
+{{ partial:source_content/special_content }}
+
+
+
+
+

@@ -1,0 +1,25 @@
+<script>
+    const navFolders = document.querySelectorAll('.nav-folder');
+
+    navFolders.forEach(navFolder => {
+        const toggleArrow = navFolder.querySelector('.toggle-arrow');
+        const childPages = navFolder.querySelector('.child-pages');
+
+        toggleArrow.addEventListener('click', (e)=>{
+            console.log(e.target);
+
+            if(e.target.classList.contains('fa-chevron-up')){
+                e.target.classList.remove('fa-chevron-up');
+                e.target.classList.add('fa-chevron-down');
+                childPages.classList.add('hidden');
+            }else{
+                e.target.classList.remove('fa-chevron-down');
+                e.target.classList.add('fa-chevron-up');
+                childPages.classList.remove('hidden');
+            }
+
+        })
+    });
+
+
+</script>

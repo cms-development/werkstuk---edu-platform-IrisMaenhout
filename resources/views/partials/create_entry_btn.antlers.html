@@ -1,0 +1,21 @@
+HID
+
+<div class=" mt-48">
+    <form action="{{ route_store }}" method="POST" title="like form">
+        {{ csrf_field }}
+
+        {{# <input type="hidden" name="entry_id" value="{{ id }}"> #}}
+        {{# <input type="hidden" data-id="{{ id }}" class="like_status" name="like_status" value="0"> #}}
+
+        <!-- Btn -->
+        <button class="like-btn border-2 border-rose-400 border-solid px-4 py-2 text-lg rounded-lg text-rose-400 hover:text-white hover:bg-rose-400 transition duration-700 ease-in-out">
+            <!-- <span class="heart-icon-outline text-3xl align-middle">&#9825;</span> -->
+            &#9825;
+
+            <!-- <span class="number-likes align-middle ml-2">{{ likes }}</span> -->
+        </button>
+
+    </form>
+
+</div>
+

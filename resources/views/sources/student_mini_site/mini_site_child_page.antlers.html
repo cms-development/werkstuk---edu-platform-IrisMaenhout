@@ -1,0 +1,120 @@
+
+{{ get_content from="/{{ collection_url }}" }}
+
+    <div class="md:flex gap-6 justify-between">
+
+        <div id="overlay" class="bg-[#000000a5] top-0 fixed w-screen h-screen hidden"></div>
+        <div id="sidebar" class="relative w-[20%] hidden md:block">
+            <aside class="bg-[#edf3ec] border-r-2 h-full fixed top-16 md:top-0 pt-14 md:pt-0">
+                <button id="close-sidebar" class="block md:hidden"><i class="fa-solid fa-xmark"></i></button>
+
+                <div class=" bg-middle-green md:mt-20 w-full p-6">
+                    <a href="./" class=" block text-middle-green bg-white py-2 w-full font-bold text-center rounded-lg">Start pagina</a>
+                </div>
+
+                <div class="pb-56 px-8 overflow-y-auto h-full">
+
+                    {{ document_content }}
+                        {{ if type == "new_folder" }}
+                            <div class="nav-folder">
+                                <div class="flex justify-between content-center gap-6 mb-2 mt-10">
+                                    <h4 class="font-bold text-lg max-w-[150px] text-darker-green">{{ title_folder }}</h4>
+
+                                    <button class="toggle-arrow"><i class="fa-solid fa-chevron-down text-darker-green"></i></button>
+                                </div>
+
+                                <div class="hidden child-pages">
+                                    {{ pages }}
+                                        {{ if type == "new_page" }}
+                                            <a class="block mt-2 ml-4 hover:text-[#20af6f] {{$ $slug == $child_page ? 'text-[#20af6f]' : '' $}}"
+                                            href="{{ slug }}">{{ title_page}}</a>
+                                        {{ /if }}
+                                    {{ /pages }}
+                                </div>
+                            </div>
+
+                        {{ /if }}
+
+                        <div class="mb-2">
+                            {{ if type == "new_page" }}
+                            <a class="block mt-4 hover:text-[#20af6f] {{$ $slug == $child_page ? 'text-[#20af6f]' : '' $}}"
+                                href="{{ slug }}">{{ title_page}}</a>
+                            {{ /if }}
+                        </div>
+
+                        {{# {{ partial:navigations/mini_site_nav }} #}}
+
+                    {{ /document_content }}
+                </div>
+
+            </aside>
+        </div>
+
+        <div class="md:mt-20 max-w-[1200px] w-[80%] mx-auto">
+            <div class="mx-auto md:px-[10%] pb-14">
+                {{ document_content }}
+                    <div>
+                        {{ if type == "new_page" }}
+
+                            {{ if slug === child_page}}
+                                <div class="py-8 ">
+
+                                    <ul class="breadcrumbs flex">
+                                        {{ nav:breadcrumbs }}
+                                        <li>
+                                            <a href="{{ url }}">{{ slug }}</a>
+                                            <p class="inline-block">{{ if !is_current }} / {{ /if }}</p>
+                                        </li>
+                                        {{ /nav:breadcrumbs }}
+                                        <li class="font-semibold text-darker-green">
+                                            <a href="{{ child_page }}">{{ child_page }}</a>
+                                        </li>
+                                    </ul>
+
+                                    <h1 class="text-3xl mt-10 mb-6">{{ title_page }}</h1>
+                                </div>
+
+                                {{ partial src="sets/{type}" }}
+                            {{ /if }}
+
+                        {{ /if }}
+
+                        {{ pages }}
+                            {{ if slug === child_page}}
+                                <div class="py-8 ">
+
+                                    <ul class="breadcrumbs flex">
+                                        {{ nav:breadcrumbs }}
+                                        <li>
+                                            <a href="{{ url }}">{{ slug }}</a>
+                                            <p class="inline-block">{{ if !is_current }} / {{ /if }}</p>
+                                        </li>
+                                        {{ /nav:breadcrumbs }}
+                                        <li class="font-semibold text-darker-green">
+                                            <a href="{{ child_page }}">{{ child_page }}</a>
+                                        </li>
+                                    </ul>
+
+                                    <h1 class="text-3xl mt-10 mb-6">{{ title_page }}</h1>
+                                </div>
+
+                                {{ partial src="sets/{type}" }}
+                            {{ /if }}
+
+                        {{ /pages }}
+
+                </div>
+                {{ /document_content }}
+
+                {{# Exta sources in the same category #}}
+                <div class="mt-28 mb-20">
+                    {{ partial:source_content/more_sources }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+{{ /get_content }}
+
+{{ partial:scripts/script_mini_site_toggle_nav }}
+

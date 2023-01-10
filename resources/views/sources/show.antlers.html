@@ -2,101 +2,232 @@
 
 {{ partial:check_access }}
 
-<div class="md:mt-36 max-w-[1200px] w-[80%] mx-auto">
+{{? $link = explode("/", $_SERVER['REQUEST_URI']); ?}}
 
-    {{ partial:breadcrumbs }}
+{{ if is_verdiepingsdossier }}
+    <div class="md:flex">
 
-    <h1 class=" text-4xl mt-8 mb-10">{{ title }}</h1>
+        {{# _________________________Overlay___________________________ #}}
+        <div id="overlay" class="bg-[#000000a5] top-0 fixed w-screen h-screen hidden"></div>
 
-    {{# Layout #}}
-    <div class="source-content-container">
-        {{ layout_content }}
-            {{ if type == "text" }}
-                <div class="text">
-                    {{ text }}
+        {{# ________________________Sidebar__________________________ #}}
+        <div id="sidebar" class="relative w-[20%] hidden md:block">
+            <aside class="bg-[#edf3ec] border-r-2 h-full fixed top-16 md:top-0 pt-14 md:pt-0">
+                <button id="close-sidebar" class="block md:hidden"><i class="fa-solid fa-xmark"></i></button>
+
+                {{# Start btn #}}
+                <div class=" bg-middle-green md:mt-20 w-full p-6">
+                    <a href="{{ slug }}" class=" block text-middle-green bg-white py-2 w-full font-bold text-center rounded-lg">Start pagina</a>
                 </div>
-            {{ /if }}
 
-            {{ partial src="sets/{type}" }}
-        {{ /layout_content }}
+                {{# Navigation #}}
+                <div class="pb-56 px-8 overflow-y-auto h-full">
+                    {{ document_content }}
+                        {{ if type == "new_folder" }}
+
+                            <div class="nav-folder">
+                                <div class="flex justify-between content-center gap-6 mb-2 mt-10">
+                                    <h4 class="font-bold text-lg max-w-[150px] text-darker-green">{{ title_folder }}</h4>
+
+                                    <button class="toggle-arrow"><i class="fa-solid fa-chevron-down text-darker-green"></i></button>
+
+                                </div>
+
+                                <div class="hidden child-pages">
+                                    {{ pages }}
+                                        {{ if type == "new_page" }}
+                                            <a class="block mt-2 ml-4 hover:text-[#20af6f]" href="/{{$ $link[1] . '/' $}}{{ slug }}">{{ title_page}}</a>
+
+                                        {{ /if }}
+                                    {{ /pages }}
+                                </div>
+
+                            </div>
+
+                        {{ /if }}
+
+                        <div class="mb-2">
+                            {{ if type == "new_page" }}
+                                <a class="block mt-4 hover:text-[#20af6f]" href="/{{$ $link[1] . '/' $}}{{ slug }}">{{ title_page}}</a>
+                            {{ /if }}
+                        </div>
+
+                        {{# {{ partial:navigations/mini_site_nav }} #}}
+                    {{ /document_content }}
+                </div>
+
+            </aside>
+        </div>
+
+        {{# ____________________________Content________________________ #}}
+        <div class="md:mt-20 max-w-[1200px] w-[80%] ">
+
+            {{# __________________Hero__________________________ #}}
+            <div class="mx-auto md:px-[10%] pb-8 bg-[#B0D2A8]">
+
+                <div class="py-8 ">
+                    <ul class="breadcrumbs flex">
+                        {{ nav:breadcrumbs }}
+                        <li class="font-semibold {{ if is_current }} text-white {{ /else }} text-[#ffffffc5] {{ /if }}">
+                            <a href="{{ url }}">{{ slug }}</a>
+                            <p class="inline-block text-[#ffffffc5]">{{ if !is_current }} / {{ /if }}</p>
+                        </li>
+                        {{ /nav:breadcrumbs }}
+                    </ul>
+
+                </div>
+
+
+                <div class="flex gap-16">
+                    <div class="w-[40%]">
+                        <img src="{{ main_image }}" class="block rounded-xl" alt="">
+                        <i class="text-[#ffffffbe] text-md block mt-6">{{ last_modified }}</i>
+                    </div>
+
+
+                    <div>
+                        <h1 class="text-3xl mb-10 text-white">{{ title }}</h1>
+
+                        <div class="text-white source-content-container">
+                            {{ hero_description }}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="flex gap-8 w-full bg-[#6d975d] px-[10%] py-4">
+                {{ categories }}
+                    <a href="{{ url }}" class="bg-[#ffffffb8] px-3 py-1 block rounded text-green-900"># {{ title }}</a>
+                {{ /categories }}
+            </div>
+
+            <div class="md:px-[10%] mt-24">
+
+                {{# __________________Dynamic content_________________ #}}
+                <div class="source-content-container">
+                    {{ main_page_content }}
+                        {{ if type == "text" }}
+                            <div class="text">
+                                {{ text }}
+                            </div>
+                        {{ else }}
+                             {{ partial src="sets/{type}" }}
+                        {{ /if }}
+
+                    {{ /main_page_content }}
+
+                    {{# __________________Chapters__________________ #}}
+                    <h2 class="mt-24 mb-6">Hoofdstukken</h2>
+
+                    <div class="grid-container mb-12">
+
+                        {{ document_content }}
+
+                            {{ if type == "new_folder" }}
+                                {{ pages.0 }}
+                                    {{ if type == "new_page" }}
+                                    <a href="/{{$ $link[1] . '/' $}}{{ slug }}" class="block bg-gradient-to-t from-[#A6F2C2] to-[#E1F0AF] p-6 rounded-xl">
+                                    {{ /if }}
+                                {{ /pages.0 }}
+
+                                    <div class="text-center">
+                                        <i class="fa-solid fa-folder bg-white p-8 rounded-full text-[#87DFB6] text-5xl"></i>
+                                    </div>
+
+                                    <p class="text-center mt-6 text-darker-green font-bold">{{ title_folder }}</p>
+                                </a>
+                            {{ /if }}
+                        {{ /document_content }}
+
+                    </div>
+
+                    <h2 class="mt-24 mb-6">Auteur(s)</h2>
+                    <div class="mb-24 flex gap-24">
+
+                        {{ author  }}
+                            <div>
+
+                                {{ if (avatar) }}
+                                    <img src="{{ avatar }}" class="w-20 h-20 rounded-full object-cover mx-auto" alt="profile picture">
+                                {{ else }}
+                                    <div class="bg-gradient-to-r from-lime-400 to-emerald-500 rounded-full w-20 h-20 flex justify-center items-center mx-auto">
+                                        <span class="text-2xl font-bold text-white capitalize">{{$ substr($first_name, 0, 1); $}}</span>
+                                    </div>
+                                {{ /if }}
+
+                                <p class="text-center mt-6 font-bold">{{ first_name }} {{ last_name }}</p>
+
+                            </div>
+                        {{ /author }}
+                    </div>
+
+                </div>
+
+                {{# Exta sources in the same category #}}
+                <div class="mt-28 mb-20">
+                    {{ partial:source_content/more_sources }}
+                </div>
+            </div>
+        </div>
     </div>
 
 
-    {{# <p>{{ content }}</p> #}}
+{{ else }}
+    <div class="md:mt-36 max-w-[1200px] w-[80%] mx-auto">
 
 
 
+        {{# <div class="my-12 bg-[#d3ede4] w-full py-6 px-12 rounded-xl ">
+            <h2 class="text-2xl mb-6 text-gray-500">Auteur:</h2>
+            {{ partial:source_content/author }}
+        </div> #}}
 
-    {{# Show pdf #}}
-    {{ if (pdf) }}
-    <div class="mt-12">
-        {{ pdf }}
-        <object class="w-full mb-12 h-[400px] md:h-[800px] rounded-xl" type="application/pdf"
-            data="{{ url }}?#zoom=100&scrollbar=0&toolbar=1&navpanes=0">
-            <p class=" text-red-500">The pdf can not be displayed.</p>
-        </object>
-        {{ /pdf }}
+        {{ partial:breadcrumbs }}
+
+        <h1 class="text-3xl mt-16">{{ title }}</h1>
+
+        <div class="my-12">
+            <hr>
+            <div class=" mt-8">
+                {{ partial:source_content/author }}
+            </div>
+
+            <div class="flex gap-8 my-8">
+                {{ categories }}
+                    <a href="{{ url }}" class="bg-lighter-green px-3 py-1 block rounded text-white"># {{ title }}</a>
+                {{ /categories }}
+            </div>
+
+            <hr>
+        </div>
+
+
+        {{# Layout #}}
+        <div class="source-content-container">
+            {{ layout_content }}
+                {{ if type == "text" }}
+                    <div class="text">
+                        {{ text }}
+                    </div>
+
+                {{ else }}
+                    {{ partial src="sets/{type}" }}
+                {{ /if }}
+
+
+            {{ /layout_content }}
+        </div>
+
+        {{ partial:source_content/special_content }}
+
+
     </div>
 
-    {{ /if }}
+    {{# Exta sources in the same category #}}
+    <div class="mt-28 w-[85%] mx-auto mb-20">
+        {{ partial:source_content/more_sources }}
+    </div>
 
-    {{# Show embeded escaperoom #}}
-    {{ if (edu_escaperoom) }}
-    <iframe class="w-full mt-12 rounded-xl" src="{{ edu_escaperoom }}" frameborder="0" height="600"
-        allowfullscreen></iframe>
+{{ /if }}
 
-    {{ /if }}
-
-
-    {{# Show videos #}}
-    {{ if (videos) }}
-        {{ videos }}
-
-            {{ if video | is_embeddable }}
-                <!-- Youtube and Vimeo -->
-                <div class="videowrapper my-12">
-                    <iframe class="w-full rounded-xl" src="{{ video | embed_url }}" frameborder="0" allowfullscreen></iframe>
-                </div>
-            {{ else }}
-                <!-- Other HTML5 video types -->
-                <video src="{{ video | embed_url }}" ...></video>
-            {{ /if }}
-
-        {{ /videos }}
-
-    {{ /if }}
-
-
-
-
-    {{ categories }}
-    <li><a href="{{ url }}">{{ title }}</a></li>
-    {{ /categories }}
-
-</div>
-
-{{# Exta sources in the same category #}}
-<div class="mt-28 w-[85%] mx-auto mb-20">
-    {{ partial:more_sources }}
-
-</div>
-
-
-{{# Scripts #}}
-
-{{ partial:scripts/script_slider }}
-
-<script>
-    const tables = document.querySelectorAll('table');
-
-    tables.forEach((table)=>{
-        // create wrapper container
-        const wrapper = document.createElement('div');
-        wrapper.className = 'table-container';
-        // insert wrapper before el in the DOM tree
-        table.parentNode.insertBefore(wrapper, table);
-        // move el into wrapper
-        wrapper.appendChild(table);
-    });
-
-</script>
+{{ partial:scripts/script_mini_site_toggle_nav }}
