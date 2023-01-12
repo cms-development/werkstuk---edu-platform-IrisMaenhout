@@ -1,0 +1,194 @@
+{{ partial:check_access }}
+{{ collection:sources slug:is="{{ source_slug }}" published:is="false"}}
+    <div class="mt-20 w-full bg-[#B0D2A8] flex justify-between py-6 px-12 items-center fixed shadow-md z-[5]">
+        <div>
+            <p>Account/ thema-dossiers/ name-website</p>
+        </div>
+
+        <div class="flex gap-14">
+            <form action="/create-new-page" method="post" title="add new page">
+                {{ csrf_field }}
+                <input type="hidden" name="source_id" value="{{ id }}">
+
+                {{ if folder_slug }}
+                    {{ document_content }}
+                        {{ if type == "new_folder" }}
+                            {{? $slugify_folder_name = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title_folder))) ?}}
+
+                            {{ if $slugify_folder_name === folder_slug }}
+                                <input type="hidden" name="new_page_location" value="{{ title_folder }}">
+                            {{ /if }}
+
+                        {{ /if }}
+                    {{ /document_content }}
+
+                {{ else }}
+                    <input type="hidden" name="new_page_location" value="root">
+                {{ /if }}
+
+                <button type="submit" class="flex justify-center items-center  w-16 h-16 bg-white rounded-full">
+                    <i class="fa-solid fa-file text-[#87DFB6] text-3xl block"></i>
+                    <div class="absolute text-center z-10 font-bold text-3xl text-white">+</div>
+                </button>
+            </form>
+
+            {{ if !folder_slug }}
+                <form action="/create-new-folder" method="post" title="add new folder">
+                    {{ csrf_field }}
+                    <input type="hidden" name="source_id" value="{{ id }}">
+
+                    <button type="submit" class="flex justify-center items-center w-16 h-16 bg-white rounded-full">
+                        <i class="fa-solid fa-folder text-[#87DFB6] text-3xl block"></i>
+                        <div class="absolute text-center z-10 font-bold text-3xl text-white">+</div>
+                    </button>
+                </form>
+            {{ /if }}
+
+            <button class="primary-btn">Publiceren</button>
+        </div>
+    </div>
+
+    {{# ________________________Folders & pages______________________ #}}
+
+    <div class="grid-edit-mini-site w-[85%] mx-auto pt-64 pb-32">
+
+        {{ if !folder_slug }}
+            <div class="start-page">
+                <div class="flex flex-col gap-4">
+                    <a href="start-pagina/wijzigen" class="block mx-auto">
+                        <i class="fa-solid fa-file text-[#44aa7a] text-8xl hover:text-[#4cd495] transition ease-in-out duration-300 hover:scale-110"></i>
+                    </a>
+                    <p class="text-center">Start pagina</p>
+                </div>
+            </div>
+
+            {{ document_content }}
+                {{ if type == "new_page" }}
+                    <div>
+                        <div class="flex flex-col gap-4">
+                            <a href="{{ slug }}/wijzigen" class="block mx-auto">
+                                <i class="fa-solid fa-file text-8xl text-[#87DFB6] hover:text-[#4cd495] transition ease-in-out duration-300 hover:scale-110"></i>
+                            </a>
+                            <p data-file-folder="file" class="text-center hover:text-teal-400 transition ease-in-out duration-300 update_title">{{ title_page }}</p>
+
+                        </div>
+                    </div>
+                {{ /if }}
+
+                {{ if type == "new_folder" }}
+                    <div>
+                        <div class="flex flex-col gap-4">
+                            <a href="map-{{$ strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title_folder))) $}}/wijzigen" class="block mx-auto">
+                                <i class="fa-solid fa-folder text-[#87DFB6] text-8xl hover:text-[#4cd495] transition ease-in-out duration-300 hover:scale-110"></i>
+                            </a>
+                            <p data-file-folder="folder" class="text-center hover:text-teal-400 transition ease-in-out duration-300 update_title">{{ title_folder }}</p>
+                        </div>
+
+                    </div>
+
+                {{ /if }}
+
+            {{ /document_content }}
+        {{ else }}
+
+            {{ document_content }}
+                {{ if type == "new_folder" }}
+                {{? $slugify_folder_name = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title_folder))) ?}}
+
+                    {{ if $slugify_folder_name === folder_slug }}
+                        {{ pages }}
+                            {{ if type == "new_page" }}
+                                <div>
+                                    <div class="flex flex-col gap-4">
+                                        <a href="{{ slug }}/wijzigen" class="block mx-auto">
+                                            <i class="fa-solid fa-file text-[#87DFB6] text-8xl hover:text-[#4cd495] transition ease-in-out duration-300 hover:scale-110"></i>
+                                        </a>
+                                        <p data-file-folder="file" class="text-center hover:text-teal-400 transition ease-in-out duration-300 update_title">{{ title_page }}</p>
+
+                                    </div>
+                                </div>
+                            {{ /if }}
+                        {{ /pages }}
+                    {{ /if }}
+
+                {{ /if }}
+
+            {{ /document_content }}
+
+        {{ /if }}
+
+    </div>
+
+
+    <script>
+        const csrf = document.querySelector('meta[name="_token"]').content;
+        const slugify = location.pathname.split('/').slice(1);
+        const slugSource = slugify[2];
+        const slugLocation = slugify[3];
+        console.log(slugify);
+
+        window.addEventListener('click', e => {
+
+            if(document.querySelector('.form-change-title')){
+
+                const inputTitle = document.querySelector('.input-title');
+                const form = document.querySelector('.form-change-title');
+                const submitBtn = document.querySelector('.change-title-btn');
+
+                if(e.target !== form && e.target !== inputTitle && e.target !== submitBtn && e.target !== document.querySelector('.fa-check')){
+                    const titleName  = document.createElement("p");
+                    titleName.className = 'text-center hover:text-teal-400 transition ease-in-out duration-300 update_title';
+                    titleName.textContent = inputTitle.value;
+
+                    form.replaceWith(titleName);
+                }
+
+            }
+
+
+            if(document.querySelectorAll('.update_title')){
+                const titles = document.querySelectorAll('.update_title');
+                titles.forEach((title)=>{
+                    if(e.target === title ){
+
+                        const text = e.target.textContent;
+                        const isFileFolder  = e.target.dataset.fileFolder;
+
+                        const updateNameForm  = document.createElement("form");
+                        updateNameForm.className = 'update-name flex mt-2 form-change-title';
+                        updateNameForm.action = '/change-folder-file-name';
+                        updateNameForm.method = 'post';
+
+
+
+                        updateNameForm.innerHTML = `
+                            <input type="text" class="w-full px-2 outline-none border-2 rounded-l-md input-title" name="new_name" value="${ text }">
+                            <input type="hidden" name="original_title" value="${ text }">
+                            <input type="hidden" name="_token" value="${ csrf }">
+                            <input type="hidden" name="source_slug" value="${ slugSource }">
+                            <input type="hidden" name="is_file_folder" value="${ isFileFolder }">
+                            <input type="hidden" name="location" value="${ slugLocation }">
+
+                            <button type="submit" class="change-title-btn"><i class="fa-solid fa-check bg-middle-green hover:bg-[#1c6543] transition ease-in-out duration-300 text-white p-4 rounded-r-md"></i></button>
+
+                        `;
+
+                        e.target.replaceWith(updateNameForm);
+
+                        const inputTitle = document.querySelector('.input-title');
+                        const inputOriginalTitle = document.querySelector('#original_title');
+                        const csrfField = document.querySelector('#csrf-token');
+
+
+                    };
+                });
+            };
+
+        });
+
+
+    </script>
+{{ /collection:sources }}
+
+
+

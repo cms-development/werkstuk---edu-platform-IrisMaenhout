@@ -254,4 +254,11 @@ p, li, input, i, b, span{
     grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
 }
 
+.grid-edit-mini-site{
+    display: grid;
+    gap: 4em;
+    grid-template-columns: repeat(auto-fill, minmax(12em, 1fr));
+}
+
+
 

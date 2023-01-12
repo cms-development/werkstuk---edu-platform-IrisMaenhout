@@ -28,8 +28,13 @@ Route::statamic('/inloggen', 'public/login');
 Route::statamic('/forgot-password', 'public/forgot_password');
 Route::statamic('/reset-password', 'public/reset_password');
 Route::statamic('/geen-toegang', 'public/no_access');
-// Route::statamic('/{collection}', 'sources/student_mini_site/mini_site_homepage');
+
 Route::statamic('/create-entry', 'sources/student_mini_site/create_mini_site');
+
+Route::statamic('/account/verdiepingsdossier/{source_slug}/wijzigen', 'sources/student_mini_site/edit_mini_site');
+Route::statamic('/account/verdiepingsdossier/{source_slug}/map-{folder_slug}/wijzigen', 'sources/student_mini_site/edit_mini_site');
+
+
 // ->name('no-access-error.show');
 // Route::name('create_entry.')->group( function()
 //     {
@@ -71,5 +76,9 @@ Route::statamic('/create-entry', 'sources/student_mini_site/create_mini_site');
     }
 
     Route::post('/create', [CreateEntryController::class, 'store'] )->name('store');
+    Route::post('/create-new-page', [CreateEntryController::class, 'createNewPage'] )->name('add-new-page');
+    Route::post('/create-new-folder', [CreateEntryController::class, 'createNewFolder'] )->name('add-new-folder');
+
+    Route::post('/change-folder-file-name', [CreateEntryController::class, 'changeName'] )->name('change-name');
 
 

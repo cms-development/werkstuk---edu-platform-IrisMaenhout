@@ -13,5 +13,19 @@ author:
   - 9f2b5fa0-6098-4ba1-be09-706663f15f2b
 is_verdiepingsdossier: 'true'
 updated_by: 9f2b5fa0-6098-4ba1-be09-706663f15f2b
-updated_at: 1673370519
+updated_at: 1673440165
+document_content:
+  -
+    id: lcrn0u3c
+    title_page: 'Voorbeeld pagina'
+    slug: voorbeeld
+    page_layout:
+      -
+        type: paragraph
+        content:
+          -
+            type: text
+            text: Test
+    type: new_page
+    enabled: true
 ---

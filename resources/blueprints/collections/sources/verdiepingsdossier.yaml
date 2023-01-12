@@ -218,6 +218,14 @@ sections:
         field:
           type: slug
           localizable: true
+          instructions_position: above
+          listable: hidden
+          visibility: visible
+          always_save: false
+          from: title
+          generate: true
+          validate:
+            - required
       -
         handle: main_image
         field:
@@ -832,7 +840,6 @@ sections:
                               visibility: visible
                               always_save: false
                     buttons:
-                      - h1
                       - h2
                       - h3
                       - h4
@@ -875,8 +882,6 @@ sections:
                     instructions_position: above
                     visibility: visible
                     always_save: false
-                    validate:
-                      - required
                 -
                   handle: videos
                   field:
