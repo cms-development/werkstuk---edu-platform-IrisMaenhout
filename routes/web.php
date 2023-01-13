@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CreateEntryController;
+use App\Http\Controllers\EditSourceContentController;
+use App\Http\Controllers\EditSourceController;
 use App\Http\Controllers\FilterContentType;
 use Illuminate\Support\Facades\Route;
 use Statamic\Facades\Entry;
@@ -33,6 +35,7 @@ Route::statamic('/create-entry', 'sources/student_mini_site/create_mini_site');
 
 Route::statamic('/account/verdiepingsdossier/{source_slug}/wijzigen', 'sources/student_mini_site/edit_mini_site');
 Route::statamic('/account/verdiepingsdossier/{source_slug}/map-{folder_slug}/wijzigen', 'sources/student_mini_site/edit_mini_site');
+Route::statamic('/account/verdiepingsdossier/{source_slug}/{page_slug}/wijzigen', 'sources/student_mini_site/edit_content_mini_site');
 
 
 // ->name('no-access-error.show');
@@ -67,18 +70,24 @@ Route::statamic('/account/verdiepingsdossier/{source_slug}/map-{folder_slug}/wij
 // });
 
 
+    if(isset($_SERVER['REQUEST_URI'])){
+        $link = explode("/", $_SERVER['REQUEST_URI']);
+        $entry = Entry::findByUri('/' . $link[1]);
 
-    $link = explode("/", $_SERVER['REQUEST_URI']);
-    $entry = Entry::findByUri('/' . $link[1]);
-
-    if($entry !== null && $entry->blueprint == 'verdiepingsdossier'){
-        Route::statamic('{collection_url}/{child_page}', 'sources/student_mini_site/mini_site_child_page');
+        if($entry !== null && $entry->blueprint == 'verdiepingsdossier'){
+            Route::statamic('{collection_url}/{child_page}', 'sources/student_mini_site/mini_site_child_page');
+        }
     }
 
-    Route::post('/create', [CreateEntryController::class, 'store'] )->name('store');
-    Route::post('/create-new-page', [CreateEntryController::class, 'createNewPage'] )->name('add-new-page');
-    Route::post('/create-new-folder', [CreateEntryController::class, 'createNewFolder'] )->name('add-new-folder');
 
-    Route::post('/change-folder-file-name', [CreateEntryController::class, 'changeName'] )->name('change-name');
+    Route::post('/create', [CreateEntryController::class, 'store'] )->name('store');
+    Route::post('/create-new-page', [EditSourceController::class, 'createNewPage'] )->name('add-new-page');
+    Route::post('/create-new-folder', [EditSourceController::class, 'createNewFolder'] )->name('add-new-folder');
+    Route::post('/remove-folder', [EditSourceController::class, 'removeFolder'] )->name('remove-folder');
+
+    Route::post('/change-folder-file-name', [EditSourceController::class, 'changeName'] )->name('change-name');
+    Route::post('/update-main-page', [EditSourceContentController::class, 'updateMainPage'] )->name('update-main-page');
+
+
 
 

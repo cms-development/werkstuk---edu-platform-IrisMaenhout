@@ -70,7 +70,7 @@
 
                 {{ foreach array="{ $content_types_checked }" as="type" }}
 
-                    {{ collection:sources taxonomy:content_type="{type}"}}
+                    {{ collection:sources taxonomy:content_type="{type}" status:in="published"}}
                         {{? $source_id = $id ?}}
                         {{ get_content from="{ $source_id }" }}
                             {{ categories }}
@@ -88,7 +88,7 @@
 
                 {{ /foreach }}
             {{ else }}
-            {{ entries as="posts"}}
+            {{ entries as="posts" status:in="published"}}
                 {{ posts }}
                     {{ partial:cards/source_card }}
                 {{ /posts }}

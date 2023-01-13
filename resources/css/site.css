@@ -109,26 +109,29 @@ p, li, input, i, b, span{
 
 /* __________________ Source content __________________ */
 
-.source-content-container h2, .about-us-container h2{
+.source-content-container h2, .about-us-container h2, .wysiwyg-editor h2{
     font-size: 28px;
 }
-.source-content-container h3, .about-us-container h3{
+.source-content-container h3, .about-us-container h3, .wysiwyg-editor h3{
     font-size: 26px;
 }
-.source-content-container h4, .about-us-container h4{
+.source-content-container h4, .about-us-container h4, .wysiwyg-editor h4{
     font-size: 21px;
 }
-.source-content-container h5, .about-us-container h5{
+.source-content-container h5, .about-us-container h5, .wysiwyg-editor h5{
     font-size: 18px;
 }
 
 .source-content-container h2, .source-content-container h3, .source-content-container h4, .source-content-container h5, .source-content-container p,
 
-.about-us-container h2, .about-us-container h3, .about-us-container h4, .about-us-container h5, .about-us-container p{
+.about-us-container h2, .about-us-container h3, .about-us-container h4, .about-us-container h5, .about-us-container p
+
+.wysiwyg-editor h2, .wysiwyg-editor h3, .wysiwyg-editor h4, .wysiwyg-editor h5, .wysiwyg-editor p
+{
     margin-bottom: 1em;
 }
 
-.source-content-container img, .about-us-container img{
+.source-content-container img, .about-us-container img, .wysiwyg-editor img{
     border-radius: 1em;
 }
 
@@ -140,40 +143,45 @@ p, li, input, i, b, span{
     margin-bottom: 1em;
 }
 
+.wysiwyg-editor a{
+    text-decoration: underline;
+    color: #28CD7F;
+}
+
 /* ______________________ Source content table ________________ */
 
-.source-content-container table, .about-us-container table{
+.source-content-container table, .about-us-container table, .wysiwyg-editor table{
     border-collapse: collapse;
     width: 100%;
 }
 
-.source-content-container .table-container, .about-us-container .table-container{
+.source-content-container .table-container, .about-us-container .table-container, .wysiwyg-editor .table-container{
     overflow-x: auto;
     margin-bottom: 2em;
     border-radius: 0.5em;
 }
 
 
-.source-content-container table td, .source-content-container table th, .about-us-container table td, .about-us-container table th {
+.source-content-container table td, .source-content-container table th, .about-us-container table td, .about-us-container table th, .wysiwyg-editor table td, .wysiwyg-editor table th {
     border: 1px solid #ddd;
     padding: 1em;
     min-width: 150px;
 }
 
-.source-content-container table th p, .about-us-container table th p{
+.source-content-container table th p, .about-us-container table th p, .wysiwyg-editor table th p{
     color: white;
 }
 
-.source-content-container table td p, .source-content-container table th p, .about-us-container table td p, .about-us-container table th p {
+.source-content-container table td p, .source-content-container table th p, .about-us-container table td p, .about-us-container table th p, .wysiwyg-editor table td p, .wysiwyg-editor table th p{
     margin-bottom: 0;
 }
 
-.source-content-container table tr:nth-child(even), .about-us-container table tr:nth-child(even){
+.source-content-container table tr:nth-child(even), .about-us-container table tr:nth-child(even), .wysiwyg-editor table tr:nth-child(even){
     background-color: #f2f2f2;
 }
 
 
-.source-content-container table th, .about-us-container table th {
+.source-content-container table th, .about-us-container table th, .wysiwyg-editor table th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
@@ -206,7 +214,7 @@ p, li, input, i, b, span{
 }
 
 
-.source-content-container blockquote, .about-us-container blockquote{
+.source-content-container blockquote, .about-us-container blockquote, .wysiwyg-editor blockquote{
     background-color: rgb(208, 240, 237);
     width: 100%;
     padding: 1em 2em;
@@ -258,6 +266,21 @@ p, li, input, i, b, span{
     display: grid;
     gap: 4em;
     grid-template-columns: repeat(auto-fill, minmax(12em, 1fr));
+}
+
+
+/* ___________________________ WYSIWYG editor _________________________ */
+
+.wysiwyg-editor ul{
+    list-style: disc inside;
+}
+
+.wysiwyg-editor ol{
+    list-style: decimal inside;
+}
+
+.wysiwyg-editor li p{
+    display: inline-block;
 }
 
 

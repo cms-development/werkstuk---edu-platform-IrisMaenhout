@@ -1,6 +1,5 @@
 ---
 id: 074d0c69-55ad-4f76-b3f9-3ce1e310617d
-published: false
 blueprint: verdiepingsdossier
 title: 'Het regent'
 categories:
@@ -13,5 +12,5 @@ author:
   - 9f2b5fa0-6098-4ba1-be09-706663f15f2b
 is_verdiepingsdossier: 'true'
 updated_by: 9f2b5fa0-6098-4ba1-be09-706663f15f2b
-updated_at: 1673361261
+updated_at: 1673538646
 ---

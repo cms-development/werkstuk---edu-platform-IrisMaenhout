@@ -583,29 +583,32 @@ p, li, input, i, b, span{
 
 /* __________________ Source content __________________ */
 
-.source-content-container h2, .about-us-container h2{
+.source-content-container h2, .about-us-container h2, .wysiwyg-editor h2{
     font-size: 28px;
 }
 
-.source-content-container h3, .about-us-container h3{
+.source-content-container h3, .about-us-container h3, .wysiwyg-editor h3{
     font-size: 26px;
 }
 
-.source-content-container h4, .about-us-container h4{
+.source-content-container h4, .about-us-container h4, .wysiwyg-editor h4{
     font-size: 21px;
 }
 
-.source-content-container h5, .about-us-container h5{
+.source-content-container h5, .about-us-container h5, .wysiwyg-editor h5{
     font-size: 18px;
 }
 
 .source-content-container h2, .source-content-container h3, .source-content-container h4, .source-content-container h5, .source-content-container p,
 
-.about-us-container h2, .about-us-container h3, .about-us-container h4, .about-us-container h5, .about-us-container p{
+.about-us-container h2, .about-us-container h3, .about-us-container h4, .about-us-container h5, .about-us-container p
+
+.wysiwyg-editor h2, .wysiwyg-editor h3, .wysiwyg-editor h4, .wysiwyg-editor h5, .wysiwyg-editor p
+{
     margin-bottom: 1em;
 }
 
-.source-content-container img, .about-us-container img{
+.source-content-container img, .about-us-container img, .wysiwyg-editor img{
     border-radius: 1em;
 }
 
@@ -617,38 +620,43 @@ p, li, input, i, b, span{
     margin-bottom: 1em;
 }
 
+.wysiwyg-editor a{
+    text-decoration: underline;
+    color: #28CD7F;
+}
+
 /* ______________________ Source content table ________________ */
 
-.source-content-container table, .about-us-container table{
+.source-content-container table, .about-us-container table, .wysiwyg-editor table{
     border-collapse: collapse;
     width: 100%;
 }
 
-.source-content-container .table-container, .about-us-container .table-container{
+.source-content-container .table-container, .about-us-container .table-container, .wysiwyg-editor .table-container{
     overflow-x: auto;
     margin-bottom: 2em;
     border-radius: 0.5em;
 }
 
-.source-content-container table td, .source-content-container table th, .about-us-container table td, .about-us-container table th {
+.source-content-container table td, .source-content-container table th, .about-us-container table td, .about-us-container table th, .wysiwyg-editor table td, .wysiwyg-editor table th {
     border: 1px solid #ddd;
     padding: 1em;
     min-width: 150px;
 }
 
-.source-content-container table th p, .about-us-container table th p{
+.source-content-container table th p, .about-us-container table th p, .wysiwyg-editor table th p{
     color: white;
 }
 
-.source-content-container table td p, .source-content-container table th p, .about-us-container table td p, .about-us-container table th p {
+.source-content-container table td p, .source-content-container table th p, .about-us-container table td p, .about-us-container table th p, .wysiwyg-editor table td p, .wysiwyg-editor table th p{
     margin-bottom: 0;
 }
 
-.source-content-container table tr:nth-child(even), .about-us-container table tr:nth-child(even){
+.source-content-container table tr:nth-child(even), .about-us-container table tr:nth-child(even), .wysiwyg-editor table tr:nth-child(even){
     background-color: #f2f2f2;
 }
 
-.source-content-container table th, .about-us-container table th {
+.source-content-container table th, .about-us-container table th, .wysiwyg-editor table th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
@@ -680,7 +688,7 @@ p, li, input, i, b, span{
     display: inline;
 }
 
-.source-content-container blockquote, .about-us-container blockquote{
+.source-content-container blockquote, .about-us-container blockquote, .wysiwyg-editor blockquote{
     background-color: rgb(208, 240, 237);
     width: 100%;
     padding: 1em 2em;
@@ -734,6 +742,20 @@ p, li, input, i, b, span{
     display: grid;
     gap: 4em;
     grid-template-columns: repeat(auto-fill, minmax(12em, 1fr));
+}
+
+/* ___________________________ WYSIWYG editor _________________________ */
+
+.wysiwyg-editor ul{
+    list-style: disc inside;
+}
+
+.wysiwyg-editor ol{
+    list-style: decimal inside;
+}
+
+.wysiwyg-editor li p{
+    display: inline-block;
 }
 
 .container {
@@ -1208,14 +1230,14 @@ p, li, input, i, b, span{
   border-radius: 0.5rem;
 }
 
-.rounded-r-md {
-  border-top-right-radius: 0.375rem;
-  border-bottom-right-radius: 0.375rem;
-}
-
 .rounded-l-md {
   border-top-left-radius: 0.375rem;
   border-bottom-left-radius: 0.375rem;
+}
+
+.rounded-r-md {
+  border-top-right-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
 }
 
 .border-2 {
@@ -1360,6 +1382,11 @@ p, li, input, i, b, span{
 .bg-\[\#e4efe0\] {
   --tw-bg-opacity: 1;
   background-color: rgb(228 239 224 / var(--tw-bg-opacity));
+}
+
+.bg-slate-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 250 252 / var(--tw-bg-opacity));
 }
 
 .bg-gradient-to-r {
@@ -1517,9 +1544,19 @@ p, li, input, i, b, span{
   padding-right: 1rem;
 }
 
-.py-64 {
-  padding-top: 16rem;
-  padding-bottom: 16rem;
+.py-56 {
+  padding-top: 14rem;
+  padding-bottom: 14rem;
+}
+
+.py-80 {
+  padding-top: 20rem;
+  padding-bottom: 20rem;
+}
+
+.px-24 {
+  padding-left: 6rem;
+  padding-right: 6rem;
 }
 
 .pt-2 {
@@ -1562,12 +1599,12 @@ p, li, input, i, b, span{
   padding-top: 16rem;
 }
 
-.pb-14 {
-  padding-bottom: 3.5rem;
-}
-
 .pb-32 {
   padding-bottom: 8rem;
+}
+
+.pb-14 {
+  padding-bottom: 3.5rem;
 }
 
 .text-center {
@@ -1718,14 +1755,14 @@ p, li, input, i, b, span{
   color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
+.text-\[\#ee7070\] {
+  --tw-text-opacity: 1;
+  color: rgb(238 112 112 / var(--tw-text-opacity));
+}
+
 .text-\[\#44aa7a\] {
   --tw-text-opacity: 1;
   color: rgb(68 170 122 / var(--tw-text-opacity));
-}
-
-.text-teal-100 {
-  --tw-text-opacity: 1;
-  color: rgb(204 251 241 / var(--tw-text-opacity));
 }
 
 .text-\[\#20af6f\] {
@@ -1746,12 +1783,6 @@ p, li, input, i, b, span{
 .shadow-md {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.shadow-sm {
-  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -1776,10 +1807,6 @@ p, li, input, i, b, span{
 
 .duration-300 {
   transition-duration: 300ms;
-}
-
-.duration-100 {
-  transition-duration: 100ms;
 }
 
 .ease-in-out {
@@ -1817,44 +1844,14 @@ p, li, input, i, b, span{
   color: rgb(32 175 111 / var(--tw-text-opacity));
 }
 
-.hover\:text-purple-400:hover {
-  --tw-text-opacity: 1;
-  color: rgb(192 132 252 / var(--tw-text-opacity));
-}
-
-.hover\:text-\[\#17985c\]:hover {
-  --tw-text-opacity: 1;
-  color: rgb(23 152 92 / var(--tw-text-opacity));
-}
-
-.hover\:text-\[\#4eaf82\]:hover {
-  --tw-text-opacity: 1;
-  color: rgb(78 175 130 / var(--tw-text-opacity));
-}
-
 .hover\:text-\[\#4cd495\]:hover {
   --tw-text-opacity: 1;
   color: rgb(76 212 149 / var(--tw-text-opacity));
 }
 
-.hover\:text-teal-600:hover {
-  --tw-text-opacity: 1;
-  color: rgb(13 148 136 / var(--tw-text-opacity));
-}
-
 .hover\:text-teal-400:hover {
   --tw-text-opacity: 1;
   color: rgb(45 212 191 / var(--tw-text-opacity));
-}
-
-.hover\:text-dark-yellow:hover {
-  --tw-text-opacity: 1;
-  color: rgb(230 209 114 / var(--tw-text-opacity));
-}
-
-.hover\:text-\[\#1c6543\]:hover {
-  --tw-text-opacity: 1;
-  color: rgb(28 101 67 / var(--tw-text-opacity));
 }
 
 @media (min-width: 768px) {

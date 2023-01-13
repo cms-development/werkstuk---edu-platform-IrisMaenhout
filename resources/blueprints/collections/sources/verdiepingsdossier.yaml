@@ -101,7 +101,7 @@ sections:
                     toolbar_mode: fixed
                     link_noopener: false
                     link_noreferrer: false
-                    target_blank: false
+                    target_blank: true
                     link_collections:
                       - sources
                     reading_time: false
@@ -193,7 +193,7 @@ sections:
           toolbar_mode: fixed
           link_noopener: false
           link_noreferrer: false
-          target_blank: false
+          target_blank: true
           link_collections:
             - sources
           reading_time: false
