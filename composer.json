@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.7",
         "statamic/cms": "3.3.*",
         "swiftmailer/swiftmailer": "^6.3",
+        "ueberdosis/tiptap-php": "^1.1",
         "xndbogdan/statamic-bard-text-color": "^2.4"
     },
     "require-dev": {

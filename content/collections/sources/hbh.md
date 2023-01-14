@@ -1,6 +1,5 @@
 ---
 id: 24b83061-adbc-45c5-9995-721418a7487c
-published: false
 blueprint: verdiepingsdossier
 title: Title
 hero_description: '<h1>Helllo</h1><p>jnjnfjfdnj</p>'
@@ -28,48 +27,211 @@ author:
   - 9f2b5fa0-6098-4ba1-be09-706663f15f2b
 is_verdiepingsdossier: 'true'
 updated_by: 9f2b5fa0-6098-4ba1-be09-706663f15f2b
-updated_at: 1673555857
+updated_at: 1673736783
 document_content:
-  0:
-    id: HNsSAhxt
-    title_page: Wandeltochten
-    slug: wandeltochten
+  -
+    id: lcw45i34
+    title_page: Marathon
+    slug: marathon
+    page_layout:
+      -
+        type: heading
+        attrs:
+          level: 2
+        content:
+          -
+            type: text
+            text: 'Stray kids'
+      -
+        type: paragraph
+        content:
+          -
+            type: text
+            text: 'Geweldige Groep'
+      -
+        type: heading
+        attrs:
+          level: 3
+        content:
+          -
+            type: text
+            text: Bangchan
+      -
+        type: paragraph
+        content:
+          -
+            type: text
+            text: 'De leider'
+      -
+        type: heading
+        attrs:
+          level: 3
+        content:
+          -
+            type: text
+            text: Felix
+      -
+        type: paragraph
+        content:
+          -
+            type: text
+            text: 'Our sunshine :)'
+      -
+        type: paragraph
+      -
+        type: heading
+        attrs:
+          level: 3
+        content:
+          -
+            type: text
+            text: Han
+      -
+        type: paragraph
+        content:
+          -
+            type: text
+            text: Rapper
+      -
+        type: heading
+        attrs:
+          level: 3
+        content:
+          -
+            type: text
+            text: Hyujin
+      -
+        type: paragraph
+        content:
+          -
+            type: text
+            text: Beautiful
+      -
+        type: heading
+        attrs:
+          level: 3
+        content:
+          -
+            type: text
+            text: Changbin
+      -
+        type: paragraph
+        content:
+          -
+            type: text
+            text: Strong
+      -
+        type: heading
+        attrs:
+          level: 3
+        content:
+          -
+            type: text
+            text: Linknow
+      -
+        type: paragraph
+        content:
+          -
+            type: text
+            text: 'Cat love'
+      -
+        type: heading
+        attrs:
+          level: 3
+        content:
+          -
+            type: text
+            text: I.N
+      -
+        type: paragraph
+        content:
+          -
+            type: text
+            text: Maknae
+      -
+        type: heading
+        attrs:
+          level: 3
+        content:
+          -
+            type: text
+            text: Seungmin
+      -
+        type: paragraph
+        content:
+          -
+            type: text
+            text: 'Heavenly vocal'
+      -
+        type: paragraph
+      -
+        type: image
+        attrs:
+          src: 'https://static.zoomnews.com/photo/msid-93358201/93358201.jpg'
+          alt: null
+          title: null
     type: new_page
     enabled: true
-  1:
-    id: OT5Ob8YN
-    title_page: Spreekbeurt
-    slug: spreekbeurt
+  -
+    id: DPF9hHJw
+    title_page: Capri-sun
+    slug: capri-sun
     type: new_page
     enabled: true
-  3:
-    id: tgXAU7GA
-    title_folder: Oefeningen
+  -
+    id: 52HWaFvm
+    title_page: Kast
+    slug: kast
+    type: new_page
+    enabled: true
+    page_layout:
+      -
+        type: heading
+        attrs:
+          level: 2
+        content:
+          -
+            type: text
+            text: 'Hello '
+      -
+        type: paragraph
+        content:
+          -
+            type: text
+            text: 'Dit is wat informatie over een kast'
+  -
+    id: 09Y30yLt
+    title_folder: Series
     type: new_folder
     enabled: true
     pages:
       -
-        id: Ug33YSXu
-        title_page: Widowmaker
-        slug: widowmaker
+        id: auf3UV91
+        title_page: 'The flash'
+        slug: the-flash
         type: new_page
         enabled: true
-  4:
-    id: DQlfRdgj
-    title_folder: Boekenbeurs
-    type: new_folder
-    enabled: true
-    pages:
-      -
-        id: 9lINfAwc
-        title_page: 'Bekende schrijvers'
-        slug: bekende-schrijvers
-        type: new_page
-        enabled: true
-      -
-        id: VcqCocdq
-        title_page: 'Populaire boeken'
-        slug: populaire-boeken
-        type: new_page
-        enabled: true
+        page_layout:
+          -
+            type: heading
+            attrs:
+              level: 2
+            content:
+              -
+                type: text
+                text: 'The flash'
+          -
+            type: paragraph
+            content:
+              -
+                type: text
+                text: 'Deze serie speelt nu op tv en ik luister naar Deja vu van Ateez.'
+          -
+            type: paragraph
+            content:
+              -
+                type: text
+                text: 'Monster - Ex'
+          -
+            type: paragraph
 ---

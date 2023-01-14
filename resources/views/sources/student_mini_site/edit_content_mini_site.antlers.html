@@ -1,3 +1,39 @@
+{{?
+    use Statamic\Facades\Entry;
+
+    $entry = Entry::findByUri('/' . $source_slug);
+    $document_content = $entry->get('document_content');
+
+    function saveCookie($content)
+    {
+        setcookie("pageContent", json_encode($content), time()+3600, '/');
+    }
+
+
+    foreach($document_content as $key => $content) {
+        if(isset($folder_slug)){
+            if(isset($content['title_folder']) && strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $content['title_folder']))) === $folder_slug){
+
+                foreach ($content['pages'] as $key => $page) {
+                    if($page_slug === $page["slug"]){
+                        saveCookie($page['page_layout']);
+                    }
+                }
+            }
+
+
+        }else{
+            if(isset($content["slug"]) && $page_slug === $content["slug"]){
+                saveCookie($content['page_layout']);
+            }
+        }
+
+
+    }
+
+?}}
+
+
 {{ partial:check_access }}
 {{ collection:sources slug:is="{{ source_slug }}" status:in="published|draft" }}
     <div class="mt-20 w-full fixed shadow-md z-[5]">
@@ -12,11 +48,31 @@
                 <p>Account/ thema-dossiers/ name-website</p>
             </div>
 
-            <div class="flex gap-14">
+            <div class="{{$ $page_slug !== 'start-pagina' ? 'flex gap-24 items-center' : '' $}} ">
+                {{ if $page_slug !== 'start-pagina' }}
+                    <form action="/remove-page" method="post" name="delete page">
+                        {{ csrf_field }}
+                        <input type="hidden" name="source_id" value="{{ id }}">
+                        <input type="hidden" name="page_slug" value=" {{ page_slug }}">
+                        <input type="hidden" name="location" value="{{$ isset($folder_slug) ? $folder_slug : 'root' $}}">
 
+                        <button type="submit" class="flex justify-center items-center w-14 h-14 bg-white rounded-full">
+                            <i class="fa-regular fa-trash-can text-[#ee7070] text-2xl block"></i>
+                        </button>
+                    </form>
+                {{ /if }}
 
-                <button class="primary-btn">Opslaan</button>
+                <form action="/update-{{$ $page_slug === 'start-pagina' ? 'main-page' : 'page' $}}" method="post" name="update page content">
+                    {{ csrf_field }}
+                    <input type="hidden" name="page_content" class="page-content">
+                    <input type="hidden" name="source_id" value="{{ id }}">
+                    <input type="hidden" name="page_slug" value=" {{ page_slug }}">
+                    <input type="hidden" name="location" value="{{$ isset($folder_slug) ? $folder_slug : 'root' $}}">
+
+                    <button type="submit" class="primary-btn">Opslaan</button>
+                </form>
             </div>
+
         </div>
 
         <div class="bg-slate-50 px-[5%]">
@@ -125,6 +181,15 @@
 
 </div>
 
-<script type="module">
+{{# <script type="module">
+    import {
+        Editor
+    } from '@tiptap/core';
 
-</script>
+    const editorElement = document.querySelector('.wysiwyg-editor');
+
+    Editor.commands.setContent({
+        "type": "doc",
+        "content": "<?php echo'$current_page_layout'?>",
+    });
+</script> #}}

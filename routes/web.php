@@ -35,39 +35,9 @@ Route::statamic('/create-entry', 'sources/student_mini_site/create_mini_site');
 
 Route::statamic('/account/verdiepingsdossier/{source_slug}/wijzigen', 'sources/student_mini_site/edit_mini_site');
 Route::statamic('/account/verdiepingsdossier/{source_slug}/map-{folder_slug}/wijzigen', 'sources/student_mini_site/edit_mini_site');
+
 Route::statamic('/account/verdiepingsdossier/{source_slug}/{page_slug}/wijzigen', 'sources/student_mini_site/edit_content_mini_site');
-
-
-// ->name('no-access-error.show');
-// Route::name('create_entry.')->group( function()
-//     {
-//         Route::post('/create', [CreateEntry::class, 'store'] )->name('store');
-//     }
-// );
-
-// Route::get('/{mini_site_slug}/{page_slug}', function ($mini_site_slug, $page_slug) {
-//     // $entry = Entry::query()
-//     // // ->where('collection', 'source')
-//     // ->where('content_type', 'verdiepingsdosier')
-//     // ->first();
-
-//     $entry = Entry::findByUri('/' . $mini_site_slug);
-
-//     function search_child_page($var)
-//     {
-//         return str_contains(json_encode($var), "dit-is-een-pagina");
-//     }
-
-//     dd($entry);
-//     if($entry["document_content"]) {
-//         $availibility_child_page = array_filter($entry["document_content"], "search_child_page");
-
-//         dd($availibility_child_page);
-//     }
-
-
-//     // return $mini_site_page_slug;
-// });
+Route::statamic('/account/verdiepingsdossier/{source_slug}/map-{folder_slug}/{page_slug}/wijzigen', 'sources/student_mini_site/edit_content_mini_site');
 
 
     if(isset($_SERVER['REQUEST_URI'])){
@@ -83,10 +53,13 @@ Route::statamic('/account/verdiepingsdossier/{source_slug}/{page_slug}/wijzigen'
     Route::post('/create', [CreateEntryController::class, 'store'] )->name('store');
     Route::post('/create-new-page', [EditSourceController::class, 'createNewPage'] )->name('add-new-page');
     Route::post('/create-new-folder', [EditSourceController::class, 'createNewFolder'] )->name('add-new-folder');
+
     Route::post('/remove-folder', [EditSourceController::class, 'removeFolder'] )->name('remove-folder');
+    Route::post('/remove-page', [EditSourceController::class, 'removePage'] )->name('remove-page');
 
     Route::post('/change-folder-file-name', [EditSourceController::class, 'changeName'] )->name('change-name');
     Route::post('/update-main-page', [EditSourceContentController::class, 'updateMainPage'] )->name('update-main-page');
+    Route::post('/update-page', [EditSourceContentController::class, 'updatePage'] )->name('update-page');
 
 
 

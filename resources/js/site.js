@@ -17,6 +17,10 @@ import StarterKit from '@tiptap/starter-kit';
 const editorElement = document.querySelector('.wysiwyg-editor');
 
 if (editorElement) {
+
+    const cookieObj = new URLSearchParams(document.cookie.replaceAll("&", "%26").replaceAll("; ","&"))
+    const cookie = cookieObj.get("pageContent");
+
     let editor = new Editor({
         element: editorElement,
         extensions: [
@@ -41,11 +45,18 @@ if (editorElement) {
             TableHeader,
             TableCell,
         ],
-        content: '<p>Example Text</p>',
+        // content: "type": "doc",
+        content: {
+            "type": "doc",
+            "content": cookie ? JSON.parse(cookie) : '',
+        },
         autofocus: true,
         editable: true,
         injectCSS: false,
     });
+
+    const wordCount = document.querySelector('.word-count');
+    const inputPageContent = document.querySelector('.page-content');
 
     const h2Btn = document.querySelector('.h2-btn');
     const h3Btn = document.querySelector('.h3-btn');
@@ -59,11 +70,15 @@ if (editorElement) {
     const quoteBtn = document.querySelector('.quote-btn');
     const linkBtn = document.querySelector('.link-btn');
     const imgBtn = document.querySelector('.img-btn');
-    const wordCount = document.querySelector('.word-count');
     const addTableBtn = document.querySelector('.add-table-btn');
 
     editorElement.addEventListener('keypress', ()=>{
         wordCount.innerHTML = editor.storage.characterCount.words() + ' woorden';
+
+        const jsonContent = editor.getJSON();
+
+        inputPageContent.value = JSON.stringify(jsonContent);
+        console.log(jsonContent);
     });
 
 
@@ -143,4 +158,7 @@ if (editorElement) {
     linkBtn.addEventListener('click', makeLink);
     imgBtn.addEventListener('click', addImg);
     addTableBtn.addEventListener('click', addTable);
+
 };
+
+

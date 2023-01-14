@@ -21,7 +21,8 @@ class EditSourceController extends Controller
             'title_page' => 'Nieuwe pagina',
             'slug' => 'nieuwe-pagina',
             'type' => 'new_page',
-            'enabled' => true
+            'enabled' => true,
+            'page_layout' => []
         ];
 
 
@@ -30,10 +31,8 @@ class EditSourceController extends Controller
         }else{
             foreach($document_content as $key => $content) {
                 if(isset($content['title_folder']) && $content['title_folder'] === $location){
-                    // $corect_folder = $content;
-                    $content['pages'][] = $new_page_info;
 
-                    // dump($key);
+                    $content['pages'][] = $new_page_info;
                     $document_content[$key] = $content;
                 }
             }
@@ -150,6 +149,46 @@ class EditSourceController extends Controller
                 unset($document_content[$key]);
 
             }
+
+        }
+
+        $entry->set('document_content', $document_content);
+        $entry->save();
+        return redirect('/account/verdiepingsdossier/' . $entry->slug . '/wijzigen');
+    }
+
+    public function removePage(Request $r)
+    {
+        $source_id = $r->source_id;
+        $page_slug = $r->page_slug;
+        $location = $r->location;
+
+        $entry = Entry::find($source_id);
+        $document_content = $entry->get('document_content');
+
+        foreach($document_content as $key => $content) {
+            if($location === 'root'){
+                if(isset($content['slug']) && $content['slug'] === $page_slug){
+                    unset($document_content[$key]);
+
+                }
+            }else{
+
+                if(isset($content['title_folder']) && strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $content['title_folder'])))  === $location){
+                    foreach ($content['pages'] as $key_page => $page) {
+
+                        if($page['slug'] === $page_slug){
+                            unset($content['pages'][$key_page]);
+                        }
+
+                    }
+
+
+                    $document_content[$key] = $content;
+
+                }
+            }
+
 
         }
 
