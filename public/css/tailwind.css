@@ -797,6 +797,10 @@ p, li, input, i, b, span{
   }
 }
 
+.static {
+  position: static;
+}
+
 .fixed {
   position: fixed;
 }
@@ -1017,6 +1021,10 @@ p, li, input, i, b, span{
   height: 4rem;
 }
 
+.h-14 {
+  height: 3.5rem;
+}
+
 .max-h-\[200px\] {
   max-height: 200px;
 }
@@ -1088,6 +1096,10 @@ p, li, input, i, b, span{
 
 .w-16 {
   width: 4rem;
+}
+
+.w-14 {
+  width: 3.5rem;
 }
 
 .min-w-\[250px\] {

@@ -2774,6 +2774,8 @@ if (editorElement) {
       withHeaderRow: true
     }).run();
   };
+  var cookieObj = new URLSearchParams(document.cookie.replaceAll("&", "%26").replaceAll("; ", "&"));
+  var cookie = cookieObj.get("pageContent");
   var editor = new _tiptap_core__WEBPACK_IMPORTED_MODULE_9__.Editor({
     element: editorElement,
     extensions: [_tiptap_starter_kit__WEBPACK_IMPORTED_MODULE_8__["default"].configure({
@@ -2790,11 +2792,17 @@ if (editorElement) {
         "class": 'table-container'
       }
     }), _tiptap_extension_table_row__WEBPACK_IMPORTED_MODULE_6__["default"], _tiptap_extension_table_header__WEBPACK_IMPORTED_MODULE_5__["default"], _tiptap_extension_table_cell__WEBPACK_IMPORTED_MODULE_4__["default"]],
-    content: '<p>Example Text</p>',
+    // content: "type": "doc",
+    content: {
+      "type": "doc",
+      "content": cookie ? JSON.parse(cookie) : ''
+    },
     autofocus: true,
     editable: true,
     injectCSS: false
   });
+  var wordCount = document.querySelector('.word-count');
+  var inputPageContent = document.querySelector('.page-content');
   var h2Btn = document.querySelector('.h2-btn');
   var h3Btn = document.querySelector('.h3-btn');
   var h4Btn = document.querySelector('.h4-btn');
@@ -2807,10 +2815,12 @@ if (editorElement) {
   var quoteBtn = document.querySelector('.quote-btn');
   var linkBtn = document.querySelector('.link-btn');
   var imgBtn = document.querySelector('.img-btn');
-  var wordCount = document.querySelector('.word-count');
   var addTableBtn = document.querySelector('.add-table-btn');
   editorElement.addEventListener('keypress', function () {
     wordCount.innerHTML = editor.storage.characterCount.words() + ' woorden';
+    var jsonContent = editor.getJSON();
+    inputPageContent.value = JSON.stringify(jsonContent);
+    console.log(jsonContent);
   });
   h2Btn.addEventListener('click', makeH2);
   h3Btn.addEventListener('click', makeH3);
