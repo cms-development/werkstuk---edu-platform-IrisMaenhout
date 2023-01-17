@@ -36,13 +36,40 @@
 
 {{ partial:check_access }}
 {{ collection:sources slug:is="{{ source_slug }}" status:in="published|draft" }}
-    <div class="mt-20 w-full fixed shadow-md z-[5]">
+
+    <div class="mt-20 w-full fixed shadow-md z-[5] bg-slate-50">
         <div class="w-full bg-[#B0D2A8] flex justify-between py-6 px-12 items-center">
             <div>
                 {{ if page_slug === 'start-pagina'}}
                     <h3 class="mt-2 mb-4 text-xl ">Start pagina</h3>
                 {{ else }}
                     {{# page name #}}
+
+                    {{ document_content }}
+                        {{ if !folder_slug }}
+
+                            {{ if type == "new_page"}}
+                                {{ if slug === $page_slug }}
+                                    <h3 class="mt-2 mb-4 text-2xl ">{{ title_page }}</h3>
+                                {{ /if }}
+                            {{ /if }}
+
+                        {{ else }}
+
+                            {{ if type == "new_folder" }}
+
+                                {{? $slugify_folder_name = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title_folder))) ?}}
+
+                                {{ if $slugify_folder_name === folder_slug }}
+                                    {{ pages }}
+                                        {{ if type == "new_page" }}
+                                            <h3 class="mt-2 mb-4 text-2xl ">{{ title_page }}</h3>
+                                        {{ /if }}
+                                    {{ /pages }}
+                                {{ /if }}
+                            {{ /if }}
+                        {{ /if }}
+                    {{ /document_content }}
                 {{ /if }}
 
                 <p>Account/ thema-dossiers/ name-website</p>
@@ -76,70 +103,96 @@
         </div>
 
         <div class="bg-slate-50 px-[5%]">
-            <div class="flex justify-between">
-                <button class="h2-btn p-4" name="bold">
+            <div class="btns-editor-grid">
+                <button class="h2-btn" name="bold">
                     <div class="flex items-center">
                         <i class="fa fa-header"></i>
                         <sub class=" font-bold">2</sub>
                     </div>
                 </button>
 
-                <button class="h3-btn p-4" name="bold">
+                <button class="h3-btn" name="bold">
                     <div class="flex items-center">
                         <i class="fa fa-header"></i>
                         <sub class=" font-bold">3</sub>
                     </div>
                 </button>
-                <button class="h4-btn p-4" name="bold">
+                <button class="h4-btn" name="bold">
                     <div class="flex items-center">
                         <i class="fa fa-header"></i>
                         <sub class="font-bold">4</sub>
                     </div>
                 </button>
 
-                <button class="bold-btn p-4" name="bold">
+                <button class="bold-btn" name="bold">
                     <i class="fa-solid fa-bold"></i>
                 </button>
 
-                <button class="italic-btn p-4">
+                <button class="italic-btn">
                     <i class="fa-solid fa-italic"></i>
                 </button>
 
-                <button class="underline-btn p-4">
+                <button class="underline-btn">
                     <i class="fa-solid fa-underline"></i>
                 </button>
 
-                <button class="strikethrough-btn p-4">
+                <button class="strikethrough-btn">
                     <i class="fa-solid fa-strikethrough"></i>
                 </button>
 
-                <button class="unorderedlist-btn p-4">
+                <button class="unorderedlist-btn">
                     <i class="fa-solid fa-list-ul"></i>
                 </button>
 
-                <button class="orderedlist-btn p-4">
+                <button class="orderedlist-btn">
                     <i class="fa-solid fa-list-ol"></i>
                 </button>
 
-                <button class="quote-btn p-4">
+                <button class="quote-btn">
                     <i class="fa-solid fa-quote-right"></i>
                 </button>
 
-                <button class="link-btn p-4">
+                <button class="link-btn">
                     <i class="fa-solid fa-link"></i>
                 </button>
 
-                <button class="img-btn p-4">
+                <button class="img-btn">
                     <i class="fa-solid fa-image"></i>
                 </button>
 
-                <button class="add-table-btn p-4">
+                {{# <button class="add-table-btn">
                     <i class="fa-solid fa-table"></i>
+                </button> #}}
+
+                <button class="add-2-layout-columns">
+                    <span class="material-symbols-outlined">
+                        view_column_2
+                    </span>
+                </button>
+
+                <button class="remove-layout-columns-btn flex justify-center items-center">
+                    <span class="material-symbols-outlined">
+                        view_column_2
+                    </span>
+                    <i class="absolute text-center font-bold text-2xl -mt-2 ml-4">-</i>
+                </button>
+
+
+                <button class="undo-btn">
+                    <span class="material-symbols-outlined">
+                        undo
+                    </span>
+                </button>
+
+                <button class="redo-btn">
+                    <span class="material-symbols-outlined">
+                        redo
+                    </span>
                 </button>
 
             </div>
 
-            <p class="word-count"></p>
+            <p class="word-count mb-4 text-right text-zinc-400"></p>
         </div>
     </div>
 
@@ -170,26 +223,96 @@
         <!-- Create the editor container -->
 
     {{ else }}
+        <div class="py-96 md:py-80 w-[90%] mx-auto">
+
+            <div class="wysiwyg-editor">
+                <div class="bubble-menu-color">
+                    <div class=" bg-white drop-shadow-md rounded-md w-min">
+                        <div class="flex gap-2 p-2">
+                            <button class="block dark-grey-btn p-2 font-bold text-[#474747] border-2 hover:bg-slate-50 rounded">
+                                A
+                            </button>
+
+                            <button class="block grey-btn p-2 font-bold text-[#787774] border-2 hover:bg-slate-50 rounded">
+                                A
+                            </button>
+
+                            <button class="block brown-btn p-2 font-bold text-[#9F6B53] border-2 hover:bg-slate-50 rounded">
+                                A
+                            </button>
+
+                            <button class="block orange-btn p-2 font-bold text-[#D9730D] border-2 hover:bg-slate-50 rounded">
+                                A
+                            </button>
+
+                            <button class="block yellow-btn p-2 font-bold text-[#CB912F] border-2 hover:bg-slate-50 rounded">
+                                A
+                            </button>
+
+                            <button class="block green-btn p-2 font-bold text-[#448361] border-2 hover:bg-slate-50 rounded">
+                                A
+                            </button>
+
+                            <button class="block blue-btn p-2 font-bold text-[#337EA9] border-2 hover:bg-slate-50 rounded">
+                                A
+                            </button>
+
+                            <button class="block purple-btn p-2 font-bold text-[#9065B0] border-2 hover:bg-slate-50 rounded">
+                                A
+                            </button>
+
+                            <button class="block pink-btn p-2 font-bold text-[#C14C8A] border-2 hover:bg-slate-50 rounded">
+                                A
+                            </button>
+
+                            <button class="block red-btn p-2 font-bold text-[#D44C47] border-2 hover:bg-slate-50 rounded">
+                                A
+                            </button>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
 
     {{ /if }}
+
+
+    {{# <div id="overlay" class="bg-[#000000a5] top-0 fixed w-screen h-screen hiddenk z-20"></div>
+
+    <div class=" relative flex justify-center w-full ">
+        <div class="popup fixed top-1/4 z-30 bg-white w-[40%] py-6 px-12 rounded-2xl">
+            <button id="close-popup" class="block ml-auto"><i class="fa fa-close text-2xl"></i></button>
+
+            <form id="select-image" class="hiddenk" action="/upload-img" method="POST" title="upload img" enctype="multipart/form-data">
+
+                <h3 class="text-center text-2xl mt-8">Selecteer een afbeelding</h3>
+
+                {{ csrf_field }}
+
+                <div class="mx-auto w-min">
+                    {{ partial:inputs/select_file }}
+                </div>
+
+                <button type="submit" class="block primary-btn ml-auto mt-8">Ga verder</button>
+
+            </form>
+
+            <div id="input-url" class="hiddenk">
+                <input type="text">
+            </div>
+
+
+        </div>
+
+    </div> #}}
+
 {{ /collection:sources }}
 
-<div class=" py-80 px-24">
 
 
-    <div class="wysiwyg-editor"></div>
-
-</div>
-
-{{# <script type="module">
-    import {
-        Editor
-    } from '@tiptap/core';
-
-    const editorElement = document.querySelector('.wysiwyg-editor');
-
-    Editor.commands.setContent({
-        "type": "doc",
-        "content": "<?php echo'$current_page_layout'?>",
-    });
-</script> #}}

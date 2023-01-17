@@ -363,7 +363,6 @@ sections:
                                         always_show_set_button: false
                                         previews: true
                                         buttons:
-                                          - h1
                                           - h2
                                           - h3
                                           - h4
@@ -377,19 +376,19 @@ sections:
                                           - subscript
                                           - unorderedlist
                                           - orderedlist
-                                          - color
                                           - removeformat
                                           - quote
                                           - anchor
                                           - image
                                           - table
                                           - horizontalrule
+                                          - color
                                         container: assets
                                         save_html: true
                                         toolbar_mode: fixed
                                         link_noopener: false
                                         link_noreferrer: false
-                                        target_blank: false
+                                        target_blank: true
                                         link_collections:
                                           - sources
                                         reading_time: false
@@ -413,7 +412,6 @@ sections:
                                         always_show_set_button: false
                                         previews: true
                                         buttons:
-                                          - h1
                                           - h2
                                           - h3
                                           - h4
@@ -428,12 +426,12 @@ sections:
                                           - unorderedlist
                                           - orderedlist
                                           - removeformat
-                                          - color
                                           - quote
                                           - anchor
                                           - image
                                           - table
                                           - horizontalrule
+                                          - color
                                         container: assets
                                         save_html: true
                                         toolbar_mode: fixed
@@ -457,7 +455,6 @@ sections:
                                         visibility: visible
                                         always_save: false
                               buttons:
-                                - h1
                                 - h2
                                 - h3
                                 - h4
@@ -466,6 +463,9 @@ sections:
                                 - italic
                                 - underline
                                 - strikethrough
+                                - small
+                                - superscript
+                                - subscript
                                 - unorderedlist
                                 - orderedlist
                                 - removeformat
@@ -473,17 +473,14 @@ sections:
                                 - anchor
                                 - image
                                 - table
-                                - color
-                                - small
-                                - superscript
-                                - subscript
                                 - horizontalrule
+                                - color
                               container: assets
                               save_html: true
                               toolbar_mode: fixed
                               link_noopener: false
                               link_noreferrer: false
-                              target_blank: false
+                              target_blank: true
                               link_collections:
                                 - sources
                               reading_time: false
@@ -594,7 +591,6 @@ sections:
                               always_show_set_button: false
                               previews: true
                               buttons:
-                                - h1
                                 - h2
                                 - h3
                                 - h4
@@ -609,12 +605,12 @@ sections:
                                 - unorderedlist
                                 - orderedlist
                                 - removeformat
-                                - color
                                 - quote
                                 - anchor
                                 - image
                                 - table
                                 - horizontalrule
+                                - color
                               container: assets
                               save_html: true
                               toolbar_mode: fixed
@@ -644,7 +640,6 @@ sections:
                               always_show_set_button: false
                               previews: true
                               buttons:
-                                - h1
                                 - h2
                                 - h3
                                 - h4
@@ -659,12 +654,12 @@ sections:
                                 - unorderedlist
                                 - orderedlist
                                 - removeformat
-                                - color
                                 - quote
                                 - anchor
                                 - image
                                 - table
                                 - horizontalrule
+                                - color
                               container: assets
                               save_html: true
                               toolbar_mode: fixed
@@ -854,18 +849,18 @@ sections:
                       - unorderedlist
                       - orderedlist
                       - removeformat
-                      - color
                       - quote
                       - anchor
                       - image
                       - table
                       - horizontalrule
+                      - color
                     container: assets
                     save_html: true
                     toolbar_mode: fixed
                     link_noopener: false
                     link_noreferrer: false
-                    target_blank: false
+                    target_blank: true
                     link_collections:
                       - sources
                     reading_time: false
