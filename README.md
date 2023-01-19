@@ -4,7 +4,7 @@
 
 Edu is a website where (future) teachers can share knowledge, research and lesson preparations with each other.
 
-Website: ...
+Website: [dev.eduonline.be](http://dev.eduonline.be/)
 
 > **Note:** This project is for educative purposes.
 
