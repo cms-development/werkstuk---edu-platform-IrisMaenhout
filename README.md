@@ -18,14 +18,31 @@ Website: [dev.eduonline.be](http://dev.eduonline.be/)
 ### Admin
 The admin has full access to the back end of the cms.
 
+**Test account:**
+Email: admin@email.com
+Password: Test1234
+
+
 ### Teachers 
 They have partial access to the back end of the cms.
+
+**Test account:**
+Email: teacher@email.com
+Password: Test1234
 
 ### Students 
 They have no access to the back end but they can make "verdiepingsdossieren" in the front end.
 
+**Test account:** 
+Email: student@email.com
+Password: Test1234
+
 ### Ex-students
 They only have reading rights and they can modify their account, just like the other user types.
+
+**Test account:**
+Email: ex-student@email.com
+Password: Test1234
 
 
 ## Used technologies

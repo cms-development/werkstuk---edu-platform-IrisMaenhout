@@ -1,0 +1,10 @@
+first_name: Teacher
+last_name: Account
+roles:
+  - teacher
+groups:
+  - teachers
+accept_register_proposal: true
+user_role: teacher
+id: 025b9025-4615-47b4-9e31-3ed356ce1621
+password_hash: $2y$10$5B/PMiyH9jyr1u2FeGcj3Oijz4K3..I1SNsceFc9yQFh/wkwq1FEq

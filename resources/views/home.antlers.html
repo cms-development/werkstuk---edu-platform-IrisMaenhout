@@ -34,7 +34,7 @@
                 const toggles = document.querySelectorAll('.toggle');
                 const container = document.querySelector('#all-categories');
 
-                fetch('http://localhost:8080/api/taxonomies/categories/terms')
+                fetch(`${location.protocol + '//' + location.host}/api/taxonomies/categories/terms`)
                     .then((response) => response.json())
                     .then((data) => {
 

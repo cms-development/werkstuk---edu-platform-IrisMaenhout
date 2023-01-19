@@ -1,0 +1,10 @@
+first_name: Admin
+last_name: Account
+super: true
+accept_register_proposal: true
+roles:
+  - admin
+groups:
+  - admins
+id: 01463fbf-a65d-45e1-96c9-5ba3274e1053
+password_hash: $2y$10$o/aNrn6xO73RjB3Z2pqtB.bUvija.A.hgYjzXccPHcvr.djJeg6Du
