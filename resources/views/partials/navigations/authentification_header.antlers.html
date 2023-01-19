@@ -1,0 +1,24 @@
+<header class="px-8 md:px-12 py-4 fixed top-0 z-10">
+    <a href="/" class="flex gap-2 items-center w-fit px-4">
+
+        {{ if logo:logo_type === "name_and_illustration" }}
+            {{ logo:illustration }}
+                <img class="md:h-12 h-8" src="{{ url }}" alt="logo artevelde">
+            {{ /logo:illustration }}
+
+            <h4 class="md:text-white text-[#5AB946] font-bold uppercase">{{ logo:website_name }}</h4>
+        {{ /if }}
+
+        {{ if logo:logo_type === "illustration" }}
+            {{ logo:illustration }}
+                <img class="md:h-12 h-8" src="{{ url }}" alt="logo artevelde">
+            {{ /logo:illustration }}
+        {{ /if }}
+
+
+        {{ if logo:logo_type === "name" }}
+            <h4 class="md:text-white text-[#5AB946] font-bold uppercase">{{ logo:website_name }}</h4>
+        {{ /if }}
+    </a>
+
+</header>

@@ -1,0 +1,59 @@
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: logo_type
+        field:
+          options:
+            name: Name
+            illustration: Illustration
+            name_and_illustration: 'Name & illustration'
+          multiple: false
+          max_items: 1
+          clearable: false
+          searchable: true
+          taggable: false
+          push_tags: false
+          cast_booleans: false
+          display: 'Logo type'
+          type: select
+          icon: select
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          validate:
+            - required
+      -
+        handle: website_name
+        field:
+          input_type: text
+          antlers: false
+          display: 'Website name'
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          unless:
+            logo_type: '=== illustration'
+      -
+        handle: illustration
+        field:
+          mode: list
+          container: assets
+          restrict: false
+          allow_uploads: true
+          show_filename: true
+          display: Illustration
+          type: assets
+          icon: assets
+          instructions: 'Use an illustration as your logo.'
+          listable: hidden
+          instructions_position: above
+          visibility: visible
+          always_save: false
+          unless:
+            logo_type: '=== name'

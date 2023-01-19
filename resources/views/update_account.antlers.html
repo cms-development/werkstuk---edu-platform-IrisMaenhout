@@ -1,0 +1,69 @@
+{{ partial:check_access }}
+
+{{?
+
+    if(isset($_SERVER['REQUEST_URI'])){
+        $url_links = explode("/", $_SERVER['REQUEST_URI']);
+    }
+
+?}}
+
+<div class="md:flex">
+    {{ partial:navigations/account_sidebar }}
+
+
+    <div class="mt-36 md:w-[70%] w-[85%] mx-auto">
+        {{ member:profile_form }}
+
+            <div>
+                <ul class="breadcrumbs flex mb-12">
+                    {{ foreach:url_links }}
+                    <li {{ if key == 2 }} class="font-semibold text-darker-green"{{ /if }}>
+                        <a href="/account/persoonlijke-info">{{ value }}</a>
+                        <p class="inline-block">{{ if key !== 2 && key !== 0}} / {{ /if }}</p>
+                    </li>
+                    {{ /foreach:url_links }}
+                </ul>
+
+                <h1 class=" text-3xl mb-8">Wijzig uw account informatie</h1>
+
+            </div>
+
+
+
+            {{ if errors }}
+                <div class="bg-red-400 rounded text-white p-2 mb-4">
+                    {{ errors }}
+                    {{ value }}<br>
+                    {{ /errors }}
+                </div>
+                {{ /if }}
+
+                {{ if success }}
+                <div class="bg-green-400 rounded text-white p-2 mb-4">
+                    {{ success }}<br>
+                </div>
+                {{ /if }}
+
+
+                {{ fields }}
+                    <div class=" mb-8">
+
+                        {{ if display !== "User role" && display !== "Accept register proposal"}}
+                            <label class="mb-2 block">{{ display }}</label>
+
+                            <input class="border border-gray-300 rounded w-full block px-2 py-1 pr-10" type="{{ handle === 'email' ? 'email' : 'text' }}"
+                            name="{{ handle }}" value="{{ value }}" />
+
+                        {{ /if }}
+                    </div>
+                {{ /fields }}
+
+                <div class="flex justify-end">
+                    <button class="primary-btn block my-8" type="submit">Opslaan</button>
+                </div>
+
+            {{ /member:profile_form }}
+        </div>
+</div>
+

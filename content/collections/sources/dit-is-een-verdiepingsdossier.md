@@ -1,5 +1,6 @@
 ---
 id: 3797bfdf-076c-481a-8cc2-2e634e9a1302
+published: true
 blueprint: verdiepingsdossier
 title: 'Dit is een verdiepingsdossier'
 document_content:

@@ -1,0 +1,10 @@
+first_name: Test
+last_name: Account
+roles:
+  - student
+groups:
+  - ex-students
+accept_register_proposal: true
+user_role: ex-student
+id: d94ad1d6-7f89-4240-b152-24f4ec03012b
+password_hash: $2y$10$UAN7HAbQQc8KZZk1fQriIeuplfT2VomUI/p.e6uutHQGkKLyZv2Wm

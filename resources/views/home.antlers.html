@@ -2,25 +2,17 @@
     {{ user }}
         {{ if accept_register_proposal}}
             <div class="md:mt-36 mx-auto w-[80%] max-w-[1200px]">
-                <div class="bg-white p-6 rounded-2xl border-2 md:flex md:gap-20 mb-12">
-                    <div class="w-full">
-                        <img class="rounded-xl w-full h-full max-h-[200px] object-cover mb-8 md:mb-0"
-                            src="https://images.unsplash.com/photo-1499914485622-a88fac536970?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
-                            alt="">
-                    </div>
 
-                    <div>
-                        <h2 class="font-bold text-xl mb-4">Mijn verdiepingsdossiers</h2>
-                        <p class="mb-8">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat modi ipsam ducimus alias
-                            labore totam. Ipsam similique consectetur quisquam, sequi ullam quaerat architecto eligendi beatae
-                            repellat natus consequuntur modi iste?</p>
+                {{ if roles }}
+                    {{ foreach:roles }}
+                        {{ if value !== "ex-student"}}
+                            {{ partial:cards/create_mini_site }}
+                        {{ /if }}
+                    {{ /foreach:roles }}
+                {{ else }}
+                    {{ partial:cards/create_mini_site }}
+                {{ /if }}
 
-                        <div class="flex justify-between items-end">
-                            <a href="/" class="underline text-middle-green">Bekijk dossiers</a>
-                            <button class="primary-btn">Nieuw</button>
-                        </div>
-                    </div>
-                </div>
 
                 <!-------------------------- Toggle categories ------------------>
 
@@ -31,7 +23,7 @@
                     <p class="toggle px-5 py-[0.5em] cursor-pointer">Theologisch</p>
                 </div>
 
-                <!------------------------------- Categories --------------------------->
+                <!--------------------- Categories --------------------------->
 
                 <div id="all-categories" class="categories-grid mb-32"></div>
             </div>

@@ -1,33 +1,44 @@
 <header class="flex justify-center px-8 md:px-20 py-4 bg-white w-full border-b-2 border-slate-200 fixed top-0 z-10">
     <div class="flex justify-between w-full items-center max-w-[1200px] mx-auto">
-        <a href="/" class="flex gap-2 items-center"><img class="md:h-12 h-8"
-                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOAAAADgCAMAAAAt85rTAAAAkFBMVEX////1hzJauUb6/fpgvExJtC/0fhb0fxv+7+T84NBMtDPj8uHX69P1hCv1hi/3omn1giT5wJ30fAz3p3L1gyf5vZj5uZH4rn/+8+z1ijf2llL4tIn2k0v2m1z+8ur71L37zrT96t/6xqZTuDz1jD3++PT83cr6y643rxP2kEX3pG385NX707z2mVn4r4Jov1W6xbr+AAAEkElEQVR4nO2c62LiNhBGTbsrQVsZRdzBLJDEpMRJ+/5vV3uzbGmCZ2RbyFL6nd8Y+6DLjDTCSQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC4JR89zSfb00Cpx2y8uHs5OPnWh6+/Efz5q5Ob8Cz3k5WReqpU+h011VLI9fzY+Zu//ELx1Yvg8v5ktEoHH1BTaSa7bl/ev+BxK/QVuZ+SUm++dfj6vgX3K6nq7d6Ymuf247Ffwd1KEo130YzmuW0r9il4WAsrvTfFebub9Cg4N2znvEQPRm3u0pvg8KSb6JWkZtPiPn0JvohGzfejEbNl4xv1JLgxzfUGVcwomt6pH8GxbOVXddOXhrfqRXDddPhdYO7DF8ym7f0aG/Yg2M2vqaF/wW1Hv9KwyTj0LrjoMP5+GjaYS30L3ovufoNU5qEKFu3i33tUFqpgap1d02jrrM2v4KTzBHPG2GbeXgWPbjpoRboKUdBVB63QlutDn4JzBxHiX4zdGt+j4NJdB61Q49AEJy1WgBTCKtz7Exy6bcCyCddhCS6chYgzVhmbN0HHI7DCahR6E5w5nULfEBYTqTdBlzHwjJ6FI3hsuwtDkapwBC1jRKqlEEJqy4gi+IzUV33QqgGnJpvtiuGh2C80X5OpLuAXFb/TuPKz6aFKbIYXV9gULtLU1QN25S8+CMrtuznxxaKjCjd17u48sq1h7j5clPP7b7rhLumt4KO82V+7jt2Bs8y4b86OG4Li6fqFGddLpV+ROuZMS0wXNRfmVPn++y8zrLnSL2O6IYjJcMdsM8qOhzAcweRpktiqXtO/jf44N/VATg9BcgNpRDehquvcXjnQD0nP9XSEUa++JCiYPEaQhWl6nZU++pKgoKME84wF/etMPTmQPJGNUBsjfkAnCcaPAs0dKcilWytyEAr7QtPtoAWpIFHxSgaKGASZWE1nCUGkMv9zQV2TaJ+JQPCenkWZOlEEgntSUG3pqyMQZDIZZk0XgWBB56KSPlsfgeCSWRHQ+w4RCCZMXcKQDxmDYEYveOkmjEGQ2xYVVKyPQZBeTpRIohAWgyAzjVa7FvU5cwyCfO1FrWrbMApBZt+wasPanDsKQXYQVo86vl5JiULwm80xUWW2+ysd9TkGQS4SnhW1ENn4vzw/kpdwgn9/oXhwVuGlV0yXpOod9Mc5QV81+tz9MZmwBJmR9AkEmRpD/ILJ6QYngYISZKu8sQtaHESIXJAr1kYvyBVr4xc83CIWhiSYbG5xZjQkwVscGg1L0NF/s8IVTGbOg2Fggkw18xMI5gPHwzA0wXJt79YwOEHXE014gsnIqWGAgsnROOylIQomhcNxGKRgMkydRYswBZP81VXED1SweuGRm24arGAySp2sLcIVrF4L5GAkhiyYHF7bvNkpIsEyJGZdFQMXLIfi2HD/jYhbsEy/Zyvy9Y3RC5YUs8zIq2/g/CSCJfnxbnLSRsiG0IeIkuSB+gOovzfEnsmHxaghzJHmP2j8aAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPjM/AMu12VaNVf1ZQAAAABJRU5ErkJggg=="
-                alt="logo artevelde">
-            <h4 class="text-[#5AB946] font-bold uppercase">Edu</h4>
+
+        <a href="/" class="flex gap-2 items-center">
+            {{# __________________________ Logo ______________________ #}}
+            {{ if logo:logo_type === "name_and_illustration" }}
+                {{ logo:illustration }}
+                    <img class="md:h-12 h-8" src="{{ url }}" alt="logo artevelde">
+                {{ /logo:illustration }}
+
+                <h4 class="text-[#5AB946] font-bold uppercase">{{ logo:website_name }}</h4>
+            {{ /if }}
+
+            {{ if logo:logo_type === "illustration" }}
+                {{ logo:illustration }}
+                    <img class="md:h-12 h-8" src="{{ url }}" alt="logo artevelde">
+                {{ /logo:illustration }}
+            {{ /if }}
+
+
+            {{ if logo:logo_type === "name" }}
+                <h4 class="md:text-white text-[#5AB946] font-bold uppercase">{{ logo:website_name }}</h4>
+            {{ /if }}
         </a>
 
-        {{# <div class=" border-2 rounded-md py-1 px-2 w-[60%] flex">
-            <input type="text" class="w-full outline-none align-middle pr-4 pl-2">
-            <button class="bg-middle-green p-1 md:p-2 rounded-md"><i
-                    class="fa-solid fa-magnifying-glass text-white"></i></button>
 
-        </div> #}}
-
-        <form action="/search/results" class="border-2 rounded-md py-1 px-2 w-[60%] flex">
-            <input type="search" name="q" placeholder="Search" class="w-full outline-none align-middle pr-4 pl-2">
+        {{# _______________________ Searchbar_______________________ #}}
+        <form action="/search" class="border-2 rounded-md py-1 px-2 w-[60%] flex">
+            <input type="search" name="q" placeholder="Search" class="w-full outline-none align-middle pr-4 pl-2" value="{{get:q}}">
             <button type="submit" class="bg-middle-green p-1 md:p-2 rounded-md"><i
                 class="fa-solid fa-magnifying-glass text-white"></i></button>
         </form>
 
 
-        {{# Profile picture #}}
-
+        {{# ___________________Profile picture _________________________#}}
         <div>
-            <a href="/account">
+            <a href="/account/persoonlijke-info">
                 {{ user }}
                     {{ if (avatar) }}
 
-                            <img src="{{ avatar }}"
+                        <img src="{{ avatar }}"
                         class="h-8 w-8 md:w-12 md:h-12 rounded-full object-cover" alt="profile picture">
 
                     {{ else }}

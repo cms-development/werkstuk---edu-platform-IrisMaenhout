@@ -135,6 +135,24 @@ class EditSourceController extends Controller
     }
 
 
+    public function changeSourceTitle(Request $r)
+    {
+        $source_title = $r->source_title;
+        $source_slug = $r->source_slug;
+        $new_slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $source_title)));
+
+        $entry = Entry::findByUri('/'. $source_slug);
+        $entry->slug($new_slug);
+        $entry->set('title', $source_title);
+        $entry->save();
+
+
+
+        // dd($entry->slug);
+        return redirect('/account/verdiepingsdossier/' . $new_slug . '/wijzigen');
+    }
+
+
     public function removeFolder(Request $r)
     {
         $source_id = $r->source_id;
@@ -196,4 +214,21 @@ class EditSourceController extends Controller
         $entry->save();
         return redirect('/account/verdiepingsdossier/' . $entry->slug . '/wijzigen');
     }
+
+
+    public function makePublic(Request $r)
+    {
+        // $status = $r->is_public;
+        $source_id = $r->source_id;
+        $entry = Entry::find($source_id);
+        $entry_status = $entry->published;
+
+        $entry->set('published', !$entry_status);
+        $entry->save();
+
+        return redirect()->back();
+
+    }
+
+
 }

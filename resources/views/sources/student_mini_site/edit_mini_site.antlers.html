@@ -1,36 +1,84 @@
-{{ partial:check_access }}
-{{ collection:sources slug:is="{{ source_slug }}" status:in="published|draft" }}
+{{# Check if the user gets access to this page #}}
+
+{{ if logged_in}}
+    {{ user }}
+        {{ if !accept_register_proposal }}
+            {{ redirect to="/geen-toegang" }}
+        {{ /if }}
+
+        {{ if roles }}
+            {{ foreach:roles }}
+                {{ if value === "ex-student"}}
+                    {{ redirect to="/geen-toegang" }}
+                {{ /if }}
+            {{ /foreach:roles }}
+
+        {{ /if }}
+    {{ /user }}
+{{ else }}
+    {{ redirect to="/geen-toegang" }}
+{{ /if }}
+
+{{?
+    if(isset($_SERVER['REQUEST_URI'])){
+        $url_links = explode("/", $_SERVER['REQUEST_URI']);
+    }
+?}}
+
+
+{{ collection:sources slug:is="{{ source_slug }}" status:in="published|draft"}}
+
+    {{ current_user }}
+        {{? $current_user_id = $id ?}}
+        {{ author }}
+            {{ if id !== current_user_id }}
+                {{ redirect to="/geen-toegang" }}
+            {{ /if }}
+        {{ /author }}
+    {{ /current_user }}
+
     <div class="mt-20 w-full bg-[#B0D2A8] flex justify-between py-6 px-12 items-center fixed shadow-md z-[5]">
         <div>
-            <p>Account/ thema-dossiers/ name-website</p>
+            <h3 class="mt-2 mb-4 text-xl ">{{ title }}</h3>
+            <ul class="breadcrumbs flex">
+                {{ foreach:url_links }}
+                <li>
+                    <a href="/{{ value }}">{{ value }}</a>
+                    <p class="inline-block">{{ if key !== 0}} / {{ /if }}</p>
+                </li>
+                {{ /foreach:url_links }}
+            </ul>
         </div>
 
         <div class="flex gap-14">
-            <form action="/create-new-page" method="post" title="add new page">
-                {{ csrf_field }}
-                <input type="hidden" name="source_id" value="{{ id }}">
+            {{ if folder_slug !== 'start-pagina'}}
+                <form action="/create-new-page" method="post" title="add new page">
+                    {{ csrf_field }}
+                    <input type="hidden" name="source_id" value="{{ id }}">
 
-                {{ if folder_slug }}
-                    {{ document_content }}
-                        {{ if type == "new_folder" }}
-                            {{? $slugify_folder_name = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title_folder))) ?}}
+                    {{ if folder_slug }}
+                        {{ document_content }}
+                            {{ if type == "new_folder" }}
+                                {{? $slugify_folder_name = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title_folder))) ?}}
 
-                            {{ if $slugify_folder_name === folder_slug }}
-                                <input type="hidden" name="new_page_location" value="{{ title_folder }}">
+                                {{ if $slugify_folder_name === folder_slug }}
+                                    <input type="hidden" name="new_page_location" value="{{ title_folder }}">
+                                {{ /if }}
+
                             {{ /if }}
+                        {{ /document_content }}
 
-                        {{ /if }}
-                    {{ /document_content }}
+                    {{ else }}
+                        <input type="hidden" name="new_page_location" value="root">
+                    {{ /if }}
 
-                {{ else }}
-                    <input type="hidden" name="new_page_location" value="root">
-                {{ /if }}
+                    <button type="submit" class="flex justify-center items-center  w-16 h-16 bg-white rounded-full">
+                        <i class="fa-solid fa-file text-[#87DFB6] text-3xl block"></i>
+                        <div class="absolute text-center z-10 font-bold text-3xl text-white">+</div>
+                    </button>
+                </form>
+            {{ /if }}
 
-                <button type="submit" class="flex justify-center items-center  w-16 h-16 bg-white rounded-full">
-                    <i class="fa-solid fa-file text-[#87DFB6] text-3xl block"></i>
-                    <div class="absolute text-center z-10 font-bold text-3xl text-white">+</div>
-                </button>
-            </form>
 
             {{ if !folder_slug }}
                 <form action="/create-new-folder" method="post" title="add new folder">
@@ -43,30 +91,46 @@
                     </button>
                 </form>
 
+
+                <button id="update-title" class="flex justify-center items-center w-16 h-16 bg-white rounded-full">
+                    <i class="fa-solid fa-pencil text-[#70c1cf] text-3xl block"></i>
+                </button>
+
+
+
+
             {{ else }}
-                <form action="/remove-folder" method="post" title="remove folder">
-                    {{ csrf_field }}
-                    <input type="hidden" name="source_id" value="{{ id }}">
+                {{ if folder_slug !== 'start-pagina'}}
+                    <form action="/remove-folder" method="post" title="remove folder">
+                        {{ csrf_field }}
+                        <input type="hidden" name="source_id" value="{{ id }}">
 
-                    {{ document_content }}
-                        {{ if type == "new_folder" }}
-                            {{? $slugify_folder_name = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title_folder))) ?}}
+                        {{ document_content }}
+                            {{ if type == "new_folder" }}
+                                {{? $slugify_folder_name = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title_folder))) ?}}
 
-                            {{ if $slugify_folder_name === folder_slug }}
-                                <input type="hidden" name="title_folder" value="{{ title_folder }}">
+                                {{ if $slugify_folder_name === folder_slug }}
+                                    <input type="hidden" name="title_folder" value="{{ title_folder }}">
+                                {{ /if }}
                             {{ /if }}
-                        {{ /if }}
-                    {{ /document_content }}
+                        {{ /document_content }}
 
 
-                    <button type="submit" class="flex justify-center items-center w-16 h-16 bg-white rounded-full">
-                        <i class="fa-solid fa-folder text-[#ee7070] text-3xl block"></i>
-                        <div class="absolute text-center z-10 font-bold text-md"><i class="fa-regular fa-trash-can text-white"></i></div>
-                    </button>
-                </form>
+                        <button type="submit" class="flex justify-center items-center w-16 h-16 bg-white rounded-full">
+                            <i class="fa-solid fa-folder text-[#ee7070] text-3xl block"></i>
+                            <div class="absolute text-center z-10 font-bold text-md"><i class="fa-regular fa-trash-can text-white"></i></div>
+                        </button>
+                    </form>
+                {{ /if }}
+
             {{ /if }}
 
-            <button class="primary-btn">Publiceren</button>
+            <form class="flex items-center" action="/publish-mini-site" method="post">
+                {{ csrf_field }}
+                <input type="hidden" name="source_id" value="{{ id }}">
+                <button type="submit" class="primary-btn">{{ published == 0 ?  'Publiceren' : 'Ofline halen'}}</button>
+            </form>
+
         </div>
     </div>
 
@@ -75,10 +139,19 @@
     <div class="grid-edit-mini-site w-[85%] mx-auto pt-64 pb-32">
 
         {{ if !folder_slug }}
-            <div class="start-page">
+            {{# <div class="start-page">
                 <div class="flex flex-col gap-4">
                     <a href="start-pagina/wijzigen" class="block mx-auto">
                         <i class="fa-solid fa-file text-[#44aa7a] text-8xl hover:text-[#4cd495] transition ease-in-out duration-300 hover:scale-110"></i>
+                    </a>
+                    <p class="text-center">Start pagina</p>
+                </div>
+            </div> #}}
+
+            <div class="start-folder">
+                <div class="flex flex-col gap-4">
+                    <a href="map-start-pagina/wijzigen" class="block mx-auto">
+                        <i class="fa-solid fa-folder text-[#44aa7a] text-8xl hover:text-[#4cd495] transition ease-in-out duration-300 hover:scale-110"></i>
                     </a>
                     <p class="text-center">Start pagina</p>
                 </div>
@@ -112,7 +185,25 @@
 
             {{ /document_content }}
         {{ else }}
+            {{ if folder_slug === 'start-pagina'}}
+                <div class="start-page">
+                    <div class="flex flex-col gap-4">
+                        <a href="hero-description/wijzigen" class="block mx-auto">
+                            <i class="fa-solid fa-file text-[#44aa7a] text-8xl hover:text-[#4cd495] transition ease-in-out duration-300 hover:scale-110"></i>
+                        </a>
+                        <p class="text-center">Hero description</p>
+                    </div>
+                </div>
 
+                <div class="start-page">
+                    <div class="flex flex-col gap-4">
+                        <a href="info/wijzigen" class="block mx-auto">
+                            <i class="fa-solid fa-file text-[#44aa7a] text-8xl hover:text-[#4cd495] transition ease-in-out duration-300 hover:scale-110"></i>
+                        </a>
+                        <p class="text-center">Start pagina info</p>
+                    </div>
+                </div>
+            {{ /if }}
             {{ document_content }}
                 {{ if type == "new_folder" }}
                 {{? $slugify_folder_name = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title_folder))) ?}}
@@ -141,12 +232,64 @@
 
     </div>
 
+    <div class="popupContainer"></div>
+
 
     <script>
         const csrf = document.querySelector('meta[name="_token"]').content;
         const slugify = location.pathname.split('/').slice(1);
         const slugSource = slugify[2];
         const slugLocation = slugify[3];
+
+        const updateTitleBtn = document.getElementById('update-title');
+        const popupContainer = document.querySelector('.popupContainer');
+
+        const updateTitleForm = `
+        <div class="absolute w-full top-0 h-[100vh] bg-[#000000a5] flex justify-center items-center z-30">
+            <div class="bg-white rounded-xl py-8 px-6 w-[40%]" >
+                <div>
+
+                    <div class="flex justify-end">
+                        <button class="close-btn"><i class="fa fa-close text-2xl mr-4 mb-2 hover:text-middle-green text-slate-300"></i></button>
+                    </div>
+                    <h3 class=" text-xl mb-8">Wijzig de titel</h3>
+
+                    <form action="/update-title" method="post" title="update title">
+                        <input type="hidden" name="_token" value="${ csrf }">
+                        <input type="hidden" name="source_slug" value="${ slugSource }">
+                        <input class="border border-gray-300 rounded w-full block px-2 py-1 pr-10" type="text" name="source_title" />
+
+                        <div class="flex justify-end mt-12">
+                            <button type="submit" id="update-title" class="primary-btn">
+                                Opslaan
+                            </button>
+
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+        `;
+
+        updateTitleBtn.addEventListener('click', ()=>{
+            popupContainer.innerHTML = updateTitleForm;
+
+            const closeBtn = document.querySelector('.close-btn');
+
+            if(closeBtn){
+                closeBtn.addEventListener('click', ()=>{
+                    popupContainer.innerHTML = '';
+                })
+            }
+
+        });
+
+
+
+
+
         console.log(slugify);
 
         window.addEventListener('click', e => {
@@ -211,6 +354,7 @@
 
     </script>
 {{ /collection:sources }}
+
 
 
 

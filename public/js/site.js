@@ -22471,16 +22471,20 @@ const StarterKit = _tiptap_core__WEBPACK_IMPORTED_MODULE_18__.Extension.create({
 
 /***/ }),
 
-/***/ "./resources/js/site.js":
-/*!******************************!*\
-  !*** ./resources/js/site.js ***!
-  \******************************/
+/***/ "./resources/js/editor/configEditor.js":
+/*!*********************************************!*\
+  !*** ./resources/js/editor/configEditor.js ***!
+  \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "editor": () => (/* binding */ editor),
+/* harmony export */   "editorElement": () => (/* binding */ editorElement)
+/* harmony export */ });
 /* harmony import */ var _gocapsule_column_extension__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @gocapsule/column-extension */ "./node_modules/@gocapsule/column-extension/dist/bundle.cjs.js");
-/* harmony import */ var _tiptap_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @tiptap/core */ "./node_modules/@tiptap/core/dist/tiptap-core.esm.js");
-/* harmony import */ var _tiptap_extension_bubble_menu__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @tiptap/extension-bubble-menu */ "./node_modules/@tiptap/extension-bubble-menu/dist/tiptap-extension-bubble-menu.esm.js");
+/* harmony import */ var _tiptap_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @tiptap/core */ "./node_modules/@tiptap/core/dist/tiptap-core.esm.js");
+/* harmony import */ var _tiptap_extension_bubble_menu__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @tiptap/extension-bubble-menu */ "./node_modules/@tiptap/extension-bubble-menu/dist/tiptap-extension-bubble-menu.esm.js");
 /* harmony import */ var _tiptap_extension_character_count__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @tiptap/extension-character-count */ "./node_modules/@tiptap/extension-character-count/dist/tiptap-extension-character-count.esm.js");
 /* harmony import */ var _tiptap_extension_color__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @tiptap/extension-color */ "./node_modules/@tiptap/extension-color/dist/tiptap-extension-color.esm.js");
 /* harmony import */ var _tiptap_extension_image__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @tiptap/extension-image */ "./node_modules/@tiptap/extension-image/dist/tiptap-extension-image.esm.js");
@@ -22492,9 +22496,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tiptap_extension_text_style__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @tiptap/extension-text-style */ "./node_modules/@tiptap/extension-text-style/dist/tiptap-extension-text-style.esm.js");
 /* harmony import */ var _tiptap_extension_underline__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @tiptap/extension-underline */ "./node_modules/@tiptap/extension-underline/dist/tiptap-extension-underline.esm.js");
 /* harmony import */ var _tiptap_starter_kit__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @tiptap/starter-kit */ "./node_modules/@tiptap/starter-kit/dist/tiptap-starter-kit.esm.js");
-// This is all you.
+/* harmony import */ var _transformData_dataToFrondend_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./transformData/dataToFrondend.js */ "./resources/js/editor/transformData/dataToFrondend.js");
 
-// _____________________WYSIWYG editor___________________
 
 
 
@@ -22510,183 +22513,285 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var editorElement = document.querySelector('.wysiwyg-editor');
-if (editorElement) {
-  var countWords = function countWords() {
-    wordCount.innerHTML = editor.storage.characterCount.words() + ' woorden';
-  }; // _______________Send content from editor to the backend _________________
-  var updateContent = function updateContent() {
-    // Get content
-    var jsonContent = editor.getJSON();
-    // console.log('editor_content: ', jsonContent);
 
-    // Replace textStyle with textColor, because the addon "Bard Text Color" uses the term textColor instead of textStyle, so otherwise it wouldn't display the data correctly in the backend.
-    for (var _key in jsonContent.content) {
-      if (jsonContent.content[_key].content !== undefined && jsonContent.content[_key].content[0].marks !== undefined && jsonContent.content[_key].content[0].marks[0].type.match(/textStyle/)) {
-        jsonContent.content[_key].content[0].marks[0].type = "textColor";
+// _______________________ Editor configuration __________________
+
+var editor = new _tiptap_core__WEBPACK_IMPORTED_MODULE_13__.Editor({
+  element: editorElement,
+  extensions: [_tiptap_starter_kit__WEBPACK_IMPORTED_MODULE_11__["default"].configure({
+    // override Document to allow columns
+    document: false,
+    heading: {
+      levels: [2, 3, 4]
+    }
+  }), _tiptap_extension_bubble_menu__WEBPACK_IMPORTED_MODULE_14__["default"].configure({
+    element: document.querySelector('.bubble-menu-color')
+  }), _tiptap_extension_underline__WEBPACK_IMPORTED_MODULE_10__["default"], _tiptap_extension_image__WEBPACK_IMPORTED_MODULE_3__["default"], _tiptap_extension_link__WEBPACK_IMPORTED_MODULE_4__["default"].configure({
+    validate: function validate(href) {
+      return /^https?:\/\//.test(href);
+    }
+  }), _tiptap_extension_character_count__WEBPACK_IMPORTED_MODULE_1__["default"], _tiptap_extension_color__WEBPACK_IMPORTED_MODULE_2__["default"], _tiptap_extension_text_style__WEBPACK_IMPORTED_MODULE_9__["default"],
+  // Table.configure({
+  //     resizable: false,
+  //     HTMLAttributes: {
+  //       class: 'table-container',
+  //     },
+  // }),
+  // TableRow,
+  // TableHeader,
+  // TableCell,
+  _gocapsule_column_extension__WEBPACK_IMPORTED_MODULE_0__.ColumnExtension],
+  // content: "type": "doc",
+  content: {
+    "type": "doc",
+    "content": _transformData_dataToFrondend_js__WEBPACK_IMPORTED_MODULE_12__.cookie ? _transformData_dataToFrondend_js__WEBPACK_IMPORTED_MODULE_12__.cookieData : ''
+  },
+  autofocus: true,
+  editable: true,
+  injectCSS: false
+});
+
+
+/***/ }),
+
+/***/ "./resources/js/editor/transformData/dataToBackend.js":
+/*!************************************************************!*\
+  !*** ./resources/js/editor/transformData/dataToBackend.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "updateContent": () => (/* binding */ updateContent)
+/* harmony export */ });
+/* harmony import */ var _configEditor_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../configEditor.js */ "./resources/js/editor/configEditor.js");
+
+
+// _______________Send content from editor to the backend _________________
+var inputPageContent = document.querySelector('.page-content');
+function updateContent() {
+  // Get content
+  var jsonContent = _configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.getJSON();
+
+  // Replace textStyle with textColor, because the addon "Bard Text Color" uses the term textColor instead of textStyle, so otherwise it wouldn't display the data correctly in the backend.
+  for (var key in jsonContent.content) {
+    // Change color in sentences
+    if (jsonContent.content[key].content !== undefined) {
+      // console.log('content',jsonContent.content[key])
+
+      jsonContent.content[key].content.forEach(function (element) {
+        console.log('element', element);
+        if (element.marks !== undefined) {
+          element.marks.forEach(function (mark) {
+            if (mark.type.match(/textStyle/)) {
+              mark.type = "textColor";
+            }
+          });
+        }
+
+        // Change color in bullet lists or ordered lists.
+        if (element.content !== undefined) {
+          if (Array.isArray(element.content)) {
+            element.content.forEach(function (listElement) {
+              // console.log('test', listElement);
+              if (listElement.content !== undefined) {
+                listElement.content.forEach(function (part) {
+                  if (part.marks !== undefined) {
+                    part.marks.forEach(function (mark) {
+                      if (mark.type.match(/textStyle/)) {
+                        mark.type = "textColor";
+                      }
+                    });
+                  }
+                });
+              }
+            });
+          }
+        }
+      });
+    }
+    ;
+    console.log(jsonContent.content[key]);
+    // Replace bullet_list and list_item with the camelCase name
+    if (jsonContent.content[key].type.match(/bulletList/)) {
+      jsonContent.content[key].type = "bullet_list";
+      jsonContent.content[key].content.forEach(function (sentenceContent) {
+        if (sentenceContent.type.match(/listItem/)) {
+          sentenceContent.type = "list_item";
+        }
+      });
+    }
+    if (jsonContent.content[key].type.match(/orderedList/)) {
+      jsonContent.content[key].type = "ordered_list";
+      jsonContent.content[key].content.forEach(function (sentenceContent) {
+        if (sentenceContent.type.match(/listItem/)) {
+          sentenceContent.type = "list_item";
+        }
+      });
+    }
+    if (jsonContent.content[key].type.match(/columnBlock/)) {
+      var colorInCulumn = function colorInCulumn(column) {
+        column.forEach(function (colContent) {
+          if (colContent.content !== undefined) {
+            colContent.content.forEach(function (contentSentence) {
+              if (contentSentence.marks !== undefined) {
+                contentSentence.marks.forEach(function (mark) {
+                  if (mark.type.match(/textStyle/)) {
+                    mark.type = "textColor";
+                  }
+                });
+              }
+              if (contentSentence.content !== undefined) {
+                contentSentence.content.forEach(function (part) {
+                  if (part.marks !== undefined) {
+                    part.marks.forEach(function (mark) {
+                      if (mark.type.match(/textStyle/)) {
+                        mark.type = "textColor";
+                      }
+                    });
+                  }
+                });
+              }
+            });
+
+            // Colors in al list item
+            // if(Array.isArray(element.content)){
+            //     element.content.forEach( listElement => {
+            //         // console.log('test', listElement);
+
+            //     })
+            // }
+          }
+        });
+      };
+      var bulletPointInCulumn = function bulletPointInCulumn(column) {
+        column.forEach(function (colContent) {
+          if (colContent.type.match(/bulletList/)) {
+            colContent.type = "bullet_list";
+            colContent.content.forEach(function (sentenceContent) {
+              if (sentenceContent.type.match(/listItem/)) {
+                sentenceContent.type = "list_item";
+              }
+            });
+          }
+        });
+      };
+      var orderedListInCulumn = function orderedListInCulumn(column) {
+        column.forEach(function (colContent) {
+          if (colContent.type.match(/orderedList/)) {
+            colContent.type = "ordered_list";
+            colContent.content.forEach(function (sentenceContent) {
+              if (sentenceContent.type.match(/listItem/)) {
+                sentenceContent.type = "list_item";
+              }
+            });
+          }
+        });
+      };
+      jsonContent.content[key].type = "set";
+      var column1Content = jsonContent.content[key].content[0].content;
+      colorInCulumn(column1Content);
+      bulletPointInCulumn(column1Content);
+      orderedListInCulumn(column1Content);
+      var column2Content = jsonContent.content[key].content[1].content;
+      colorInCulumn(column2Content);
+      bulletPointInCulumn(column2Content);
+      orderedListInCulumn(column2Content);
+      delete jsonContent.content[key].content;
+      jsonContent.content[key].attrs = {
+        values: {
+          type: "2_columns",
+          colomn1: column1Content,
+          colomn2: column2Content
+        }
+      };
+    }
+  }
+  ;
+  inputPageContent.value = JSON.stringify(jsonContent);
+  console.log('2de: ', jsonContent);
+}
+
+
+/***/ }),
+
+/***/ "./resources/js/editor/transformData/dataToFrondend.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/editor/transformData/dataToFrondend.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "cookie": () => (/* binding */ cookie),
+/* harmony export */   "cookieData": () => (/* binding */ cookieData)
+/* harmony export */ });
+// ________ Get cookie for data that was send from the backend _________
+
+var cookieObj = new URLSearchParams(document.cookie.replaceAll("&", "%26").replaceAll("; ", "&"));
+var cookie = cookieObj.get("pageContent");
+var cookieData = JSON.parse(cookie);
+console.log(cookieData);
+
+// change some parts of the received object, that way the tip tap editor can reder the data correctly.
+for (var key in cookieData) {
+  // Replace the mark textColor in textStyle
+  if (cookieData[key].content !== undefined) {
+    cookieData[key].content.forEach(function (element) {
+      if (element.marks !== undefined) {
+        element.marks.forEach(function (mark) {
+          if (mark.type.match(/textColor/)) {
+            mark.type = "textStyle";
+          }
+        });
       }
-      ;
-      if (jsonContent.content[_key].type.match(/columnBlock/)) {
-        var colorInCulumn = function colorInCulumn(column) {
-          column.forEach(function (colContent) {
-            if (colContent.content !== undefined) {
-              colContent.content.forEach(function (contentSentence) {
-                if (contentSentence.marks !== undefined) {
-                  contentSentence.marks.forEach(function (mark) {
-                    if (mark.type.match(/textStyle/)) {
-                      mark.type = "textColor";
+      if (element.content !== undefined) {
+        if (Array.isArray(element.content)) {
+          element.content.forEach(function (listElement) {
+            console.log('blabla', listElement);
+            if (listElement.content !== undefined) {
+              listElement.content.forEach(function (part) {
+                if (part.marks !== undefined) {
+                  part.marks.forEach(function (mark) {
+                    if (mark.type.match(/textColor/)) {
+                      mark.type = "textStyle";
                     }
                   });
                 }
               });
             }
           });
-        };
-        jsonContent.content[_key].type = "set";
-        var _column1Content = jsonContent.content[_key].content[0].content;
-        colorInCulumn(_column1Content);
-        var _column2Content = jsonContent.content[_key].content[1].content;
-        colorInCulumn(_column2Content);
-        delete jsonContent.content[_key].content;
-        jsonContent.content[_key].attrs = {
-          values: {
-            type: "2_columns",
-            colomn1: _column1Content,
-            colomn2: _column2Content
-          }
-        };
+        }
       }
-    }
-    ;
-    inputPageContent.value = JSON.stringify(jsonContent);
-    // console.log('2de: ',jsonContent);
-  };
-  var undoBtnStyle = function undoBtnStyle(action) {
-    if (editor.can().undo()) {
-      action;
-      undoBtn.style.opacity = "1";
-      undoBtn.style.cursor = "pointer";
-    } else {
-      undoBtn.style.opacity = "0.5";
-      undoBtn.style.cursor = "default";
-    }
-  };
-  var redoBtnStyle = function redoBtnStyle(action) {
-    if (editor.can().redo()) {
-      action;
-      redoBtn.style.opacity = "1";
-      redoBtn.style.cursor = "pointer";
-    } else {
-      redoBtn.style.opacity = "0.5";
-      redoBtn.style.cursor = "default";
-    }
-  };
-  var makeH2 = function makeH2() {
-    editor.chain().focus().toggleHeading({
-      level: 2
-    }).run();
-    updateContent();
-  };
-  var makeH3 = function makeH3() {
-    editor.chain().focus().toggleHeading({
-      level: 3
-    }).run();
-    updateContent();
-  };
-  var makeH4 = function makeH4() {
-    editor.chain().focus().toggleHeading({
-      level: 4
-    }).run();
-    updateContent();
-  };
-  var makeBold = function makeBold() {
-    editor.chain().focus().toggleBold().run();
-    updateContent();
-  };
-  var makeItalic = function makeItalic() {
-    editor.chain().focus().toggleItalic().run();
-    updateContent();
-  };
-  var makeUnderline = function makeUnderline() {
-    editor.chain().focus().toggleUnderline().run();
-    updateContent();
-  };
-  var makeStrikethrough = function makeStrikethrough() {
-    editor.chain().focus().toggleStrike().run();
-    updateContent();
-  };
-  var makeOrderedList = function makeOrderedList() {
-    editor.chain().focus().toggleOrderedList().run();
-    updateContent();
-  };
-  var makeUnorderedList = function makeUnorderedList() {
-    editor.chain().focus().toggleBulletList().run();
-    updateContent();
-  };
-  var makeQuote = function makeQuote() {
-    editor.chain().focus().toggleBlockquote().run();
-    updateContent();
-  };
-  var makeLink = function makeLink() {
-    var givenUrl = editor.getAttributes('link').href;
-    if (givenUrl === undefined) {
-      var url = prompt('Url:');
-      editor.chain().focus().toggleLink({
-        href: url,
-        target: '_blank'
-      }).run();
-    } else {
-      editor.chain().focus().toggleLink().run();
-    }
-    updateContent();
-  };
-  var addImg = function addImg() {
-    var imgUrl = prompt('Adres van de afbeelding:');
-    if (imgUrl) {
-      editor.chain().focus().setImage({
-        src: imgUrl
-      }).run();
-    }
-    updateContent();
-  }; // function addTable() {
-  //     editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run();
-  //     updateContent();
-  // }
-  var undo = function undo() {
-    undoBtnStyle(editor.chain().focus().undo().run());
-    updateContent();
-    redoBtnStyle();
-  };
-  var redo = function redo() {
-    redoBtnStyle(editor.chain().focus().redo().run());
-    updateContent();
-    undoBtnStyle();
-  };
-  var createColumns = function createColumns() {
-    editor.chain().focus().setColumns(2).run();
-    updateContent();
-  };
-  var deleteColumns = function deleteColumns() {
-    editor.chain().focus().unsetColumns().run();
-    updateContent();
-  };
-  // ________ Get cookie for data that was send from the backend _________
+    });
+  }
+  ;
 
-  var cookieObj = new URLSearchParams(document.cookie.replaceAll("&", "%26").replaceAll("; ", "&"));
-  var cookie = cookieObj.get("pageContent");
-  var cookieData = JSON.parse(cookie);
+  // Replace bullet_list and list_item with the camelCase name
+  if (cookieData[key].type.match(/bullet_list/)) {
+    cookieData[key].type = "bulletList";
+    cookieData[key].content.forEach(function (sentenceContent) {
+      if (sentenceContent.type.match(/list_item/)) {
+        sentenceContent.type = "listItem";
+      }
+    });
+  }
+  if (cookieData[key].type.match(/ordered_list/)) {
+    cookieData[key].type = "orderedList";
+    cookieData[key].content.forEach(function (sentenceContent) {
+      if (sentenceContent.type.match(/list_item/)) {
+        sentenceContent.type = "listItem";
+      }
+    });
+  }
 
-  // Replace the mark textColor in textStyle, that way the tip tap editor can reder a particular color.
-
-  for (var key in cookieData) {
-    // console.log('cookie',cookieData);
-
-    if (cookieData[key].content !== undefined && cookieData[key].content[0].marks !== undefined && cookieData[key].content[0].marks[0].type.match(/textColor/)) {
-      cookieData[key].content[0].marks[0].type = "textStyle";
-    }
-    ;
-    if (cookieData[key].type.match(/set/)) {
-      // console.log(jsonContent.content[key].content);
-      var colorInCulumnCookie = function colorInCulumnCookie(column) {
+  // Replace set with columnBlock
+  if (cookieData[key].type.match(/set/)) {
+    // console.log(jsonContent.content[key].content);
+    // Replace the mark textColor in textStyle
+    var colorInCulumnCookie = function colorInCulumnCookie(column) {
+      if (Array.isArray(column)) {
+        console.log('column', column);
         column.forEach(function (colContent) {
           if (colContent.content !== undefined) {
             colContent.content.forEach(function (contentSentence) {
@@ -22701,65 +22806,211 @@ if (editorElement) {
           }
           ;
         });
-      };
-      cookieData[key].type = "columnBlock";
-      var column1Content = cookieData[key].attrs.values.colomn1;
-      colorInCulumnCookie(column1Content);
-      console.log(column1Content);
-      var column2Content = cookieData[key].attrs.values.colomn2;
-      colorInCulumnCookie(column2Content);
-      console.log(column2Content);
-      delete cookieData[key].attrs;
-      cookieData[key].content = [{
-        content: column1Content,
-        type: "column"
-      }, {
-        content: column2Content,
-        type: "column"
-      }];
-    }
-    // console.log('edit cookie',cookieData);
+      }
+    };
+    var bulletPointInCulumn = function bulletPointInCulumn(column) {
+      if (Array.isArray(column)) {
+        column.forEach(function (colContent) {
+          if (colContent.type.match(/bullet_list/)) {
+            colContent.type = "bulletList";
+            colContent.content.forEach(function (sentenceContent) {
+              if (sentenceContent.type.match(/list_item/)) {
+                sentenceContent.type = "listItem";
+              }
+            });
+          }
+        });
+      }
+    };
+    var orderedListInCulumn = function orderedListInCulumn(column) {
+      if (Array.isArray(column)) {
+        column.forEach(function (colContent) {
+          if (colContent.type.match(/ordered_list/)) {
+            colContent.type = "orderedList";
+            colContent.content.forEach(function (sentenceContent) {
+              if (sentenceContent.type.match(/list_item/)) {
+                sentenceContent.type = "listItem";
+              }
+            });
+          }
+        });
+      }
+    };
+    cookieData[key].type = "columnBlock";
+    var column1Content = cookieData[key].attrs.values.colomn1;
+    colorInCulumnCookie(column1Content);
+    bulletPointInCulumn(column1Content);
+    orderedListInCulumn(column1Content);
+    console.log(column1Content);
+    var column2Content = cookieData[key].attrs.values.colomn2;
+    colorInCulumnCookie(column2Content);
+    bulletPointInCulumn(column2Content);
+    orderedListInCulumn(column2Content);
+    console.log(column2Content);
+    delete cookieData[key].attrs;
+    cookieData[key].content = [{
+      content: column1Content,
+      type: "column"
+    }, {
+      content: column2Content,
+      type: "column"
+    }];
   }
-  ;
+}
+;
 
-  // _______________________ Editor configuration __________________
 
-  var editor = new _tiptap_core__WEBPACK_IMPORTED_MODULE_12__.Editor({
-    element: editorElement,
-    extensions: [_tiptap_starter_kit__WEBPACK_IMPORTED_MODULE_11__["default"].configure({
-      // override Document to allow columns
-      document: false,
-      heading: {
-        levels: [2, 3, 4]
-      }
-    }), _tiptap_extension_bubble_menu__WEBPACK_IMPORTED_MODULE_13__["default"].configure({
-      element: document.querySelector('.bubble-menu-color')
-    }), _tiptap_extension_underline__WEBPACK_IMPORTED_MODULE_10__["default"], _tiptap_extension_image__WEBPACK_IMPORTED_MODULE_3__["default"], _tiptap_extension_link__WEBPACK_IMPORTED_MODULE_4__["default"].configure({
-      validate: function validate(href) {
-        return /^https?:\/\//.test(href);
-      }
-    }), _tiptap_extension_character_count__WEBPACK_IMPORTED_MODULE_1__["default"], _tiptap_extension_color__WEBPACK_IMPORTED_MODULE_2__["default"], _tiptap_extension_text_style__WEBPACK_IMPORTED_MODULE_9__["default"],
-    // Table.configure({
-    //     resizable: false,
-    //     HTMLAttributes: {
-    //       class: 'table-container',
-    //     },
-    // }),
-    // TableRow,
-    // TableHeader,
-    // TableCell,
-    _gocapsule_column_extension__WEBPACK_IMPORTED_MODULE_0__.ColumnExtension],
-    // content: "type": "doc",
-    content: {
-      "type": "doc",
-      "content": cookie ? cookieData : ''
-    },
-    autofocus: true,
-    editable: true,
-    injectCSS: false
-  });
+/***/ }),
+
+/***/ "./resources/js/site.js":
+/*!******************************!*\
+  !*** ./resources/js/site.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./editor/configEditor.js */ "./resources/js/editor/configEditor.js");
+/* harmony import */ var _editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./editor/transformData/dataToBackend.js */ "./resources/js/editor/transformData/dataToBackend.js");
+// This is all you.
+
+// _____________________WYSIWYG editor___________________
+
+
+// import {mainMenuBtnsActions, countWords, updateContent, undoBtnStyle, redoBtnStyle}
+// from './editor/Menus/mainMenu.js';
+// import { colorMenuBtnsActions } from './editor/Menus/colorMenu.js';
+
+if (_editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editorElement) {
+  var countWords = function countWords() {
+    wordCount.innerHTML = _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.storage.characterCount.words() + ' woorden';
+  };
+  var undoBtnStyle = function undoBtnStyle(action) {
+    if (_editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.can().undo()) {
+      action;
+      undoBtn.style.opacity = "1";
+      undoBtn.style.cursor = "pointer";
+    } else {
+      undoBtn.style.opacity = "0.5";
+      undoBtn.style.cursor = "default";
+    }
+  };
+  var redoBtnStyle = function redoBtnStyle(action) {
+    if (_editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.can().redo()) {
+      action;
+      redoBtn.style.opacity = "1";
+      redoBtn.style.cursor = "pointer";
+    } else {
+      redoBtn.style.opacity = "0.5";
+      redoBtn.style.cursor = "default";
+    }
+  };
+  var makeH2 = function makeH2() {
+    _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().toggleHeading({
+      level: 2
+    }).run();
+    (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
+  };
+  var makeH3 = function makeH3() {
+    _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().toggleHeading({
+      level: 3
+    }).run();
+    (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
+  };
+  var makeH4 = function makeH4() {
+    _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().toggleHeading({
+      level: 4
+    }).run();
+    (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
+  };
+  var makeBold = function makeBold() {
+    _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().toggleBold().run();
+    (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
+  };
+  var makeItalic = function makeItalic() {
+    _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().toggleItalic().run();
+    (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
+  };
+  var makeUnderline = function makeUnderline() {
+    _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().toggleUnderline().run();
+    (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
+  };
+  var makeStrikethrough = function makeStrikethrough() {
+    _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().toggleStrike().run();
+    (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
+  };
+  var makeOrderedList = function makeOrderedList() {
+    _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().toggleOrderedList().run();
+    (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
+  };
+  var makeUnorderedList = function makeUnorderedList() {
+    _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().toggleBulletList().run();
+    (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
+  };
+  var makeQuote = function makeQuote() {
+    _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().toggleBlockquote().run();
+    (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
+  };
+  var makeLink = function makeLink() {
+    var givenUrl = _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.getAttributes('link').href;
+    if (givenUrl === undefined) {
+      var url = prompt('Url:');
+      _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().toggleLink({
+        href: url,
+        target: '_blank'
+      }).run();
+    } else {
+      _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().toggleLink().run();
+    }
+    (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
+  };
+  var addImg = function addImg() {
+    // const imgUrl = prompt('Adres van de afbeelding:');
+
+    popupContainer.innerHTML = updateTitleForm;
+    var closeBtn = document.querySelector('.close-btn');
+    var img = document.getElementById('upload-img');
+    img.addEventListener('change', function (e) {
+      console.log(e.target.src);
+    });
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function () {
+        popupContainer.innerHTML = '';
+      });
+    }
+
+    // if (imgUrl) {
+    //     editor.chain().focus().setImage({
+    //         src: imgUrl
+    //     }).run();
+    // }
+
+    (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
+  }; // function addTable() {
+  //     editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run();
+  //     updateContent();
+  // }
+  var undo = function undo() {
+    undoBtnStyle(_editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().undo().run());
+    (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
+    redoBtnStyle();
+  };
+  var redo = function redo() {
+    redoBtnStyle(_editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().redo().run());
+    (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
+    undoBtnStyle();
+  };
+  var createColumns = function createColumns() {
+    _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().setColumns(2).run();
+    (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
+  };
+  var deleteColumns = function deleteColumns() {
+    _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().unsetColumns().run();
+    (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
+  };
+  var csrf = document.querySelector('meta[name="_token"]').content;
   var wordCount = document.querySelector('.word-count');
-  var inputPageContent = document.querySelector('.page-content');
+  // const inputPageContent = document.querySelector('.page-content');
+
   var h2Btn = document.querySelector('.h2-btn');
   var h3Btn = document.querySelector('.h3-btn');
   var h4Btn = document.querySelector('.h4-btn');
@@ -22777,12 +23028,15 @@ if (editorElement) {
   var redoBtn = document.querySelector('.redo-btn');
   var layoutColumnsBtn = document.querySelector('.add-2-layout-columns');
   var removeLayoutColumnsBtn = document.querySelector('.remove-layout-columns-btn');
+  var updateTitleBtn = document.getElementById('update-title');
+  var popupContainer = document.querySelector('.popupContainer');
+  var updateTitleForm = "\n        <div class=\"absolute w-full top-0 h-[100vh] bg-[#000000a5] flex justify-center items-center z-30\">\n            <div class=\"bg-white rounded-xl py-8 px-6 w-[40%]\" >\n                <div>\n\n                    <div class=\"flex justify-end\">\n                        <button class=\"close-btn\"><i class=\"fa fa-close text-2xl mr-4 mb-2 hover:text-middle-green text-slate-300\"></i></button>\n                    </div>\n                    <h3 class=\" text-xl mb-8\">Kies een afbeelding</h3>\n\n                    <form action=\"/upload-image\" method=\"post\" title=\"upload picture\" enctype=\"multipart/form-data\">\n                        <input type=\"hidden\" name=\"_token\" value=\"".concat(csrf, "\">\n                        <input id=\"upload-img\" type=\"file\" name=\"image\" accept=\"image/*\">\n\n                        <div class=\"flex justify-end mt-12\">\n                            <button type=\"submit\" id=\"update-title\" class=\"primary-btn\">\n                                Uploaden\n                            </button>\n\n                        </div>\n                    </form>\n\n                </div>\n\n            </div>\n        </div>\n        ");
   countWords();
   undoBtnStyle();
   redoBtnStyle();
-  editorElement.addEventListener('keyup', function () {
+  _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editorElement.addEventListener('keyup', function () {
     countWords();
-    updateContent();
+    (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
     undoBtnStyle();
     redoBtnStyle();
   });
@@ -22801,67 +23055,69 @@ if (editorElement) {
   // addTableBtn.addEventListener('click', addTable);
   undoBtn.addEventListener('click', undo);
   redoBtn.addEventListener('click', redo);
-  layoutColumnsBtn.addEventListener('click', createColumns);
-  removeLayoutColumnsBtn.addEventListener('click', deleteColumns);
-  window.addEventListener('click', function (e) {
-    // Check if the user clicked the columns or the buttons and disable the unnecessary button.
-    if (e.target.parentElement.className === "column" || e.target.parentElement.className === "column-block" || e.target.parentElement.className === "add-2-layout-columns" || e.target.parentElement.className === "remove-layout-columns-btn") {
-      layoutColumnsBtn.disabled = true;
-      layoutColumnsBtn.style.opacity = "0.5";
-      removeLayoutColumnsBtn.disabled = false;
-      removeLayoutColumnsBtn.style.opacity = "1";
-    } else {
-      layoutColumnsBtn.disabled = false;
-      layoutColumnsBtn.style.opacity = "1";
-      removeLayoutColumnsBtn.disabled = true;
-      removeLayoutColumnsBtn.style.opacity = "0.5";
-    }
-  });
+  if (layoutColumnsBtn && removeLayoutColumnsBtn) {
+    layoutColumnsBtn.addEventListener('click', createColumns);
+    removeLayoutColumnsBtn.addEventListener('click', deleteColumns);
+    window.addEventListener('click', function (e) {
+      // Check if the user clicked the columns or the buttons and disable the unnecessary button.
+      if (e.target.parentElement.className === "column" || e.target.parentElement.className === "column-block" || e.target.parentElement.className === "add-2-layout-columns" || e.target.parentElement.className === "remove-layout-columns-btn") {
+        layoutColumnsBtn.disabled = true;
+        layoutColumnsBtn.style.opacity = "0.5";
+        removeLayoutColumnsBtn.disabled = false;
+        removeLayoutColumnsBtn.style.opacity = "1";
+      } else {
+        layoutColumnsBtn.disabled = false;
+        layoutColumnsBtn.style.opacity = "1";
+        removeLayoutColumnsBtn.disabled = true;
+        removeLayoutColumnsBtn.style.opacity = "0.5";
+      }
+    });
+  }
 
   // _________________________ Change text color _____________________
   window.addEventListener('mouseup', function () {
     // console.log(document.activeElement);
     var colorMenu = document.querySelector('.bubble-menu-color');
     if (colorMenu) {
-      var setDarkGrey = function setDarkGrey() {
-        editor.chain().focus().setColor('#474747').run();
-        updateContent();
+      var setNormal = function setNormal() {
+        _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().unsetColor().run();
+        (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
       };
       var setGrey = function setGrey() {
-        editor.chain().focus().setColor('#787774').run();
-        updateContent();
+        _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().setColor('#787774').run();
+        (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
       };
       var setBrown = function setBrown() {
-        editor.chain().focus().setColor('#9F6B53').run();
-        updateContent();
+        _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().setColor('#9F6B53').run();
+        (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
       };
       var setOrange = function setOrange() {
-        editor.chain().focus().setColor('#D9730D').run();
-        updateContent();
+        _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().setColor('#D9730D').run();
+        (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
       };
       var setYellow = function setYellow() {
-        editor.chain().focus().setColor('#CB912F').run();
-        updateContent();
+        _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().setColor('#CB912F').run();
+        (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
       };
       var setGreen = function setGreen() {
-        editor.chain().focus().setColor('#448361').run();
-        updateContent();
+        _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().setColor('#448361').run();
+        (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
       };
       var setBlue = function setBlue() {
-        editor.chain().focus().setColor('#337EA9').run();
-        updateContent();
+        _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().setColor('#337EA9').run();
+        (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
       };
       var setPurple = function setPurple() {
-        editor.chain().focus().setColor('#9065B0').run();
-        updateContent();
+        _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().setColor('#9065B0').run();
+        (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
       };
       var setPink = function setPink() {
-        editor.chain().focus().setColor('#C14C8A').run();
-        updateContent();
+        _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().setColor('#C14C8A').run();
+        (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
       };
       var setRed = function setRed() {
-        editor.chain().focus().setColor('#D44C47').run();
-        updateContent();
+        _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().setColor('#D44C47').run();
+        (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
       };
       // Colors
       var darkGreyBtn = document.querySelector('.dark-grey-btn');
@@ -22874,7 +23130,7 @@ if (editorElement) {
       var purpleBtn = document.querySelector('.purple-btn');
       var pinkBtn = document.querySelector('.pink-btn');
       var redBtn = document.querySelector('.red-btn');
-      darkGreyBtn.addEventListener('click', setDarkGrey);
+      darkGreyBtn.addEventListener('click', setNormal);
       greyBtn.addEventListener('click', setGrey);
       brownBtn.addEventListener('click', setBrown);
       orangeBtn.addEventListener('click', setOrange);

@@ -134,7 +134,29 @@ document_content:
                 content:
                   -
                     type: text
+                    marks:
+                      -
+                        type: bold
+                      -
+                        type: underline
+                      -
+                        type: textColor
+                        attrs:
+                          color: '#D9730D'
                     text: dsjfdfjkd
+              -
+                type: paragraph
+              -
+                type: paragraph
+                content:
+                  -
+                    type: text
+                    marks:
+                      -
+                        type: textColor
+                        attrs:
+                          color: '#474747'
+                    text: jkjkj
             colomn2:
               -
                 type: paragraph
@@ -144,6 +166,14 @@ document_content:
                     text: 'Dit is een 2de column'
               -
                 type: paragraph
+      -
+        type: paragraph
+      -
+        type: paragraph
+        content:
+          -
+            type: text
+            text: 'Hello, jdfjdhdfjkddsjdjf '
     type: new_page
     enabled: 'true'
   -

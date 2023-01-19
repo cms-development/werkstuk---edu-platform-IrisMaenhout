@@ -10,8 +10,48 @@ class EditSourceContentController extends Controller
     //
     public function updateMainPage(Request $r)
     {
-        # code...
-        dd('hello');
+        $page_content = $r->page_content;
+        $source_id = $r->source_id;
+        $page_slug = $r->page_slug;
+        $json_content = json_decode($page_content, true);
+
+        $entry = Entry::find($source_id);
+
+        if($page_slug === 'info'){
+            $entry->set('main_page_content', $json_content['content']);
+        }else{
+            $entry->set('hero_description', $json_content['content']);
+        }
+
+//         main_page_content:
+        //   -
+        //     type: paragraph
+        //     content:
+        //       -
+        //         type: text
+        //         text: 'Dit is wat tekst '
+        //   -
+        //     type: paragraph
+        //     content:
+        //       -
+        //         type: text
+        //         marks:
+        //           -
+        //             type: bold
+        //         text: 'Dit is een bold tekst '
+        //   -
+        //     type: set
+        //     attrs:
+        //       id: ld2dkdeu
+        //       values:
+        //         type: 2_columns
+        //         colomn1: '<p>Dit is de 1 ste kolom</p>'
+        //         colomn2: '<p>Dit is de 2de kolom</p>'
+        //   -
+        //     type: paragraph
+        // dd($entry);
+        $entry->save();
+        return redirect()->back();
     }
 
     public function updatePage(Request $r)

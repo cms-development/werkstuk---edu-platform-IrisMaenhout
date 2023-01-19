@@ -40,9 +40,9 @@ class CreateEntryController extends Controller
         // dd($r);
 
         $title = $r->title;
-        $slug = $r->slug;
+        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title)));
         $categories = $r->categories;
-        $hero_description = $r->hero_description;
+        // $hero_description = $r->hero_description;
 
         $document_content = [
             [
@@ -87,7 +87,6 @@ class CreateEntryController extends Controller
             ->slug($slug)
             ->data([
                 'title' => $title,
-                'hero_description' => $hero_description,
                 'categories' => $categories,
                 'content_type' => 'verdiepingsdossier',
                 'main_image' =>  $this->storeImg($r),

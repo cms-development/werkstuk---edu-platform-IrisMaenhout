@@ -1,0 +1,31 @@
+{{?
+
+    if(isset($_SERVER['REQUEST_URI'])){
+        $link = explode("/", $_SERVER['REQUEST_URI']);
+    }
+
+?}}
+<div id="overlay" class="bg-[#000000a5] top-0 fixed w-screen h-screen hidden"></div>
+<div id="sidebar" class="relative w-[20%] hidden md:block">
+    <aside class="bg-[#e4efe0] h-full fixed top-16 md:top-0 pt-14 md:pt-0">
+        <div class="md:mt-36 mx-8">
+            <h3 class="text-lg mb-6">Mijn account</h3>
+            <ul>
+                <li class="mb-2">
+                    <a href="/account/persoonlijke-info" class="hover:text-middle-green {{ $link[2] === 'persoonlijke-info' ? 'text-middle-green font-bold' : '' }}">Persoonlijke info</a>
+                </li>
+
+                <li class="mb-2">
+                    <a href="/account/verdiepingsdossiers" class="hover:text-middle-green {{ $link[2] === 'verdiepingsdossiers' ? 'text-middle-green font-bold' : '' }}">Uw verdiepingsdossiers</a>
+                </li>
+
+                <li>
+                    <a href="{{ user:logout_url }}" class="hover:text-middle-green">Uitloggen</a>
+                </li>
+            </ul>
+
+
+        </div>
+
+    </aside>
+</div>

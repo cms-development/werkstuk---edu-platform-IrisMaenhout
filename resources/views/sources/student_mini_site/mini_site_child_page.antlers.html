@@ -79,32 +79,40 @@
 
                         {{ /if }}
 
-                        {{ pages }}
-                            {{ if slug === child_page}}
-                                <div class="py-8 ">
+                        {{# {{ if pages }}
+                            {{ pages }}
 
-                                    <ul class="breadcrumbs flex">
-                                        {{ nav:breadcrumbs }}
-                                        <li>
-                                            <a href="{{ url }}">{{ slug }}</a>
-                                            <p class="inline-block">{{ if !is_current }} / {{ /if }}</p>
-                                        </li>
-                                        {{ /nav:breadcrumbs }}
-                                        <li class="font-semibold text-darker-green">
-                                            <a href="{{ child_page }}">{{ child_page }}</a>
-                                        </li>
-                                    </ul>
+                                {{ if slug === child_page}}
+                                    <div class="py-8 ">
 
-                                    <h1 class="text-3xl mt-10 mb-6">{{ title_page }}</h1>
-                                </div>
+                                        <ul class="breadcrumbs flex">
+                                            {{ nav:breadcrumbs }}
+                                            <li>
+                                                <a href="{{ url }}">{{ slug }}</a>
+                                                <p class="inline-block">{{ if !is_current }} / {{ /if }}</p>
+                                            </li>
+                                            {{ /nav:breadcrumbs }}
+                                            <li class="font-semibold text-darker-green">
+                                                <a href="{{ child_page }}">{{ child_page }}</a>
+                                            </li>
+                                        </ul>
 
-                                {{ partial src="sets/{type}" }}
-                            {{ /if }}
+                                        <h1 class="text-3xl mt-10 mb-6">{{ title_page }}</h1>
+                                    </div>
 
-                        {{ /pages }}
+                                    {{ partial src="sets/{type}" }}
+                                {{ /if }}
 
-                </div>
+                            {{ /pages }}
+
+                        {{ /if }} #}}
+
+                    </div>
+
+
                 {{ /document_content }}
+                {{# {{? dd('end') ?}} #}}
+
 
                 {{# Exta sources in the same category #}}
                 <div class="mt-28 mb-20">

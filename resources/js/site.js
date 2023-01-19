@@ -1,135 +1,22 @@
 // This is all you.
 
 // _____________________WYSIWYG editor___________________
-import { ColumnExtension } from '@gocapsule/column-extension';
 import {
-    Editor,
-    Node
-} from '@tiptap/core';
-import BubbleMenu from '@tiptap/extension-bubble-menu';
-import CharacterCount from '@tiptap/extension-character-count';
-import Color from '@tiptap/extension-color';
-import Image from '@tiptap/extension-image';
-import Link from '@tiptap/extension-link';
-import Table from '@tiptap/extension-table';
-import TableCell from '@tiptap/extension-table-cell';
-import TableHeader from '@tiptap/extension-table-header';
-import TableRow from '@tiptap/extension-table-row';
-import TextStyle from '@tiptap/extension-text-style';
-import Underline from '@tiptap/extension-underline';
-import StarterKit from '@tiptap/starter-kit';
+    editorElement,
+    editor
+} from './editor/configEditor.js';
+import {
+    updateContent
+} from './editor/transformData/dataToBackend.js';
+// import {mainMenuBtnsActions, countWords, updateContent, undoBtnStyle, redoBtnStyle}
+// from './editor/Menus/mainMenu.js';
+// import { colorMenuBtnsActions } from './editor/Menus/colorMenu.js';
 
-const editorElement = document.querySelector('.wysiwyg-editor');
 
 if (editorElement) {
-
-    // ________ Get cookie for data that was send from the backend _________
-
-    const cookieObj = new URLSearchParams(document.cookie.replaceAll("&", "%26").replaceAll("; ","&"));
-    const cookie = cookieObj.get("pageContent");
-    const cookieData = JSON.parse(cookie);
-
-    // Replace the mark textColor in textStyle, that way the tip tap editor can reder a particular color.
-
-    for(let key in cookieData){
-        // console.log('cookie',cookieData);
-
-        if (cookieData[key].content !== undefined && cookieData[key].content[0].marks !== undefined && (cookieData[key].content[0].marks[0].type).match(/textColor/)){
-
-            cookieData[key].content[0].marks[0].type = "textStyle";
-        };
-
-        if((cookieData[key].type).match(/set/)){
-            cookieData[key].type = "columnBlock";
-            // console.log(jsonContent.content[key].content);
-
-            function colorInCulumnCookie(column) {
-                column.forEach(colContent => {
-                    if(colContent.content !== undefined){
-                        colContent.content.forEach((contentSentence)=>{
-                            if(contentSentence.marks !== undefined){
-                                contentSentence.marks.forEach((mark)=>{
-                                    if((mark.type).match(/textColor/)){
-                                        mark.type = "textStyle";
-                                    }
-                                });
-                            }
-                        });
-                    };
-                });
-            }
-
-            const column1Content = cookieData[key].attrs.values.colomn1;
-            colorInCulumnCookie(column1Content);
-            console.log(column1Content);
-
-            const column2Content = cookieData[key].attrs.values.colomn2;
-            colorInCulumnCookie(column2Content);
-            console.log(column2Content);
-
-
-            delete cookieData[key].attrs;
-            cookieData[key].content = [
-                {
-                    content: column1Content,
-                    type: "column"
-                },
-                {
-                    content: column2Content,
-                    type: "column"
-                }
-            ];
-
-        }
-        // console.log('edit cookie',cookieData);
-    };
-
-    // _______________________ Editor configuration __________________
-
-    let editor = new Editor({
-        element: editorElement,
-        extensions: [
-            StarterKit.configure({
-                // override Document to allow columns
-                document: false,
-                heading: {
-                    levels: [2, 3, 4],
-                }
-            }),
-            BubbleMenu.configure({
-                element: document.querySelector('.bubble-menu-color'),
-            }),
-            Underline,
-            Image,
-            Link.configure({
-                validate: href => /^https?:\/\//.test(href),
-            }),
-            CharacterCount,
-            Color,
-            TextStyle,
-            // Table.configure({
-            //     resizable: false,
-            //     HTMLAttributes: {
-            //       class: 'table-container',
-            //     },
-            // }),
-            // TableRow,
-            // TableHeader,
-            // TableCell,
-            ColumnExtension,
-        ],
-        // content: "type": "doc",
-        content: {
-            "type": "doc",
-            "content": cookie ? cookieData : '',
-        },
-        autofocus: true,
-        editable: true,
-        injectCSS: false,
-    });
-
+    const csrf = document.querySelector('meta[name="_token"]').content;
     const wordCount = document.querySelector('.word-count');
-    const inputPageContent = document.querySelector('.page-content');
+    // const inputPageContent = document.querySelector('.page-content');
 
     const h2Btn = document.querySelector('.h2-btn');
     const h3Btn = document.querySelector('.h3-btn');
@@ -149,87 +36,62 @@ if (editorElement) {
     const layoutColumnsBtn = document.querySelector('.add-2-layout-columns');
     const removeLayoutColumnsBtn = document.querySelector('.remove-layout-columns-btn');
 
+    const updateTitleBtn = document.getElementById('update-title');
+    const popupContainer = document.querySelector('.popupContainer');
+
+    const updateTitleForm = `
+        <div class="absolute w-full top-0 h-[100vh] bg-[#000000a5] flex justify-center items-center z-30">
+            <div class="bg-white rounded-xl py-8 px-6 w-[40%]" >
+                <div>
+
+                    <div class="flex justify-end">
+                        <button class="close-btn"><i class="fa fa-close text-2xl mr-4 mb-2 hover:text-middle-green text-slate-300"></i></button>
+                    </div>
+                    <h3 class=" text-xl mb-8">Kies een afbeelding</h3>
+
+                    <form action="/upload-image" method="post" title="upload picture" enctype="multipart/form-data">
+                        <input type="hidden" name="_token" value="${ csrf }">
+                        <input id="upload-img" type="file" name="image" accept="image/*">
+
+                        <div class="flex justify-end mt-12">
+                            <button type="submit" id="update-title" class="primary-btn">
+                                Uploaden
+                            </button>
+
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+        `;
+
 
 
     function countWords() {
         wordCount.innerHTML = editor.storage.characterCount.words() + ' woorden';
     }
 
-    // _______________Send content from editor to the backend _________________
-    function updateContent() {
-        // Get content
-        const jsonContent = editor.getJSON();
-        // console.log('editor_content: ', jsonContent);
-
-
-        // Replace textStyle with textColor, because the addon "Bard Text Color" uses the term textColor instead of textStyle, so otherwise it wouldn't display the data correctly in the backend.
-        for(let key in jsonContent.content){
-
-            if (jsonContent.content[key].content !== undefined && jsonContent.content[key].content[0].marks !== undefined && (jsonContent.content[key].content[0].marks[0].type).match(/textStyle/)){
-
-                jsonContent.content[key].content[0].marks[0].type = "textColor";
-            };
-
-            if((jsonContent.content[key].type).match(/columnBlock/)){
-                jsonContent.content[key].type = "set";
-
-                function colorInCulumn(column) {
-                    column.forEach(colContent => {
-                        if(colContent.content !== undefined){
-                            colContent.content.forEach((contentSentence)=>{
-                                if(contentSentence.marks !== undefined){
-                                    contentSentence.marks.forEach((mark)=>{
-                                        if((mark.type).match(/textStyle/)){
-                                            mark.type = "textColor";
-                                        }
-                                    });
-                                }
-                            });
-                        }
-                    });
-                }
-
-                const column1Content = jsonContent.content[key].content[0].content;
-                colorInCulumn(column1Content);
-
-                const column2Content = jsonContent.content[key].content[1].content;
-                colorInCulumn(column2Content);
-
-                delete jsonContent.content[key].content;
-                jsonContent.content[key].attrs = {
-                    values: {
-                        type: "2_columns",
-                        colomn1: column1Content,
-                        colomn2: column2Content
-                    }
-                }
-
-            }
-
-        };
-
-        inputPageContent.value = JSON.stringify(jsonContent);
-        // console.log('2de: ',jsonContent);
-    }
 
 
     function undoBtnStyle(action) {
-        if(editor.can().undo()){
+        if (editor.can().undo()) {
             action;
             undoBtn.style.opacity = "1";
             undoBtn.style.cursor = "pointer";
-        }else{
+        } else {
             undoBtn.style.opacity = "0.5";
             undoBtn.style.cursor = "default";
         }
     }
 
     function redoBtnStyle(action) {
-        if(editor.can().redo()){
+        if (editor.can().redo()) {
             action;
             redoBtn.style.opacity = "1";
             redoBtn.style.cursor = "pointer";
-        }else{
+        } else {
             redoBtn.style.opacity = "0.5";
             redoBtn.style.cursor = "default";
         }
@@ -239,7 +101,7 @@ if (editorElement) {
     undoBtnStyle();
     redoBtnStyle();
 
-    editorElement.addEventListener('keyup', ()=>{
+    editorElement.addEventListener('keyup', () => {
         countWords();
         updateContent();
         undoBtnStyle();
@@ -248,17 +110,23 @@ if (editorElement) {
 
 
     function makeH2() {
-        editor.chain().focus().toggleHeading({ level: 2 }).run();
+        editor.chain().focus().toggleHeading({
+            level: 2
+        }).run();
         updateContent();
     }
 
     function makeH3() {
-        editor.chain().focus().toggleHeading({ level: 3 }).run();
+        editor.chain().focus().toggleHeading({
+            level: 3
+        }).run();
         updateContent();
     }
 
     function makeH4() {
-        editor.chain().focus().toggleHeading({ level: 4 }).run();
+        editor.chain().focus().toggleHeading({
+            level: 4
+        }).run();
         updateContent();
 
     }
@@ -303,10 +171,13 @@ if (editorElement) {
 
     function makeLink() {
         const givenUrl = editor.getAttributes('link').href;
-        if(givenUrl === undefined){
+        if (givenUrl === undefined) {
             const url = prompt('Url:');
-            editor.chain().focus().toggleLink({ href: url, target: '_blank' }).run();
-        }else{
+            editor.chain().focus().toggleLink({
+                href: url,
+                target: '_blank'
+            }).run();
+        } else {
             editor.chain().focus().toggleLink().run();
         }
 
@@ -315,10 +186,26 @@ if (editorElement) {
     }
 
     function addImg() {
-        const imgUrl = prompt('Adres van de afbeelding:');
-        if (imgUrl) {
-            editor.chain().focus().setImage({ src: imgUrl }).run();
+        // const imgUrl = prompt('Adres van de afbeelding:');
+
+        popupContainer.innerHTML = updateTitleForm;
+
+        const closeBtn = document.querySelector('.close-btn');
+        const img = document.getElementById('upload-img');
+        img.addEventListener('change', (e)=>{
+            console.log(e.target.src)
+        })
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                popupContainer.innerHTML = '';
+            })
         }
+
+        // if (imgUrl) {
+        //     editor.chain().focus().setImage({
+        //         src: imgUrl
+        //     }).run();
+        // }
 
         updateContent();
     }
@@ -369,34 +256,37 @@ if (editorElement) {
     // addTableBtn.addEventListener('click', addTable);
     undoBtn.addEventListener('click', undo);
     redoBtn.addEventListener('click', redo);
-    layoutColumnsBtn.addEventListener('click', createColumns);
-    removeLayoutColumnsBtn.addEventListener('click', deleteColumns);
 
-    window.addEventListener('click', (e)=>{
-        // Check if the user clicked the columns or the buttons and disable the unnecessary button.
-        if(e.target.parentElement.className === "column" || e.target.parentElement.className === "column-block" || e.target.parentElement.className === "add-2-layout-columns" || e.target.parentElement.className === "remove-layout-columns-btn"){
+    if (layoutColumnsBtn && removeLayoutColumnsBtn) {
+        layoutColumnsBtn.addEventListener('click', createColumns);
+        removeLayoutColumnsBtn.addEventListener('click', deleteColumns);
 
-            layoutColumnsBtn.disabled = true;
-            layoutColumnsBtn.style.opacity = "0.5";
+        window.addEventListener('click', (e) => {
+            // Check if the user clicked the columns or the buttons and disable the unnecessary button.
+            if (e.target.parentElement.className === "column" || e.target.parentElement.className === "column-block" || e.target.parentElement.className === "add-2-layout-columns" || e.target.parentElement.className === "remove-layout-columns-btn") {
 
-            removeLayoutColumnsBtn.disabled = false;
-            removeLayoutColumnsBtn.style.opacity = "1";
-        }else{
-            layoutColumnsBtn.disabled = false;
-            layoutColumnsBtn.style.opacity = "1";
+                layoutColumnsBtn.disabled = true;
+                layoutColumnsBtn.style.opacity = "0.5";
 
-            removeLayoutColumnsBtn.disabled = true;
-            removeLayoutColumnsBtn.style.opacity = "0.5";
-        }
-    });
+                removeLayoutColumnsBtn.disabled = false;
+                removeLayoutColumnsBtn.style.opacity = "1";
+            } else {
+                layoutColumnsBtn.disabled = false;
+                layoutColumnsBtn.style.opacity = "1";
+
+                removeLayoutColumnsBtn.disabled = true;
+                removeLayoutColumnsBtn.style.opacity = "0.5";
+            }
+        });
+    }
 
     // _________________________ Change text color _____________________
-    window.addEventListener('mouseup', ()=>{
+    window.addEventListener('mouseup', () => {
 
         // console.log(document.activeElement);
         const colorMenu = document.querySelector('.bubble-menu-color');
 
-        if(colorMenu){
+        if (colorMenu) {
             // Colors
             const darkGreyBtn = document.querySelector('.dark-grey-btn');
             const greyBtn = document.querySelector('.grey-btn');
@@ -410,8 +300,8 @@ if (editorElement) {
             const redBtn = document.querySelector('.red-btn');
 
 
-            function setDarkGrey() {
-                editor.chain().focus().setColor('#474747').run();
+            function setNormal() {
+                editor.chain().focus().unsetColor().run();
                 updateContent();
             }
 
@@ -461,7 +351,7 @@ if (editorElement) {
                 updateContent();
             }
 
-            darkGreyBtn.addEventListener('click', setDarkGrey);
+            darkGreyBtn.addEventListener('click', setNormal);
             greyBtn.addEventListener('click', setGrey);
             brownBtn.addEventListener('click', setBrown);
             orangeBtn.addEventListener('click', setOrange);
@@ -475,5 +365,3 @@ if (editorElement) {
     });
 
 };
-
-

@@ -1,0 +1,66 @@
+<div class="bg-white p-6 rounded-2xl border-2 mb-12">
+    <div class="md:flex justify-between">
+        <div>
+
+            <div class=" mt-6">
+                <h2 class="font-bold text-xl mb-8"><a href="{{ url }}">{{ title }}</a></h2>
+
+                {{ if categories }}
+                    <div class="mb-4 gap-4 md:flex">
+                        <p class="mb-4">Categorie:</p>
+
+                        <div class="flex flex-wrap gap-4">
+                            {{ categories }}
+                            <a href="{{ url }}"
+                                class="bg-lighter-green px-3 py-1 block rounded text-white">{{ title }}</a>
+                            {{ /categories }}
+
+                        </div>
+
+                    </div>
+                {{ /if }}
+
+                <div class="mb-4 gap-4 md:flex">
+                    <p class="mb-4">Publiceren:</p>
+
+                    <form action="/publish-mini-site" method="post">
+                        {{ csrf_field }}
+                        <input type="hidden" name="source_id" value="{{ id }}">
+                        <button type="submit">
+                            <label class="relative flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer" name="is_public" {{ published == 1 ? 'checked' : '' }}>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-900"></div>
+                              </label>
+                        </button>
+
+                    </form>
+
+
+                </div>
+
+                <div class="flex justify-between mt-6">
+                    <a href="/account/verdiepingsdossier/{{ slug }}/wijzigen" class="text-[#7886CD] underline">Bewerken</a>
+
+                    <form action="" method="post">
+                        <button class="text-[#B92C2C] underline" type="submit">Verwijderen</button>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {{ if main_image }}
+            <a class="block md:w-[30%] mt-10 mb-6 md:mt-0" href="{{ url }}">
+                <img src="{{ main_image }}" alt="main image" class=" w-full h-full rounded-t-xl object-cover block max-h-52">
+
+                <div class=" bg-dark-yellow px-4 py-2 rounded-b-xl">
+                    <i class="text-slate-700 text-center block w-full text-sm">{{ last_modified }}</i>
+                </div>
+            </a>
+        {{ /if }}
+
+    </div>
+
+</div>

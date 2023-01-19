@@ -2,33 +2,44 @@
     use Statamic\Facades\Entry;
 
     $entry = Entry::findByUri('/' . $source_slug);
-    $document_content = $entry->get('document_content');
 
     function saveCookie($content)
     {
         setcookie("pageContent", json_encode($content), time()+3600, '/');
     }
 
+    if(isset($folder_slug) && $folder_slug === "start-pagina"){
+        if($page_slug === "info"){
+            $document_content = $entry->get('main_page_content');
+            saveCookie($document_content);
+        }else{
 
-    foreach($document_content as $key => $content) {
-        if(isset($folder_slug)){
-            if(isset($content['title_folder']) && strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $content['title_folder']))) === $folder_slug){
+            $document_content = $entry->get('hero_description');
+            saveCookie($document_content);
+        }
+    }else {
+        $document_content = $entry->get('document_content');
 
-                foreach ($content['pages'] as $key => $page) {
-                    if($page_slug === $page["slug"]){
-                        saveCookie($page['page_layout']);
+        foreach($document_content as $key => $content) {
+            if(isset($folder_slug)){
+                if(isset($content['title_folder']) && strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $content['title_folder']))) === $folder_slug){
+
+                    foreach ($content['pages'] as $key => $page) {
+                        if($page_slug === $page["slug"]){
+                            saveCookie($page['page_layout']);
+                        }
                     }
+                }
+
+
+            }else{
+                if(isset($content["slug"]) && $page_slug === $content["slug"]){
+                    saveCookie($content['page_layout']);
                 }
             }
 
 
-        }else{
-            if(isset($content["slug"]) && $page_slug === $content["slug"]){
-                saveCookie($content['page_layout']);
-            }
         }
-
-
     }
 
 ?}}
@@ -37,11 +48,14 @@
 {{ partial:check_access }}
 {{ collection:sources slug:is="{{ source_slug }}" status:in="published|draft" }}
 
+    <div class="popupContainer"></div>
     <div class="mt-20 w-full fixed shadow-md z-[5] bg-slate-50">
         <div class="w-full bg-[#B0D2A8] flex justify-between py-6 px-12 items-center">
             <div>
-                {{ if page_slug === 'start-pagina'}}
-                    <h3 class="mt-2 mb-4 text-xl ">Start pagina</h3>
+
+                {{ if folder_slug === 'start-pagina'}}
+                    <h3 class="mt-2 mb-4 text-xl ">{{$ $page_slug === 'hero-description' ? 'Hero description' : 'Start pagina info'; $}}</h3>
+
                 {{ else }}
                     {{# page name #}}
 
@@ -75,8 +89,10 @@
                 <p>Account/ thema-dossiers/ name-website</p>
             </div>
 
-            <div class="{{$ $page_slug !== 'start-pagina' ? 'flex gap-24 items-center' : '' $}} ">
-                {{ if $page_slug !== 'start-pagina' }}
+
+            <div class="flex gap-24 items-center">
+
+                {{ if folder_slug || page_slug && folder_slug !== 'start-pagina' }}
                     <form action="/remove-page" method="post" name="delete page">
                         {{ csrf_field }}
                         <input type="hidden" name="source_id" value="{{ id }}">
@@ -89,7 +105,7 @@
                     </form>
                 {{ /if }}
 
-                <form action="/update-{{$ $page_slug === 'start-pagina' ? 'main-page' : 'page' $}}" method="post" name="update page content">
+                <form action="/update-{{$ isset($folder_slug) && $folder_slug === 'start-pagina' ? 'main-page' : 'page' $}}" method="post" name="update page content">
                     {{ csrf_field }}
                     <input type="hidden" name="page_content" class="page-content">
                     <input type="hidden" name="source_id" value="{{ id }}">
@@ -164,18 +180,20 @@
                     <i class="fa-solid fa-table"></i>
                 </button> #}}
 
-                <button class="add-2-layout-columns">
-                    <span class="material-symbols-outlined">
-                        view_column_2
-                    </span>
-                </button>
+                {{ if page_slug !== 'hero-description' }}
+                    <button class="add-2-layout-columns">
+                        <span class="material-symbols-outlined">
+                            view_column_2
+                        </span>
+                    </button>
 
-                <button class="remove-layout-columns-btn flex justify-center items-center">
-                    <span class="material-symbols-outlined">
-                        view_column_2
-                    </span>
-                    <i class="absolute text-center font-bold text-2xl -mt-2 ml-4">-</i>
-                </button>
+                    <button class="remove-layout-columns-btn flex justify-center items-center">
+                        <span class="material-symbols-outlined">
+                            view_column_2
+                        </span>
+                        <i class="absolute text-center font-bold text-2xl -mt-2 ml-4">-</i>
+                    </button>
+                {{ /if }}
 
 
                 <button class="undo-btn">
@@ -223,7 +241,7 @@
         <!-- Create the editor container -->
 
     {{ else }}
-        <div class="py-96 md:py-80 w-[90%] mx-auto">
+        <div class=" py-[450px] md:py-96 w-[90%] mx-auto">
 
             <div class="wysiwyg-editor">
                 <div class="bubble-menu-color">

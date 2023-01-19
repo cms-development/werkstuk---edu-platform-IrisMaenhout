@@ -1,0 +1,64 @@
+{{# Check if the user gets access to this page #}}
+
+{{ if logged_in}}
+    {{ user }}
+        {{ if !accept_register_proposal }}
+            {{ redirect to="/geen-toegang" }}
+        {{ /if }}
+
+        {{ if roles }}
+            {{ foreach:roles }}
+                {{ if value === "ex-student"}}
+                    {{ redirect to="/geen-toegang" }}
+                {{ /if }}
+            {{ /foreach:roles }}
+
+        {{ /if }}
+    {{ /user }}
+{{ else }}
+    {{ redirect to="/geen-toegang" }}
+{{ /if }}
+
+{{?
+    if(isset($_SERVER['REQUEST_URI'])){
+        $url_links = explode("/", $_SERVER['REQUEST_URI']);
+    }
+?}}
+
+<div class="md:flex">
+    {{ partial:navigations/account_sidebar }}
+
+
+    <div class="mt-36 md:w-[70%] w-[85%] mx-auto">
+        <div class="flex justify-between">
+            <ul class="breadcrumbs flex mb-12">
+                {{ foreach:url_links }}
+                <li {{ if key == 2 }} class="font-semibold text-darker-green"{{ /if }}>
+                    <a href="/account/verdiepingsdossiers">{{ value }}</a>
+                    <p class="inline-block">{{ if key !== 2 && key !== 0}} / {{ /if }}</p>
+                </li>
+                {{ /foreach:url_links }}
+            </ul>
+
+            <div>
+                <a href="/nieuw-verdiepingsdossier" class="block primary-btn">Nieuw</a>
+            </div>
+        </div>
+
+        <div>
+
+            <h1 class=" text-3xl mb-8">Verdiepingsdossiers</h1>
+
+            {{ current_user }}
+                {{? $current_user_id = $id?}}
+
+                {{ collection:sources taxonomy:content_type="verdiepingsdossier|themadossier" author:contains="{{ current_user_id }}" status:in="published|draft"}}
+                    {{ if collection }}
+                        {{ partial:cards/overview_mini_site_card }}
+                    {{ /if }}
+                {{ /collection:sources }}
+            {{ /current_user }}
+
+        </div>
+    </div>
+</div>
