@@ -14,9 +14,7 @@ import {
 
 
 if (editorElement) {
-    const csrf = document.querySelector('meta[name="_token"]').content;
     const wordCount = document.querySelector('.word-count');
-    // const inputPageContent = document.querySelector('.page-content');
 
     const h2Btn = document.querySelector('.h2-btn');
     const h3Btn = document.querySelector('.h3-btn');
@@ -30,49 +28,14 @@ if (editorElement) {
     const quoteBtn = document.querySelector('.quote-btn');
     const linkBtn = document.querySelector('.link-btn');
     const imgBtn = document.querySelector('.img-btn');
-    // const addTableBtn = document.querySelector('.add-table-btn');
     const undoBtn = document.querySelector('.undo-btn');
     const redoBtn = document.querySelector('.redo-btn');
     const layoutColumnsBtn = document.querySelector('.add-2-layout-columns');
     const removeLayoutColumnsBtn = document.querySelector('.remove-layout-columns-btn');
 
-    const updateTitleBtn = document.getElementById('update-title');
-    const popupContainer = document.querySelector('.popupContainer');
-
-    const updateTitleForm = `
-        <div class="absolute w-full top-0 h-[100vh] bg-[#000000a5] flex justify-center items-center z-30">
-            <div class="bg-white rounded-xl py-8 px-6 w-[40%]" >
-                <div>
-
-                    <div class="flex justify-end">
-                        <button class="close-btn"><i class="fa fa-close text-2xl mr-4 mb-2 hover:text-middle-green text-slate-300"></i></button>
-                    </div>
-                    <h3 class=" text-xl mb-8">Kies een afbeelding</h3>
-
-                    <form action="/upload-image" method="post" title="upload picture" enctype="multipart/form-data">
-                        <input type="hidden" name="_token" value="${ csrf }">
-                        <input id="upload-img" type="file" name="image" accept="image/*">
-
-                        <div class="flex justify-end mt-12">
-                            <button type="submit" id="update-title" class="primary-btn">
-                                Uploaden
-                            </button>
-
-                        </div>
-                    </form>
-
-                </div>
-
-            </div>
-        </div>
-        `;
-
-
-
     function countWords() {
         wordCount.innerHTML = editor.storage.characterCount.words() + ' woorden';
     }
-
 
 
     function undoBtnStyle(action) {
@@ -186,35 +149,16 @@ if (editorElement) {
     }
 
     function addImg() {
-        // const imgUrl = prompt('Adres van de afbeelding:');
+        const imgUrl = prompt('Adres van de afbeelding:');
 
-        popupContainer.innerHTML = updateTitleForm;
-
-        const closeBtn = document.querySelector('.close-btn');
-        const img = document.getElementById('upload-img');
-        img.addEventListener('change', (e)=>{
-            console.log(e.target.src)
-        })
-        if (closeBtn) {
-            closeBtn.addEventListener('click', () => {
-                popupContainer.innerHTML = '';
-            })
+        if (imgUrl) {
+            editor.chain().focus().setImage({
+                src: imgUrl
+            }).run();
         }
-
-        // if (imgUrl) {
-        //     editor.chain().focus().setImage({
-        //         src: imgUrl
-        //     }).run();
-        // }
 
         updateContent();
     }
-
-    // function addTable() {
-    //     editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run();
-
-    //     updateContent();
-    // }
 
     function undo() {
         undoBtnStyle(editor.chain().focus().undo().run());
@@ -253,7 +197,6 @@ if (editorElement) {
     quoteBtn.addEventListener('click', makeQuote);
     linkBtn.addEventListener('click', makeLink);
     imgBtn.addEventListener('click', addImg);
-    // addTableBtn.addEventListener('click', addTable);
     undoBtn.addEventListener('click', undo);
     redoBtn.addEventListener('click', redo);
 

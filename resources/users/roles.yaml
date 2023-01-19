@@ -16,11 +16,19 @@ ex-student:
 teacher:
   title: Teacher
   permissions:
+    - 'access cp'
+    - 'view pages entries'
+    - 'edit pages entries'
+    - 'create pages entries'
+    - 'delete pages entries'
+    - 'publish pages entries'
+    - 'edit other authors pages entries'
     - 'view sources entries'
     - 'edit sources entries'
     - 'create sources entries'
     - 'delete sources entries'
     - 'publish sources entries'
+    - 'reorder sources entries'
     - 'configure taxonomies'
     - 'view categories terms'
     - 'edit categories terms'
@@ -30,8 +38,15 @@ teacher:
     - 'edit content_type terms'
     - 'create content_type terms'
     - 'delete content_type terms'
+    - 'configure asset containers'
     - 'view assets assets'
     - 'upload assets assets'
+    - 'edit assets assets'
+    - 'move assets assets'
+    - 'rename assets assets'
+    - 'view contact form submissions'
+    - 'delete contact form submissions'
+    - 'view contacteer_ons form submissions'
 admin:
   title: Admin
   permissions:

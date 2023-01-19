@@ -22964,31 +22964,14 @@ if (_editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editorElement) {
     (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
   };
   var addImg = function addImg() {
-    // const imgUrl = prompt('Adres van de afbeelding:');
-
-    popupContainer.innerHTML = updateTitleForm;
-    var closeBtn = document.querySelector('.close-btn');
-    var img = document.getElementById('upload-img');
-    img.addEventListener('change', function (e) {
-      console.log(e.target.src);
-    });
-    if (closeBtn) {
-      closeBtn.addEventListener('click', function () {
-        popupContainer.innerHTML = '';
-      });
+    var imgUrl = prompt('Adres van de afbeelding:');
+    if (imgUrl) {
+      _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().setImage({
+        src: imgUrl
+      }).run();
     }
-
-    // if (imgUrl) {
-    //     editor.chain().focus().setImage({
-    //         src: imgUrl
-    //     }).run();
-    // }
-
     (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
-  }; // function addTable() {
-  //     editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run();
-  //     updateContent();
-  // }
+  };
   var undo = function undo() {
     undoBtnStyle(_editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().undo().run());
     (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
@@ -23007,10 +22990,7 @@ if (_editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editorElement) {
     _editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editor.chain().focus().unsetColumns().run();
     (0,_editor_transformData_dataToBackend_js__WEBPACK_IMPORTED_MODULE_1__.updateContent)();
   };
-  var csrf = document.querySelector('meta[name="_token"]').content;
   var wordCount = document.querySelector('.word-count');
-  // const inputPageContent = document.querySelector('.page-content');
-
   var h2Btn = document.querySelector('.h2-btn');
   var h3Btn = document.querySelector('.h3-btn');
   var h4Btn = document.querySelector('.h4-btn');
@@ -23023,14 +23003,10 @@ if (_editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editorElement) {
   var quoteBtn = document.querySelector('.quote-btn');
   var linkBtn = document.querySelector('.link-btn');
   var imgBtn = document.querySelector('.img-btn');
-  // const addTableBtn = document.querySelector('.add-table-btn');
   var undoBtn = document.querySelector('.undo-btn');
   var redoBtn = document.querySelector('.redo-btn');
   var layoutColumnsBtn = document.querySelector('.add-2-layout-columns');
   var removeLayoutColumnsBtn = document.querySelector('.remove-layout-columns-btn');
-  var updateTitleBtn = document.getElementById('update-title');
-  var popupContainer = document.querySelector('.popupContainer');
-  var updateTitleForm = "\n        <div class=\"absolute w-full top-0 h-[100vh] bg-[#000000a5] flex justify-center items-center z-30\">\n            <div class=\"bg-white rounded-xl py-8 px-6 w-[40%]\" >\n                <div>\n\n                    <div class=\"flex justify-end\">\n                        <button class=\"close-btn\"><i class=\"fa fa-close text-2xl mr-4 mb-2 hover:text-middle-green text-slate-300\"></i></button>\n                    </div>\n                    <h3 class=\" text-xl mb-8\">Kies een afbeelding</h3>\n\n                    <form action=\"/upload-image\" method=\"post\" title=\"upload picture\" enctype=\"multipart/form-data\">\n                        <input type=\"hidden\" name=\"_token\" value=\"".concat(csrf, "\">\n                        <input id=\"upload-img\" type=\"file\" name=\"image\" accept=\"image/*\">\n\n                        <div class=\"flex justify-end mt-12\">\n                            <button type=\"submit\" id=\"update-title\" class=\"primary-btn\">\n                                Uploaden\n                            </button>\n\n                        </div>\n                    </form>\n\n                </div>\n\n            </div>\n        </div>\n        ");
   countWords();
   undoBtnStyle();
   redoBtnStyle();
@@ -23052,7 +23028,6 @@ if (_editor_configEditor_js__WEBPACK_IMPORTED_MODULE_0__.editorElement) {
   quoteBtn.addEventListener('click', makeQuote);
   linkBtn.addEventListener('click', makeLink);
   imgBtn.addEventListener('click', addImg);
-  // addTableBtn.addEventListener('click', addTable);
   undoBtn.addEventListener('click', undo);
   redoBtn.addEventListener('click', redo);
   if (layoutColumnsBtn && removeLayoutColumnsBtn) {

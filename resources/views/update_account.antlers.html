@@ -1,11 +1,9 @@
-{{ partial:check_access }}
+{{ partial:check_access check_specific="{{ false }}" }}
 
 {{?
-
     if(isset($_SERVER['REQUEST_URI'])){
         $url_links = explode("/", $_SERVER['REQUEST_URI']);
     }
-
 ?}}
 
 <div class="md:flex">

@@ -1,26 +1,28 @@
 <!-- Display overview of sources -->
 
-{{ partial:check_access }}
+{{ partial:check_access check_specific="{{ false }}" }}
 
 {{? $current_category = $slug; ?}}
 
 <div class="md:flex">
+
+    {{# _____________________ Overlay ____________________________ #}}
     <div id="overlay" class="bg-[#000000a5] top-0 fixed w-screen h-screen hidden"></div>
+
+    {{# _______________________ Sidebar with filters ___________________ #}}
     <div id="sidebar" class="relative w-[20%] hidden md:block">
         <aside class="bg-[#e4efe0] h-full fixed top-16 md:top-0 pt-14 md:pt-0">
             <div class="md:mt-36 mx-8">
-                <button id="close-sidebar" class="block md:hidden"><i class="fa-solid fa-xmark"></i></button>
-
-                <div class="nav-folder">
-                    <div class="flex justify-between content-center gap-6 mb-2 mt-10">
-                        <h4 class="font-bold text-lg max-w-[150px] text-darker-green">Informatie type</h4>
-
-                        <button class="toggle-arrow"><i class="fa-solid fa-chevron-down text-darker-green"></i></button>
-
-                    </div>
+                <div class="flex justify-end">
+                    <button id="close-sidebar" class="block md:hidden mb-4"><i class="fa-solid fa-xmark text-lg"></i></button>
                 </div>
 
+                <div class="nav-folder mb-6">
+                    <h4 class="font-bold text-lg max-w-[150px] text-darker-green">Informatie type</h4>
 
+                </div>
+
+                {{# ______________ Category filters ____________________ #}}
                 <form method="get" class=" child-pages">
 
                     {{ taxonomy:content_type }}
@@ -59,9 +61,13 @@
 
             <h1 class="mt-12 font-bold text-3xl mb-12">{{ title }}</h1>
 
+            {{# _____________ Button to open sidebar on the phone ________#}}
             <button id="open-sidebar" class=" md:hidden bg-dark-yellow w-full p-4 rounded-2xl mb-12"><i class="fa-solid fa-filter text-white mr-2"></i> <span class="text-white uppercase font-bold">Filters</span></button>
 
+
             {{ if get:content_type }}
+
+                {{# _______________ Filtered sources __________________ #}}
                 {{?
                     $content_types_checked = [];
                     $content_types_checked = $_GET['content_type'];
@@ -88,6 +94,8 @@
 
                 {{ /foreach }}
             {{ else }}
+
+            {{# _______________ All sources __________________ #}}
             {{ entries as="posts" status:in="published"}}
                 {{ posts }}
                     {{ partial:cards/source_card }}

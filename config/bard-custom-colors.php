@@ -49,8 +49,15 @@ return [
 
 
     'default_colors' => [
-        'black' => '#000000',
-        'white' => '#FFFFFF',
-        'red' => '#e63946',
+        'dark grey' => '#474747',
+        'grey' => '#787774',
+        'brown' => '#9F6B53',
+        'orange' => '#D9730D',
+        'yellow' => '#CB912F',
+        'green' => '#448361',
+        'blue' => '#337EA9',
+        'purple' => '#9065B0',
+        'pink' => '#C14C8A',
+        'red' => '#D44C47'
     ]
 ];

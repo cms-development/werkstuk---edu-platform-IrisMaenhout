@@ -7,7 +7,7 @@ use Statamic\Facades\Entry;
 
 class EditSourceContentController extends Controller
 {
-    //
+
     public function updateMainPage(Request $r)
     {
         $page_content = $r->page_content;
@@ -23,33 +23,6 @@ class EditSourceContentController extends Controller
             $entry->set('hero_description', $json_content['content']);
         }
 
-//         main_page_content:
-        //   -
-        //     type: paragraph
-        //     content:
-        //       -
-        //         type: text
-        //         text: 'Dit is wat tekst '
-        //   -
-        //     type: paragraph
-        //     content:
-        //       -
-        //         type: text
-        //         marks:
-        //           -
-        //             type: bold
-        //         text: 'Dit is een bold tekst '
-        //   -
-        //     type: set
-        //     attrs:
-        //       id: ld2dkdeu
-        //       values:
-        //         type: 2_columns
-        //         colomn1: '<p>Dit is de 1 ste kolom</p>'
-        //         colomn2: '<p>Dit is de 2de kolom</p>'
-        //   -
-        //     type: paragraph
-        // dd($entry);
         $entry->save();
         return redirect()->back();
     }
@@ -65,20 +38,17 @@ class EditSourceContentController extends Controller
 
         $entry = Entry::find($source_id);
         $document_content = $entry->get('document_content');
-        // dump($document_content);
+
         if($location === 'root'){
-            // dump($page_slug);
+
             foreach($document_content as $key => $content) {
-                if($page_slug === 'start-pagina'){
 
-                }else{
-                    #update page in root
-                    if(isset($content['slug']) && $page_slug === $content['slug']){
-                        $content['page_layout'] = $json_content['content'];
-                        $document_content[$key] = $content;
-                    }
-
+                if(isset($content['slug']) && $page_slug === $content['slug']){
+                    $content['page_layout'] = $json_content['content'];
+                    $document_content[$key] = $content;
                 }
+
+
             }
         }else{
             foreach($document_content as $content_key => $content) {
@@ -100,7 +70,6 @@ class EditSourceContentController extends Controller
             }
         }
 
-        // dd($document_content);
         $entry->set('document_content', $document_content);
         $entry->save();
         return redirect()->back();

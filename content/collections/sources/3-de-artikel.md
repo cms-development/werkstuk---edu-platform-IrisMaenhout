@@ -9,7 +9,7 @@ categories:
 source_type:
   - pdf
 updated_by: 9f2b5fa0-6098-4ba1-be09-706663f15f2b
-updated_at: 1672915699
+updated_at: 1674148526
 content_type:
   - boek
 bard_layout:
@@ -85,7 +85,7 @@ layout_content:
       id: lbruz8yy
       values:
         type: 2_columns
-        colomn1: '<h3><strong>Then</strong></h3><p>가끔 참 철이 없었지<br>의미 없이 화를 막 냈으니<br>나도 그러긴 싫었었는데<br>이미 많이 지난 시간인걸</p><p>훨씬 많은 선물들에 비해<br>당신의 손에는 내가 없었지</p><p>시간을 되돌릴 수만 있다면<br>더 잘할 수 있을 텐데</p><p>이제 와<br>지겹게 함께했던<br>시간들 이렇게 생각해요</p><p>그때로 한번 miss you<br>그때로 다시 miss you<br>I don&#039;t wanna miss you<br>I just wanna bless you<br>말해주지 못했던<br>웃어주지 못했던<br>때로 again again</p><p>그때도 한번 miss you<br>그때도 다시 miss you<br>I don&#039;t wanna miss you<br>I just wanna bless you<br>말해주지 못했던<br>웃어주지 못했던<br>때로 again again</p>'
+        colomn1: '<h2>Dit is een titel</h2><p><span style="color:rgb(0, 0, 0)!important;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia tellus eget fringilla euismod. Praesent nec ex pharetra, dapibus purus non, sagittis ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis odio ipsum, efficitur tempus consectetur a, iaculis vitae ligula. Duis non vehicula nisl, ut vulputate orci. Nam vitae fermentum leo. In sollicitudin at nulla feugiat finibus. Nullam quam sapien, sollicitudin in nulla at, eleifend egestas magna. Pellentesque efficitur urna quis erat molestie, in hendrerit dui tempus.</span></p><p><span style="color:rgb(0, 0, 0)!important;">Donec vulputate ante eu scelerisque venenatis. Nunc rhoncus lorem nibh, eu fringilla neque mattis sit amet. Aliquam laoreet semper est, aliquet maximus mi condimentum auctor. Maecenas sit amet risus eu magna laoreet bibendum tincidunt ut lacus. Aenean euismod lacus in lorem finibus, id sagittis nisl vehicula. Duis nibh enim, tempus eget ultricies ut, varius nec turpis. Praesent erat est, bibendum eget nisi sagittis, laoreet sodales ipsum. Fusce auctor augue quis elit sagittis, quis sagittis justo facilisis. Nunc et efficitur sem, quis sollicitudin nunc. Aenean facilisis neque nibh, at posuere velit tristique sit amet. Duis eleifend semper leo imperdiet volutpat.</span></p><p><span style="color:rgb(0, 0, 0)!important;">Cras a est a leo mollis rhoncus. Suspendisse potenti. Duis pharetra lorem quis arcu rutrum pretium. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent ac nibh non diam blandit commodo. Sed pulvinar vulputate nisi. Fusce molestie massa eget dolor convallis tincidunt. Proin rhoncus metus sit amet ex elementum, quis tincidunt tortor malesuada. Sed auctor porttitor ipsum, id dictum ex iaculis eget. Cras et ligula eget ex mollis hendrerit eu et arcu. Mauris a sapien vel ex dapibus convallis ac ut nibh. Vivamus maximus turpis metus, ut hendrerit nulla porttitor sed. Aenean convallis odio in facilisis pharetra. Aliquam rutrum orci purus. Proin ipsum ligula, ultrices sit amet turpis vitae, pretium semper tortor.</span></p>'
         colomn2: '<p><img src="statamic://asset::assets::39a9f53feef67fef9732640333e28aac.jpg" alt="Whale"></p>'
   -
     type: table
@@ -106,7 +106,7 @@ layout_content:
                 content:
                   -
                     type: text
-                    text: Korean
+                    text: Titel
           -
             type: table_header
             attrs:
@@ -120,7 +120,7 @@ layout_content:
                 content:
                   -
                     type: text
-                    text: English
+                    text: Titel
           -
             type: table_header
             attrs:
@@ -134,7 +134,7 @@ layout_content:
                 content:
                   -
                     type: text
-                    text: Type
+                    text: Titel
       -
         type: table_row
         content:
@@ -151,7 +151,7 @@ layout_content:
                 content:
                   -
                     type: text
-                    text: 안녕
+                    text: Woord
           -
             type: table_cell
             attrs:
@@ -165,7 +165,7 @@ layout_content:
                 content:
                   -
                     type: text
-                    text: Hello
+                    text: Woord
           -
             type: table_cell
             attrs:
@@ -179,7 +179,7 @@ layout_content:
                 content:
                   -
                     type: text
-                    text: Greeting
+                    text: Woord
       -
         type: table_row
         content:
@@ -196,7 +196,7 @@ layout_content:
                 content:
                   -
                     type: text
-                    text: 눈
+                    text: Woord
           -
             type: table_cell
             attrs:
@@ -210,7 +210,7 @@ layout_content:
                 content:
                   -
                     type: text
-                    text: 'Eye, snow'
+                    text: Woord
           -
             type: table_cell
             attrs:
@@ -224,15 +224,11 @@ layout_content:
                 content:
                   -
                     type: text
-                    text: Noun
+                    text: Woord
   -
     type: horizontal_rule
   -
     type: paragraph
-    content:
-      -
-        type: text
-        text: fdgjjjsjk
   -
     type: paragraph
     content:
@@ -242,25 +238,6 @@ layout_content:
           src: 'asset::assets::categories/woman.jpeg'
           alt: null
   -
-    type: set
-    attrs:
-      id: lbs1z1wc
-      values:
-        type: 3_columns
-        column1: '<h3>Dit is een tekst</h3><ol start="1"><li><p><p></p><p></p><p></p><p></p><p>jkgggnjgfnjgjkngjngd</p><ol start="1"><li><p>jfjfdjkfjkfjkfjkfjkjj</p></li><li><p>sddjjfjkjkd</p></li></ol></p></li><li><p>jfjfgjkfjkqfjk</p></li><li><p>sdjjkjkjkgf</p></li></ol>'
-        column2: '<h3>Dit is een tekst</h3><p><strike>jffjkgfjkgfjgfjkgf</strike></p><p></p><ul><li><p><p></p><p></p><p></p><p></p><p>Helllo</p><ul><li><p><p></p><p></p><p></p><p></p><p>jfjfjkfjk</p><ul><li><p>jdjdjkdjkdjk</p></li></ul></p></li></ul></p></li><li><p>HI</p></li><li><p>jsdjksfjk</p></li></ul>'
-        column3: '<h3>Dit is een tekst</h3><p><em><u>jffjkgfjkgfjgfjkgf</u></em></p>'
-  -
-    type: set
-    attrs:
-      id: lbs2mfei
-      values:
-        type: 2_columns
-        colomn1: '<h4>Hi</h4><p>sdhjhjbfj</p><p><u>jxcjxcjkxc</u></p><p><strike>dhdsjsdjd</strike></p><p>jfjfjfjfcxjcxjkcxjk</p><p>cjkcjkds<sup>sdjdsjsdjksd</sup></p><p>jkjkcjkc<sub>cjkcxjcxjkcxkcx</sub></p><p><em>jcxjcxjkxc</em></p><p><strong>jfjfjfjf</strong></p><ul><li><p><p></p><p></p><p></p><p></p><p>kdkdkd</p><ul><li><p><p></p><p></p><p></p><p></p><p>jjfjfjffd</p><ul><li><p>jfjfjkfdjkfd</p></li></ul></p></li></ul></p></li><li><p>sdksdkdk</p></li><li><p>djdjdskjq</p></li></ul><p></p>'
-        colomn2: '<h4>dshdhd</h4><p>Bool</p><ol start="1"><li><p><p></p><p></p><p></p><p></p><p>ddjdj</p><ol start="1"><li><p>jfdjkfdjkf</p></li><li><p>jfdjkfdjfd</p></li></ol></p></li><li><p>djdsjdj</p></li><li><p>sjd</p></li></ol><p></p><p></p>'
-  -
-    type: paragraph
-  -
     type: blockquote
     content:
       -
@@ -269,12 +246,6 @@ layout_content:
           -
             type: text
             text: 'This is a quote'
-      -
-        type: paragraph
-        content:
-          -
-            type: text
-            text: jdsjsdjkd
   -
     type: paragraph
 ---

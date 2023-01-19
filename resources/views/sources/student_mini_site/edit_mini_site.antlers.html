@@ -1,23 +1,6 @@
 {{# Check if the user gets access to this page #}}
 
-{{ if logged_in}}
-    {{ user }}
-        {{ if !accept_register_proposal }}
-            {{ redirect to="/geen-toegang" }}
-        {{ /if }}
-
-        {{ if roles }}
-            {{ foreach:roles }}
-                {{ if value === "ex-student"}}
-                    {{ redirect to="/geen-toegang" }}
-                {{ /if }}
-            {{ /foreach:roles }}
-
-        {{ /if }}
-    {{ /user }}
-{{ else }}
-    {{ redirect to="/geen-toegang" }}
-{{ /if }}
+{{ partial:check_access check_specific="{{ true }}" }}
 
 {{?
     if(isset($_SERVER['REQUEST_URI'])){
@@ -37,7 +20,12 @@
         {{ /author }}
     {{ /current_user }}
 
+    {{ if !title }}
+        {{ 404 }}
+    {{ /if }}
+
     <div class="mt-20 w-full bg-[#B0D2A8] flex justify-between py-6 px-12 items-center fixed shadow-md z-[5]">
+
         <div>
             <h3 class="mt-2 mb-4 text-xl ">{{ title }}</h3>
             <ul class="breadcrumbs flex">
@@ -159,28 +147,11 @@
 
             {{ document_content }}
                 {{ if type == "new_page" }}
-                    <div>
-                        <div class="flex flex-col gap-4">
-                            <a href="{{ slug }}/wijzigen" class="block mx-auto">
-                                <i class="fa-solid fa-file text-8xl text-[#87DFB6] hover:text-[#4cd495] transition ease-in-out duration-300 hover:scale-110"></i>
-                            </a>
-                            <p data-file-folder="file" class="text-center hover:text-teal-400 transition ease-in-out duration-300 update_title">{{ title_page }}</p>
-
-                        </div>
-                    </div>
+                    {{ partial:source_content/page_mini_site slug="{{ slug }}"}}
                 {{ /if }}
 
                 {{ if type == "new_folder" }}
-                    <div>
-                        <div class="flex flex-col gap-4">
-                            <a href="map-{{$ strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title_folder))) $}}/wijzigen" class="block mx-auto">
-                                <i class="fa-solid fa-folder text-[#87DFB6] text-8xl hover:text-[#4cd495] transition ease-in-out duration-300 hover:scale-110"></i>
-                            </a>
-                            <p data-file-folder="folder" class="text-center hover:text-teal-400 transition ease-in-out duration-300 update_title">{{ title_folder }}</p>
-                        </div>
-
-                    </div>
-
+                    {{ partial:source_content/folder_mini_site title_folder="{{ title_folder }}"}}
                 {{ /if }}
 
             {{ /document_content }}
@@ -211,15 +182,7 @@
                     {{ if $slugify_folder_name === folder_slug }}
                         {{ pages }}
                             {{ if type == "new_page" }}
-                                <div>
-                                    <div class="flex flex-col gap-4">
-                                        <a href="{{ slug }}/wijzigen" class="block mx-auto">
-                                            <i class="fa-solid fa-file text-[#87DFB6] text-8xl hover:text-[#4cd495] transition ease-in-out duration-300 hover:scale-110"></i>
-                                        </a>
-                                        <p data-file-folder="file" class="text-center hover:text-teal-400 transition ease-in-out duration-300 update_title">{{ title_page }}</p>
-
-                                    </div>
-                                </div>
+                                {{ partial:source_content/page_mini_site slug="{{ slug }}"}}
                             {{ /if }}
                         {{ /pages }}
                     {{ /if }}

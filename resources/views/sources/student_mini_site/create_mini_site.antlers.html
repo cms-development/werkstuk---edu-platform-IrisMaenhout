@@ -1,3 +1,6 @@
+{{# ____________ Check if the user has the right to access this page ___________ #}}
+{{ partial:check_access check_specific="{{ true }}" }}
+
 <div class="mt-32">
     <div class="bg-white w-[50%] mx-auto mb-14 py-8 px-12 rounded-lg border-2 border-gray-200">
         <h1 class="text-2xl mb-12">Verdiepingsdosier creëren</h1>
@@ -8,7 +11,7 @@
             <input type="text" name="title" class="border border-gray-300 rounded w-full block px-2 py-1 pr-10">
 
             <div class="bg-grey-lighter py-10">
-                <label class="w-44 flex flex-col items-center px-2 py-3 bg-white-rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer">
+                <label class="w-44 flex flex-col items-center px-2 py-3 bg-white-rounded-lg shadow-md tracking-wide uppercase border border-blue cursor-pointer rounded-md">
                         <span class="mt-2 text-base leading-normal">
                             Select a file
                         </span>
@@ -25,12 +28,7 @@
                 {{ taxonomy:categories }}
                     <option value="{{ slug }}">{{ title }}</option>
                 {{ /taxonomy:categories }}
-            </select><br>
-
-            {{# <label for="img">Select image:</label>
-            <input type="file" id="img" name="img" accept="image/*"> #}}
-
-
+            </select>
 
             <div class="flex justify-end">
                 <button class="primary-btn mt-14 mb-6" type="submit">Verdiepingsdossier maken</button>

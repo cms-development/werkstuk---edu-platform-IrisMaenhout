@@ -3,6 +3,7 @@
         <div>
             <div class="flex gap-6">
 
+                {{#______________ Author info________________ #}}
                 {{ author }}
 
                     {{ if (avatar) }}
@@ -22,6 +23,8 @@
                             {{ first_name }} {{ last_name }}
                         {{ /author }}
                     </h4>
+
+                    {{# The date when the source was last modified #}}
                     <i class="text-slate-400 text-sm">{{ last_modified }}</i>
                 </div>
             </div>
@@ -47,10 +50,9 @@
                 {{ if content_type }}
                     <div class="mb-2 gap-4 md:flex">
                         <p class="mb-4">Informatie type:</p>
-                        <div class="flex flex-wrap gap-4">
+                        <div class="flex flex-wrap gap-2">
                             {{ content_type }}
-                            <a href="{{ url }}"
-                                class="bg-darker-green px-3 py-1 block rounded text-white">{{ title }}</a>
+                                <p class="text-darker-green py-1 rounded"># {{ title }}</p>
                             {{ /content_type }}
                         </div>
 

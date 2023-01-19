@@ -15,7 +15,6 @@
 </head>
 
 <body class="bg-gray-50 font-sans leading-normal">
-    <!-- <div class="mx-auto px-2 lg:min-h-screen flex flex-col items-center justify-center"> -->
 
     <!----------------------- START HEADER ---------------------------->
 
@@ -23,44 +22,19 @@
         {{ user }}
             {{ if accept_register_proposal }}
                 {{ if title !== "Public page"}}
-                    {{ partial:header_logged_in }}
+                    {{ partial:navigations/header_logged_in }}
                 {{ /if }}
             {{ /if }}
         {{ /user }}
 
-    {{# {{ else }}
-        {{ if is_homepage }}
-            {{ partial:header_public }}
-        {{ else }}
-            Logo
-        {{ /if }} #}}
-
     {{ /if}}
-
-
-
-
-
-
 
 
     <!----------------------- END HEADER ---------------------------->
 
     {{ template_content }}
 
-
-    <!-- </div> -->
     <script src="{{ mix src='/js/site.js' }}"></script>
-
-    {{# <script>
-        $(function() {
-            $.ajaxSetup({
-              headers: {
-                'X-CSRF-Token': $('meta[name="_token"]').attr('content')
-              }
-            });
-          });
-    </script> #}}
 </body>
 
 </html>

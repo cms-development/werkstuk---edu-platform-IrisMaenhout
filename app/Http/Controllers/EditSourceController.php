@@ -38,11 +38,8 @@ class EditSourceController extends Controller
             }
         }
 
-        // dd($document_content);
-
         $entry->set('document_content', $document_content);
         $entry->save();
-        // dd($entry);
         return redirect()->back();
     }
 
@@ -63,7 +60,6 @@ class EditSourceController extends Controller
             'pages' => []
         ];
 
-        // dd($document_content);
         $entry->set('document_content', $document_content);
         $entry->save();
         return redirect()->back();
@@ -78,10 +74,7 @@ class EditSourceController extends Controller
         $location = $r->location;
 
         $entry = Entry::findByUri('/'. $source_slug);
-
         $document_content = $entry->get('document_content');
-
-
 
         if($is_file_folder === 'folder'){
             foreach($document_content as $key => $content) {
@@ -127,7 +120,7 @@ class EditSourceController extends Controller
 
         }
 
-        // dd($document_content);
+
         $entry->set('document_content', $document_content);
         $entry->save();
         return redirect()->back();
@@ -146,9 +139,6 @@ class EditSourceController extends Controller
         $entry->set('title', $source_title);
         $entry->save();
 
-
-
-        // dd($entry->slug);
         return redirect('/account/verdiepingsdossier/' . $new_slug . '/wijzigen');
     }
 
@@ -201,13 +191,10 @@ class EditSourceController extends Controller
 
                     }
 
-
                     $document_content[$key] = $content;
 
                 }
             }
-
-
         }
 
         $entry->set('document_content', $document_content);
@@ -218,7 +205,6 @@ class EditSourceController extends Controller
 
     public function makePublic(Request $r)
     {
-        // $status = $r->is_public;
         $source_id = $r->source_id;
         $entry = Entry::find($source_id);
         $entry_status = $entry->published;

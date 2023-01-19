@@ -1,6 +1,7 @@
 {{?
     use Statamic\Facades\Entry;
 
+    // Fetch data and save in a cookie, the saved data will be used in the editor using JavaScript.
     $entry = Entry::findByUri('/' . $source_slug);
 
     function saveCookie($content)
@@ -44,8 +45,8 @@
 
 ?}}
 
-
-{{ partial:check_access }}
+{{# ____________ Check if the user has the right to access this page ___________ #}}
+{{ partial:check_access check_specific="{{ true }}" }}
 {{ collection:sources slug:is="{{ source_slug }}" status:in="published|draft" }}
 
     <div class="popupContainer"></div>
@@ -91,7 +92,7 @@
 
 
             <div class="flex gap-24 items-center">
-
+                {{# ____________________ Remove current page __________________ #}}
                 {{ if folder_slug || page_slug && folder_slug !== 'start-pagina' }}
                     <form action="/remove-page" method="post" name="delete page">
                         {{ csrf_field }}
@@ -105,6 +106,7 @@
                     </form>
                 {{ /if }}
 
+                {{# ____________ Save content of the page__________________#}}
                 <form action="/update-{{$ isset($folder_slug) && $folder_slug === 'start-pagina' ? 'main-page' : 'page' $}}" method="post" name="update page content">
                     {{ csrf_field }}
                     <input type="hidden" name="page_content" class="page-content">
@@ -118,217 +120,26 @@
 
         </div>
 
+        {{# _______________ Editor main navigation________________ #}}
         <div class="bg-slate-50 px-[5%]">
-            <div class="btns-editor-grid">
-                <button class="h2-btn" name="bold">
-                    <div class="flex items-center">
-                        <i class="fa fa-header"></i>
-                        <sub class=" font-bold">2</sub>
-                    </div>
-                </button>
-
-                <button class="h3-btn" name="bold">
-                    <div class="flex items-center">
-                        <i class="fa fa-header"></i>
-                        <sub class=" font-bold">3</sub>
-                    </div>
-                </button>
-                <button class="h4-btn" name="bold">
-                    <div class="flex items-center">
-                        <i class="fa fa-header"></i>
-                        <sub class="font-bold">4</sub>
-                    </div>
-                </button>
-
-                <button class="bold-btn" name="bold">
-                    <i class="fa-solid fa-bold"></i>
-                </button>
-
-                <button class="italic-btn">
-                    <i class="fa-solid fa-italic"></i>
-                </button>
-
-                <button class="underline-btn">
-                    <i class="fa-solid fa-underline"></i>
-                </button>
-
-                <button class="strikethrough-btn">
-                    <i class="fa-solid fa-strikethrough"></i>
-                </button>
-
-                <button class="unorderedlist-btn">
-                    <i class="fa-solid fa-list-ul"></i>
-                </button>
-
-                <button class="orderedlist-btn">
-                    <i class="fa-solid fa-list-ol"></i>
-                </button>
-
-                <button class="quote-btn">
-                    <i class="fa-solid fa-quote-right"></i>
-                </button>
-
-                <button class="link-btn">
-                    <i class="fa-solid fa-link"></i>
-                </button>
-
-                <button class="img-btn">
-                    <i class="fa-solid fa-image"></i>
-                </button>
-
-                {{# <button class="add-table-btn">
-                    <i class="fa-solid fa-table"></i>
-                </button> #}}
-
-                {{ if page_slug !== 'hero-description' }}
-                    <button class="add-2-layout-columns">
-                        <span class="material-symbols-outlined">
-                            view_column_2
-                        </span>
-                    </button>
-
-                    <button class="remove-layout-columns-btn flex justify-center items-center">
-                        <span class="material-symbols-outlined">
-                            view_column_2
-                        </span>
-                        <i class="absolute text-center font-bold text-2xl -mt-2 ml-4">-</i>
-                    </button>
-                {{ /if }}
-
-
-                <button class="undo-btn">
-                    <span class="material-symbols-outlined">
-                        undo
-                    </span>
-                </button>
-
-                <button class="redo-btn">
-                    <span class="material-symbols-outlined">
-                        redo
-                    </span>
-                </button>
-
-            </div>
+            {{ partial:navigations/editor_nav }}
 
             <p class="word-count mb-4 text-right text-zinc-400"></p>
         </div>
     </div>
 
 
-    {{ if page_slug === 'start-pagina'}}
-        {{# <div class=" py-56">
-            <form action="/update-main-page" method="POST" title="update start pagina" enctype="multipart/form-data">
-                {{ csrf_field }}
+    <div class=" py-[450px] md:py-96 w-[90%] mx-auto">
 
-                <input type="hidden" name="entry_id" value="{{ id }}">
+        {{# ______________WYSIWYG editor (with tip tap) ___________________#}}
+        <div class="wysiwyg-editor">
 
 
-                <label for="hero_description">Hero description</label><br>
-                <textarea name="hero_description" id="" cols="30" rows="10"></textarea>
-                <br>
-
-                <label for="main_page_content">Main page content</label><br>
-                <textarea name="main_page_content" id="" cols="30" rows="10"></textarea>
-                <br>
-
-            <button type="submit">Update start pagina</button>
-
-            </form>
-
-        </div> #}}
-
-
-        <!-- Create the editor container -->
-
-    {{ else }}
-        <div class=" py-[450px] md:py-96 w-[90%] mx-auto">
-
-            <div class="wysiwyg-editor">
-                <div class="bubble-menu-color">
-                    <div class=" bg-white drop-shadow-md rounded-md w-min">
-                        <div class="flex gap-2 p-2">
-                            <button class="block dark-grey-btn p-2 font-bold text-[#474747] border-2 hover:bg-slate-50 rounded">
-                                A
-                            </button>
-
-                            <button class="block grey-btn p-2 font-bold text-[#787774] border-2 hover:bg-slate-50 rounded">
-                                A
-                            </button>
-
-                            <button class="block brown-btn p-2 font-bold text-[#9F6B53] border-2 hover:bg-slate-50 rounded">
-                                A
-                            </button>
-
-                            <button class="block orange-btn p-2 font-bold text-[#D9730D] border-2 hover:bg-slate-50 rounded">
-                                A
-                            </button>
-
-                            <button class="block yellow-btn p-2 font-bold text-[#CB912F] border-2 hover:bg-slate-50 rounded">
-                                A
-                            </button>
-
-                            <button class="block green-btn p-2 font-bold text-[#448361] border-2 hover:bg-slate-50 rounded">
-                                A
-                            </button>
-
-                            <button class="block blue-btn p-2 font-bold text-[#337EA9] border-2 hover:bg-slate-50 rounded">
-                                A
-                            </button>
-
-                            <button class="block purple-btn p-2 font-bold text-[#9065B0] border-2 hover:bg-slate-50 rounded">
-                                A
-                            </button>
-
-                            <button class="block pink-btn p-2 font-bold text-[#C14C8A] border-2 hover:bg-slate-50 rounded">
-                                A
-                            </button>
-
-                            <button class="block red-btn p-2 font-bold text-[#D44C47] border-2 hover:bg-slate-50 rounded">
-                                A
-                            </button>
-                        </div>
-
-
-                    </div>
-
-                </div>
-            </div>
-
+            {{# __________________ Buble color menu ____________________#}}
+            {{ partial:navigations/color_menu_mini_site }}
         </div>
 
-
-
-    {{ /if }}
-
-
-    {{# <div id="overlay" class="bg-[#000000a5] top-0 fixed w-screen h-screen hiddenk z-20"></div>
-
-    <div class=" relative flex justify-center w-full ">
-        <div class="popup fixed top-1/4 z-30 bg-white w-[40%] py-6 px-12 rounded-2xl">
-            <button id="close-popup" class="block ml-auto"><i class="fa fa-close text-2xl"></i></button>
-
-            <form id="select-image" class="hiddenk" action="/upload-img" method="POST" title="upload img" enctype="multipart/form-data">
-
-                <h3 class="text-center text-2xl mt-8">Selecteer een afbeelding</h3>
-
-                {{ csrf_field }}
-
-                <div class="mx-auto w-min">
-                    {{ partial:inputs/select_file }}
-                </div>
-
-                <button type="submit" class="block primary-btn ml-auto mt-8">Ga verder</button>
-
-            </form>
-
-            <div id="input-url" class="hiddenk">
-                <input type="text">
-            </div>
-
-
-        </div>
-
-    </div> #}}
+    </div>
 
 {{ /collection:sources }}
 

@@ -1,40 +1,38 @@
 <p align="center"><img src="https://statamic.com/assets/branding/Statamic-Logo+Wordmark-Rad.svg" width="400" alt="Statamic Logo" /></p>
 
-## About Statamic 3
+## About Edu
 
-Statamic 3 is the flat-first, Laravel + Git powered CMS designed for building beautiful, easy to manage websites.
+Edu is a website where (future) teachers can share knowledge, research and lesson preparations with each other.
 
-> **Note:** This repository contains the code for the Statamic application. To contribute to the core package, visit the [Statamic core package repository][cms-repo].
+Website: ...
 
-
-## Learning Statamic
-
-Statamic 3 has extensive [documentation][docs]. We dedicate a significant amount of time and energy every day to improving them, so if something is unclear, feel free to open issues for anything you find confusing or incomplete. We are happy to consider anything you feel will make the docs and CMS better.
-
-## Support
-
-We provide official developer support on [Statamic 3 Pro](https://statamic.com/pricing) projects. Community-driven support is available on the [forum](https://statamic.com/forum) and in [Discord][discord].
+> **Note:** This project is for educative purposes.
 
 
-## Contributing
+## user roles
+- Admin
+- Teachers
+- Students
+- Ex-students
 
-Thank you for considering contributing to Statamic! We simply ask that you review the [contribution guide][contribution] before you open issues or send pull requests.
+### Admin
+The admin has full access to the back end of the cms.
+
+### Teachers 
+They have partial access to the back end of the cms.
+
+### Students 
+They have no access to the back end but they can make "verdiepingsdossieren" in the front end.
+
+### Ex-students
+They only have reading rights and they can modify their account, just like the other user types.
 
 
-## Code of Conduct
+## Used technologies
+- Statamic -> cms
+- Tip tap -> editor for front end wizard
 
-In order to ensure that the Statamic community is welcoming to all and generally a rad place to belong, please review and abide by the [Code of Conduct](https://github.com/statamic/cms/wiki/Code-of-Conduct).
+## Deployment
+I'm hosting my website on digital ocean on a subdomain because I've read that this can avoid having to pay for the pro version. [Licensing](https://statamic.dev/licensing#sites)
 
 
-## Important Links
-
-- [Statamic Main Site](https://statamic.com)
-- [Statamic 3 Documentation][docs]
-- [Statamic 3 Core Package Repo][cms-repo]
-- [Statamic 3 Migrator](https://github.com/statamic/migrator)
-- [Statamic Discord][discord]
-
-[docs]: https://statamic.dev/
-[discord]: https://statamic.com/discord
-[contribution]: https://github.com/statamic/cms/blob/master/CONTRIBUTING.md
-[cms-repo]: https://github.com/statamic/cms

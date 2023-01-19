@@ -1,6 +1,6 @@
 <!-- Display source content -->
 
-{{ partial:check_access }}
+{{ partial:check_access check_specific="{{ false }}" }}
 
 {{? $link = explode("/", $_SERVER['REQUEST_URI']); ?}}
 
@@ -52,7 +52,6 @@
                             {{ /if }}
                         </div>
 
-                        {{# {{ partial:navigations/mini_site_nav }} #}}
                     {{ /document_content }}
                 </div>
 
@@ -171,16 +170,9 @@
         </div>
     </div>
 
-
+    {{ partial:scripts/script_mini_site_toggle_nav }}
 {{ else }}
     <div class="md:mt-36 max-w-[1200px] w-[80%] mx-auto">
-
-
-
-        {{# <div class="my-12 bg-[#d3ede4] w-full py-6 px-12 rounded-xl ">
-            <h2 class="text-2xl mb-6 text-gray-500">Auteur:</h2>
-            {{ partial:source_content/author }}
-        </div> #}}
 
         {{ partial:breadcrumbs }}
 

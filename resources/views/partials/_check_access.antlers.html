@@ -3,6 +3,17 @@
         {{ if !accept_register_proposal }}
             {{ redirect to="/geen-toegang" }}
         {{ /if }}
+
+        {{ if check_specific == true }}
+            {{ if roles }}
+                {{ foreach:roles }}
+                    {{ if value === "ex-student"}}
+                        {{ redirect to="/geen-toegang" }}
+                    {{ /if }}
+                {{ /foreach:roles }}
+
+            {{ /if }}
+        {{ /if }}
     {{ /user }}
 {{ else }}
     {{ redirect to="/geen-toegang" }}

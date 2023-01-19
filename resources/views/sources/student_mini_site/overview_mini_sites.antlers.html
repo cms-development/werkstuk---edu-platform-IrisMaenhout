@@ -1,23 +1,5 @@
-{{# Check if the user gets access to this page #}}
-
-{{ if logged_in}}
-    {{ user }}
-        {{ if !accept_register_proposal }}
-            {{ redirect to="/geen-toegang" }}
-        {{ /if }}
-
-        {{ if roles }}
-            {{ foreach:roles }}
-                {{ if value === "ex-student"}}
-                    {{ redirect to="/geen-toegang" }}
-                {{ /if }}
-            {{ /foreach:roles }}
-
-        {{ /if }}
-    {{ /user }}
-{{ else }}
-    {{ redirect to="/geen-toegang" }}
-{{ /if }}
+{{# ____________ Check if the user has the right to access this page ___________ #}}
+{{ partial:check_access check_specific="{{ true }}" }}
 
 {{?
     if(isset($_SERVER['REQUEST_URI'])){
